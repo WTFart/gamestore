@@ -2,7 +2,7 @@ module.exports = (server) => {
 
     server.route({
         method: 'GET',
-        path:'/hello', 
+        path:'/', 
         handler: function (request, reply) {
             return reply('hello world');
         }
