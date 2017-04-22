@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 18, 2017 at 03:59 PM
+-- Generation Time: Apr 22, 2017 at 10:24 AM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -242,7 +242,7 @@ INSERT INTO `publishers` (`publisher_id`, `name`, `country`, `website`) VALUES
 
 CREATE TABLE `stores` (
   `store_id` int(2) NOT NULL,
-  `country` varchar(9) DEFAULT NULL
+  `country` varchar(9) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 --
@@ -250,16 +250,16 @@ CREATE TABLE `stores` (
 --
 
 INSERT INTO `stores` (`store_id`, `country`) VALUES
-(1, 'Thailand'),
-(2, 'Japan'),
-(3, 'U.S.'),
-(4, 'U.K.'),
-(5, 'India'),
-(6, 'Hong Kong'),
 (7, 'Brazil'),
 (8, 'China'),
+(6, 'Hong Kong'),
+(5, 'India'),
+(2, 'Japan'),
 (9, 'Singapore'),
-(10, 'Spain');
+(10, 'Spain'),
+(1, 'Thailand'),
+(4, 'U.K.'),
+(3, 'U.S.');
 
 -- --------------------------------------------------------
 
@@ -380,13 +380,14 @@ ALTER TABLE `publishers`
 -- Indexes for table `stores`
 --
 ALTER TABLE `stores`
-  ADD PRIMARY KEY (`store_id`);
+  ADD PRIMARY KEY (`country`);
 
 --
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`user_id`);
+  ADD PRIMARY KEY (`user_id`),
+  ADD KEY `country` (`country`);
 
 --
 -- Indexes for table `wishlists`
@@ -419,6 +420,12 @@ ALTER TABLE `orders`
 --
 ALTER TABLE `payments`
   ADD CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+
+--
+-- Constraints for table `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `country` FOREIGN KEY (`country`) REFERENCES `stores` (`country`);
 
 --
 -- Constraints for table `wishlists`
