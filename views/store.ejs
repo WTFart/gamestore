@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Game|Game Store</title>
+    <title>Store</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -36,19 +36,23 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">Game Store</a>
+                </button>
+                <a class="navbar-brand" href="/featured/<%= user_id %>">Featured</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="/store">Games</a>
+                        <a href="/store/<%= user_id %>">Store</a>
                     </li>
                     <li>
-                        <a href="/signin">Top Chart</a>
+                        <a href="/library/<%= user_id %>">Library</a>
                     </li>
                     <li>
-                        <a href="#">Contact</a>
+                        <a href="/wishlist/<%= user_id %>">Wishlist</a>
+                    </li>
+                    <li>
+                        <a href="/profile/<%= user_id %>">Profile</a>
                     </li>
                 </ul>
             </div>
@@ -72,7 +76,7 @@
         <br />
         <div class="list-group">
             <% for (var i = 0; i < games.length; i++ ) {%>
-                <a href="/games/<%= games[i].game_id %>" class="list-group-item"><%= games[i].name %></a>
+                <a href="/store/<%= user_id %>/<%= games[i].game_id %>" class="list-group-item"><%= games[i].name %></a>
             <% } %>
         </div>
         

@@ -7,21 +7,15 @@ var connection = mysql.createConnection({
 });
 
 module.exports = function (app) {
-
-  ////////////////
-  // test route //
-  ////////////////
-  app.route('/test')
-    .get((req, res) => {
-      connection.query('SELECT name, price FROM games WHERE price < 1000', (err, result) => {
-        return res.json(result)
-      })
-    })
-
   ////////////////
   // home route //
   ////////////////
   app.route('/')
+    .get((req, res) => {
+      res.render('index.ejs')
+    })
+    
+  app.route('/index')
     .get((req, res) => {
       res.render('index.ejs')
     })
@@ -42,42 +36,59 @@ module.exports = function (app) {
      res.render('signup.ejs')
    })
 
+  ////////////////////
+  // featured route //
+  ////////////////////
+  app.route('/featured/:user_id')
+   .get((req, res) => {
+     connection.query('SELECT game_id, name, price FROM games WHERE review > 4', (err, result) => {
+       res.render('featured.ejs', { user_id: req.params.user_id, games: result })
+     })
+   })
+
   /////////////////
   // store route //
   /////////////////
-  app.route('/store')
+  app.route('/store/:user_id')
     .get((req, res) => {
       connection.query('SELECT game_id, name, price FROM games', (err, result) => {
-        // games[0].game_id
-        // games[1].name
-        // games[2].price
-        res.render('store.ejs', { games: result })
+        res.render('store.ejs', { user_id: req.params.user_id, games: result })
       })
     })
 
   ///////////////////
   // library route //
   ///////////////////
-  app.route('/library')
+  app.route('/library/:user_id')
     .get((req, res) => {
-      res.render('library.ejs')
+      res.render('library.ejs', { user_id: req.params.user_id })
     })
+
+  ////////////////////
+  // wishlist route //
+  ////////////////////
+  app.route('/wishlist/:user_id')
+   .get((req, res) => {
+     res.render('wishlist.ejs', { user_id: req.params.user_id })
+   })
 
   ///////////////////
   // profile route //
   ///////////////////
-  app.route('/profile')
+  app.route('/profile/:user_id')
     .get((req, res) => {
-      res.render('profile.ejs')
+      connection.query('SELECT * FROM users WHERE user_id = ?', [req.params.user_id], (err, result) => {
+        res.render('profile.ejs', { user: result[0] })
+      })
     })
 
   ////////////////
   // game route //
   ////////////////
-  app.route('/games/:id')
+  app.route('/store/:user_id/:game_id')
    .get((req, res) => {
-     connection.query("SELECT * FROM games WHERE game_id = ?", [req.params.id], (err, result) => {
-       res.render('game.ejs', { game: result })
+     connection.query("SELECT * FROM games WHERE game_id = ?", [req.params.game_id], (err, result) => {
+       res.render('game.ejs', { user_id: req.params.user_id, game: result[0] })
      })
    })
 }
