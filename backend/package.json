@@ -1,16 +1,12 @@
 {
   "name": "gamestore",
   "version": "1.0.0",
-  "description": "Database System group project",
-  "main": "index.js",
+  "description": "",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "hapi": "^16.1.1",
-    "mysql": "^2.13.0",
-    "vision": "^4.1.1"
-  }
+  "license": "ISC"
 }

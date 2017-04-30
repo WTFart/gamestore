@@ -1,22 +1,26 @@
-'use strict';
+const express = require('express');
+const bodyParser = require('body-parser');
+const app = express();
+const cors = require('cors')
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
+app.use(bodyParser.json());
+app.use(cors())
+app.listen(3000);
+console.log('Store@ http://localhost:' + 3000);
 
-const Hapi = require('hapi');
-var Vision = require('vision')
-
-// Create a server with a host and port
-const server = new Hapi.Server();
-server.connection({ 
-    host: 'localhost', 
-    port: 8384
-});
-
-require("./route/route_manager")(server)
-
-// Start the server
-server.start((err) => {
-
-    if (err) {
-        throw err;
-    }
-    console.log('Server running at:', server.info.uri);
-});
+app.route('/test')
+  .get((req, res) => {
+    return res.status(200).json({
+      message: 'Hello World!'
+    })
+  })
+  
+var mysql      = require('mysql');
+ var connection = mysql.createConnection({
+   host     : 'localhost',
+   user     : 'root',
+   password : '',
+   database : 'Store'
+ });
