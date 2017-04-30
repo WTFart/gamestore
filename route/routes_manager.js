@@ -69,7 +69,7 @@ module.exports = function (app) {
   ////////////////
   // game route //
   ////////////////
-  app.get('games/:id')
+  app.route('games/:id')
    .get((req, res) => {
      res.render('game.html')
    })
