@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Index</title>
+  <title>Sign in</title>
 
   <!-- Bootstrap Core CSS -->
   <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -26,9 +26,13 @@
 </head>
 
 <body>
-  <div class="container">
-    <div class="col-md-5 form-position">
-       <form action="/login" method="post">
+ <div class="container">
+
+<div class="col-sm-6 col-sm-offset-3">
+
+    <h1><span class="fa fa-sign-in"></span> Sign in</h1>
+    
+    <form action="/signin" method="post">
         <div class="form-group">
             <label>Username</label>
             <input type="text" class="form-control" name="username">
@@ -41,9 +45,14 @@
         <button type="submit" class="btn btn-warning btn-lg">Login</button>
     </form>
 
+    <hr>
 
-    </div>
-  </div>
+    <p>Need an account? <a href="/signup">Sign up</a></p>
+    <p>Or <a href="/">Back</a>.</p>
+
+</div>
+
+</div>
 </body>
 
 </html>

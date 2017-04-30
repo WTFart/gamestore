@@ -61,7 +61,7 @@
         </div>
         <!-- /.container -->
     </nav>
-
+    
     <div class="container">
         <div class="list-group">
             <%= game.game_id %>
@@ -72,6 +72,9 @@
             <% var review = game.review %>
             <%for (var i = 0; i < review; i++) {%>
             <span class="glyphicon glyphicon-star"></span>
+            <%}%>
+            <%for (var i = 0; i < 5-review; i++) {%>
+            <span class="glyphicon glyphicon-star-empty"></span>
             <%}%>
         </div>
     </div>
