@@ -74,8 +74,10 @@ module.exports = function (app) {
   ////////////////
   // game route //
   ////////////////
-  app.route('games/:id')
+  app.route('/games/:id')
    .get((req, res) => {
-     res.render('game.html')
+     connection.query("SELECT * FROM games WHERE game_id = ?", [req.params.id], (err, result) => {
+       res.render('game.ejs', { game: result })
+     })
    })
 }

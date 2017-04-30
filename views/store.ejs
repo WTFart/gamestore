@@ -72,7 +72,7 @@
         <br />
         <div class="list-group">
             <% for (var i = 0; i < games.length; i++ ) {%>
-            <a href="#" class="list-group-item"><%= games[i].name %></a>
+                <a href="/games/<%= games[i].game_id %>" class="list-group-item"><%= games[i].name %></a>
             <% } %>
         </div>
         
