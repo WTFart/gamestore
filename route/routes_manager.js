@@ -23,7 +23,7 @@ module.exports = function (app) {
   ////////////////
   app.route('/')
     .get((req, res) => {
-      res.render('index.html')
+      res.render('index.ejs')
     })
 
   /////////////////
@@ -31,15 +31,23 @@ module.exports = function (app) {
   /////////////////
   app.route('/login')
     .get((req, res) => {
-      res.render('login.html')
+      res.render('signin.ejs')
     })
+
+  ////////////////////////
+  // registration route //
+  ////////////////////////
+  app.route('/register')
+   .get((req, res) => {
+     res.render('registration.ejs')
+   })
 
   /////////////////
   // store route //
   /////////////////
   app.route('/store')
     .get((req, res) => {
-      res.render('store.html')
+      res.render('store.ejs')
     })
 
   ///////////////////
@@ -47,7 +55,7 @@ module.exports = function (app) {
   ///////////////////
   app.route('/library')
     .get((req, res) => {
-      res.render('library.html')
+      res.render('library.ejs')
     })
 
   ///////////////////
@@ -55,7 +63,7 @@ module.exports = function (app) {
   ///////////////////
   app.route('/profile')
     .get((req, res) => {
-      res.render('profile.html')
+      res.render('profile.ejs')
     })
 
   ////////////////
