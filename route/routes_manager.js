@@ -26,20 +26,20 @@ module.exports = function (app) {
       res.render('index.ejs')
     })
 
-  /////////////////
-  // login route //
-  /////////////////
-  app.route('/login')
+  //////////////////
+  // signin route //
+  //////////////////
+  app.route('/signin')
     .get((req, res) => {
       res.render('signin.ejs')
     })
 
-  ////////////////////////
-  // registration route //
-  ////////////////////////
-  app.route('/register')
+  //////////////////
+  // signup route //
+  //////////////////
+  app.route('/signup')
    .get((req, res) => {
-     res.render('registration.ejs')
+     res.render('signup.ejs')
    })
 
   /////////////////
@@ -47,7 +47,12 @@ module.exports = function (app) {
   /////////////////
   app.route('/store')
     .get((req, res) => {
-      res.render('store.ejs')
+      connection.query('SELECT game_id, name, price FROM games', (err, result) => {
+        // games[0].game_id
+        // games[1].name
+        // games[2].price
+        res.render('store.ejs', { games: result })
+      })
     })
 
   ///////////////////
