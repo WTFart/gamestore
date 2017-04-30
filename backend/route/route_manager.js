@@ -14,7 +14,7 @@ module.exports = (server) => {
         method: 'GET',
         path:'/', 
         handler: function (request, reply) {
-            reply.view('index.html');
+            reply('Hello, world!');
         }
     });
 
