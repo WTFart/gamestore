@@ -26,14 +26,6 @@ module.exports = function (app) {
       res.render('index.html')
     })
 
-  ////////////////////////
-  // registration route //
-  ////////////////////////
-  app.route('/regis')
-    .get((req, res) => {
-      res.render('registration.html')
-    })
-
   /////////////////
   // login route //
   /////////////////
@@ -49,4 +41,28 @@ module.exports = function (app) {
     .get((req, res) => {
       res.render('store.html')
     })
+
+  ///////////////////
+  // library route //
+  ///////////////////
+  app.route('/library')
+    .get((req, res) => {
+      res.render('library.html')
+    })
+
+  ///////////////////
+  // profile route //
+  ///////////////////
+  app.route('/profile')
+    .get((req, res) => {
+      res.render('profile.html')
+    })
+
+  ////////////////
+  // game route //
+  ////////////////
+  app.get('games/:id')
+   .get((req, res) => {
+     res.render('game.html')
+   })
 }
