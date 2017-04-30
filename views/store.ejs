@@ -78,31 +78,37 @@
             <a href="#" class="list-group-item">Vestibulum at eros</a>
         </div>
 
-        <div class="container body-margin-top" id="shallowbg">
-            <div ng-controller="browseCtrl">
-                <h1>Browse All</h1>
-                <table class="table table-bordered" border="1" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th>Category </th>
-                            <th>Subject</th>
-                            <th>File Name</th>
-                            <th>Owner</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="datum in data" ng-init="">
-                            <td><a href='/category/{{datum.categoryID}}' target="_blank">{{ datum.categoryName }}</a></td>
-                            <td><a href='/subject/{{datum.subjectID}}' target="_blank"> {{ datum.subjectName }}</a></td>
-                            <td><a href='/view/{{datum.fileName}}' target="_blank">{{ datum.fileName }}</a></td>
-                            <td>{{ datum.username }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        
+        <h1>Browse All</h1>
+        <table class="table table-bordered" border="1" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Category </th>
+                    <th>Subject</th>
+                    <th>File Name</th>
+                    <th>Owner</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ul>
+                    <% for(var i=0; i<games.length; i++) {%>
+                        <li>
+                            <%= games.game_ids[i] %>
+                            <%= names[i] %>
+                            <%= supplies[i] %>
+                        </li>
+                        <% } %>
+                </ul>
+                <!--<td><a href='/category/{{datum.categoryID}}' target="_blank">{{ datum.categoryName }}</a></td>
+                <td><a href='/subject/{{datum.subjectID}}' target="_blank"> {{ datum.subjectName }}</a></td>
+                <td><a href='/view/{{datum.fileName}}' target="_blank">{{ datum.fileName }}</a></td>
+                <td>{{ datum.username }}</td>-->
+            </tbody>
+        </table>
     </div>
+    </div>
+
+    </div>
+
 </body>
 
 </html>
