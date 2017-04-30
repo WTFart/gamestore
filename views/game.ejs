@@ -12,10 +12,10 @@
     <title><%=game[0].name%></title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="css/shop-homepage.css" rel="stylesheet">
+    <link href="/css/shop-homepage.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -27,7 +27,7 @@
 </head>
 
 <body>
-   <!-- Navigation -->
+    <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -66,18 +66,26 @@
         <!-- /.container -->
     </nav>
 
+    <div class="container">
+        <div class="list-group">
+            <%= game[0].game_id %>
+            <%= game[0].name %>
+            <%= game[0].developer %>
+            <%= game[0].price %>
+            <%= game[0].genre %>
+            <% var review = game[0].review %>
+            <%for (var i = 0; i < review; i++) {%>
+            <span class="glyphicon glyphicon-star"></span>
+            <%}%>
+        </div>
+    </div>
 
-  <div class="list-group">
-    <%= game[0].game_id %>
-    <%= game[0].name %>
-    <%= game[0].developer %>
-    <%= game[0].price %>
-    <%= game[0].genre %>
-    <% var review = game[0].review %>
-    <%for (var i = 0; i < review; i++) {%>
-      <span class="glyphicon glyphicon-star"></span>
-    <%}%>
-  </div>
+
+    <!-- jQuery -->
+    <script src="/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/js/bootstrap.min.js"></script>
 </body>
 
 </html>
