@@ -16,11 +16,5 @@ app.route('/test')
       message: 'Hello World!'
     })
   })
-  
-var mysql      = require('mysql');
- var connection = mysql.createConnection({
-   host     : 'localhost',
-   user     : 'root',
-   password : '',
-   database : 'Store'
- });
+
+require('./route/routes_manager.js')(app);
