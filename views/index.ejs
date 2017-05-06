@@ -43,16 +43,88 @@
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
+<ul class="nav navbar-nav">
                     <li>
-                        <a href="/signin">Sign In</a>
-                    </li>
-                </ul>
+                        <a id="myBtn">Sign In</a>
+                        <!-- Trigger/Open The Modal -->
 
-                <!-- Right nav menu-->
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="/signup">Sign Up</a>
+                        <!-- The Modal -->
+                        <div id="myModal" class="modal">
+
+                            <!-- Modal content -->
+                            <div class="modal-content">
+                                <span class="close">&times;</span>
+                                <div class="form">
+                                    <ul class="tab-group">
+                                        <li class="tab active"><a href="#login">Log In</a></li>
+                                        <li class="tab"><a href="#signup">Sign Up</a></li>
+                                    </ul>
+
+                                    <div class="tab-content">
+                                        <div id="login">
+                                            <h1>Welcome Back!</h1>
+
+                                            <form action="/login" method="post">
+
+                                                <div class="field-wrap">
+                                                    <label>Email Address<span class="req">*</span></label>
+                                                    <input type="email" required autocomplete="off" />
+                                                </div>
+
+                                                <div class="field-wrap">
+                                                    <label>Password<span class="req">*</span></label>
+                                                    <input type="password" required autocomplete="off" />
+                                                </div>
+
+                                                <p class="forgot"><a href="#">Forgot Password?</a></p>
+
+                                                <button class="button button-block" />Log In</button>
+
+                                            </form>
+
+                                        </div>
+
+                                        <div id="signup">
+                                            <h1>Sign Up Here</h1>
+
+                                            <form action="/signup" method="post">
+                                                <div class="top-row">
+                                                    <div class="field-wrap">
+                                                        <label>First Name<span class="req">*</span></label>
+                                                        <input type="text" required autocomplete="off" />
+                                                    </div>
+
+                                                    <div class="field-wrap">
+                                                        <label>Last Name<span class="req">*</span></label>
+                                                        <input type="text" required autocomplete="off" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="field-wrap">
+                                                    <label>Email Address<span class="req">*</span></label>
+                                                    <input type="email" required autocomplete="off" />
+                                                </div>
+
+                                                <div class="field-wrap">
+                                                    <label>Set A Password<span class="req">*</span></label>
+                                                    <input type="password" required autocomplete="off" />
+                                                </div>
+
+                                                <button type="submit" class="button button-block" />Get Started</button>
+
+                                            </form>
+
+                                        </div>
+
+
+
+                                    </div>
+                                    <!-- tab-content -->
+
+                                </div>
+                            </div>
+
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -268,12 +340,118 @@
 
     </div>
     <!-- /.container -->
+    <script>
+        $(".form").find("input, textarea").on("keyup blur focus", function (e) {
+            var $this = $(this),
+                label = $this.prev("label");
+
+            if (e.type === "keyup") {
+                if ($this.val() === "") {
+                    label.removeClass("active highlight");
+                } else {
+                    label.addClass("active highlight");
+                }
+            } else if (e.type === "blur") {
+                if ($this.val() === "") {
+                    label.removeClass("active highlight");
+                } else {
+                    label.removeClass("highlight");
+                }
+            } else if (e.type === "focus") {
+                if ($this.val() === "") {
+                    label.removeClass("highlight");
+                } else if ($this.val() !== "") {
+                    label.addClass("highlight");
+                }
+            }
+        });
+
+        $(".tab a").on("click", function (e) {
+            e.preventDefault();
+
+            $(this).parent().addClass("active");
+            $(this).parent().siblings().removeClass("active");
+
+            target = $(this).attr("href");
+
+            $(".tab-content > div").not(target).hide();
+
+            $(target).fadeIn(600);
+        });
+    </script>
 
     <!-- jQuery -->
     <script src="/js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="/js/bootstrap.min.js"></script>
+    <script>
+        // Get the modal
+        var modal = document.getElementById('myModal');
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("myBtn");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks on the button, open the modal 
+        btn.onclick = function () {
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+    <script>
+        $(".form").find("input, textarea").on("keyup blur focus", function (e) {
+            var $this = $(this),
+                label = $this.prev("label");
+
+            if (e.type === "keyup") {
+                if ($this.val() === "") {
+                    label.removeClass("active highlight");
+                } else {
+                    label.addClass("active highlight");
+                }
+            } else if (e.type === "blur") {
+                if ($this.val() === "") {
+                    label.removeClass("active highlight");
+                } else {
+                    label.removeClass("highlight");
+                }
+            } else if (e.type === "focus") {
+                if ($this.val() === "") {
+                    label.removeClass("highlight");
+                } else if ($this.val() !== "") {
+                    label.addClass("highlight");
+                }
+            }
+        });
+
+        $(".tab a").on("click", function (e) {
+            e.preventDefault();
+
+            $(this).parent().addClass("active");
+            $(this).parent().siblings().removeClass("active");
+
+            target = $(this).attr("href");
+
+            $(".tab-content > div").not(target).hide();
+
+            $(target).fadeIn(600);
+        });
+    </script>
 
 </body>
 

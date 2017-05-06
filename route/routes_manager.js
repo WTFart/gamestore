@@ -10,15 +10,12 @@ module.exports = function (app) {
   ////////////////
   // home route //
   ////////////////
-  app.route('/')
-    .get((req, res) => {
-      res.render('index.ejs')
-    })
-    
-  app.route('/index')
-    .get((req, res) => {
-      res.render('index.ejs')
-    })
+  ['/', '/index'].forEach((path) => {
+    app.route(path)
+      .get((req, res) => {
+        res.render('index.ejs')
+      })
+  })
 
   //////////////////
   // signin route //
