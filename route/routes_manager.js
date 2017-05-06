@@ -7,7 +7,10 @@ var connection = mysql.createConnection({
 });
 
 module.exports = function (app, passport) {
-  ['/', '/index', '/signin', '/signup', '/featured', '/store', '/library', '/wishlist', '/profile', '/featured/:game_id', '/store/:game_id'].forEach((path) => {
+
+  ['/', '/index', '/signin', '/signup',
+  '/featured', '/store', '/library', '/wishlist', '/profile',
+  '/featured/:game_id', '/store/:game_id'].forEach((path) => {
     app.route(path)
       .get((req, res) => {
         if (path == '/' || path == '/index') {
@@ -83,18 +86,11 @@ module.exports = function (app, passport) {
   // signup route //
   //////////////////
   app.route('/signup')
-    .post((req, res) => {
-      connection.query('SELECT user_id FROM users WHERE email = ?', [req.body.email], (err, result) => {
-        if (!result[0]) {
-          connection.query('INSERT INTO users (name, surname, username, password, gender, age, email, country) values(?,?,?,?,?,?,?,?)',
-            [req.body.name, req.body.surname, req.body.username, password, req.body.gender, req.body.age, email, req.body.country],
-            (err, result) => {
-              connection.query('SELECT * FROM users WHERE email = ?', [req.body.email], (err, result) => {
-                res.redirect('/featured/?user_id' + result[0].user_id)
-              }
-            )
-          }
-        )}
-      })
+    .post(passport.authenticate('signup', {
+      failureRedirect: '/',
+      failureFlash: true
+    }),
+    (req, res) => {
+      res.redirect('/featured/?user_id' + req,user.user_id)
     })
 }

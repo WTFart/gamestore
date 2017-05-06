@@ -42,4 +42,37 @@ module.exports = function(passport) {
       })
     })
   }))
+
+  passport.user('signup', new LocalStrategy({
+    usernameField: 'email',
+    passwordField: 'password',
+    passReqToCallback: true
+  },
+  (req, email, password, done) => {
+    process.nextTick(() => {
+      if (!req.user) {
+        connection.query('SELECT user_id FROM users WHERE email = ?', [email], (err, result) => {
+          if (err) {
+            return done(err)
+          }
+          if (result[0]) {
+            return done(null, false, req.flash('signupMessage', 'Email is already taken.'))
+          } else {
+            connection.query('INSERT INTO users (name, surname, username, password, gender, age, email, country) values (?,?,?,?,?,?,?,?)',
+            [req.body.name, req.body.surname, req.body.username, password, req.body.gender, req.body.age, email, req.body.country],
+            (err, result) => {
+              if (err) {
+                return done(err)
+              }
+              connection.query('SELECT * FROM users WHERE email = ?', [email], (err, result) => {
+                return done(null, result[0])
+              })
+            })
+          }
+        })
+      } else {
+        return done(null, req.user)
+      }
+    })
+  }))
 }
