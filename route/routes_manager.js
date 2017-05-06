@@ -6,7 +6,7 @@ var connection = mysql.createConnection({
   database: 'gamestore_database'
 });
 
-module.exports = function (app) {
+module.exports = function (app, passport) {
   ////////////////
   // home route //
   ////////////////
@@ -24,6 +24,13 @@ module.exports = function (app) {
     .get((req, res) => {
       res.render('signin.ejs')
     })
+
+  app.route('/signin')
+    .post(passport.authenticate('local-signin', {
+      successRedirect: '/featured/1',
+      failureRedirect: '/signin',
+      failureFlash: true
+    }))
 
   //////////////////
   // signup route //
