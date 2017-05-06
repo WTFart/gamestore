@@ -42,12 +42,12 @@ module.exports = function (app, passport) {
           connection.query('SELECT game_id, name, price FROM games', (err, result) => {
             res.render('store.ejs', { user_id: req.query.user_id, games: result })
           })
-        } else if (path == 'library') {
+        } else if (path == '/library') {
           ///////////////////
           // library route //
           ///////////////////
           res.render('library.ejs', { user_id: req.query.user_id })
-        } else if (path == 'wishlist') {
+        } else if (path == '/wishlist') {
           ////////////////////
           // wishlist route //
           ////////////////////
