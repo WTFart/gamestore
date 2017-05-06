@@ -43,7 +43,7 @@ module.exports = function(passport) {
     })
   }))
 
-  passport.user('signup', new LocalStrategy({
+  passport.use('signup', new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password',
     passReqToCallback: true
