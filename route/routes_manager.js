@@ -27,10 +27,12 @@ module.exports = function (app, passport) {
 
   app.route('/signin')
     .post(passport.authenticate('local-signin', {
-      successRedirect: '/featured/1',
       failureRedirect: '/signin',
       failureFlash: true
-    }))
+    }),
+    (req, res) => {
+      res.redirect('/featured/' + req.user.user_id)
+    })
 
   //////////////////
   // signup route //
