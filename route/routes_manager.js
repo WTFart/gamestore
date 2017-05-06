@@ -7,13 +7,63 @@ var connection = mysql.createConnection({
 });
 
 module.exports = function (app, passport) {
-  ////////////////
-  // home route //
-  ////////////////
-  ['/', '/index'].forEach((path) => {
+  ['/', '/index', '/signin', '/signup', '/featured', '/store', '/library', '/wishlist', '/profile', '/featured/:game_id', '/store/:game_id'].forEach((path) => {
     app.route(path)
       .get((req, res) => {
-        res.render('index.ejs')
+        if (path == '/' || path == '/index') {
+          ////////////////
+          // home route //
+          ////////////////
+          res.render('index.ejs')
+        } else if (path == '/signin') {
+          //////////////////
+          // signin route //
+          //////////////////
+          res.render('signin.ejs')
+        } else if (path == '/signup') {
+          //////////////////
+          // signup route //
+          //////////////////
+          res.render('signup.ejs')
+        } else if (path == '/featured') {
+          ////////////////////
+          // featured route //
+          ////////////////////
+          connection.query('SELECT game_id, name, price FROM games WHERE review = 5', (err, result) => {
+            res.render('featured.ejs', { user_id: req.query.user_id, games: result })
+          })
+        } else if (path == '/store') {
+          /////////////////
+          // store route //
+          /////////////////
+          connection.query('SELECT game_id, name, price FROM games', (err, result) => {
+            res.render('store.ejs', { user_id: req.query.user_id, games: result })
+          })
+        } else if (path == 'library') {
+          ///////////////////
+          // library route //
+          ///////////////////
+          res.render('library.ejs', { user_id: req.query.user_id })
+        } else if (path == 'wishlist') {
+          ////////////////////
+          // wishlist route //
+          ////////////////////
+          res.render('wishlist.ejs', { user_id: req.query.user_id })
+        } else if (path == '/profile') {
+          ///////////////////
+          // profile route //
+          ///////////////////
+          connection.query('SELECT * FROM users WHERE user_id = ?', [req.query.user_id], (err, result) => {
+            res.render('profile.ejs', { user: result[0] })
+          })
+        } else if (path == '/featured/:game_id' || path == '/store/:game_id') {
+          ////////////////
+          // game route //
+          ////////////////
+          connection.query('SELECT * FROM games WHERE game_id = ?', [req.params.game_id], (err, result) => {
+            res.render('game.ejs', { user_id: req.query.user_id, game: result[0] })
+          })
+        }
       })
   })
 
@@ -21,80 +71,30 @@ module.exports = function (app, passport) {
   // signin route //
   //////////////////
   app.route('/signin')
-    .get((req, res) => {
-      res.render('signin.ejs')
-    })
-
-  app.route('/signin')
-    .post(passport.authenticate('local-signin', {
+    .post(passport.authenticate('signin', {
       failureRedirect: '/signin',
       failureFlash: true
     }),
     (req, res) => {
-      res.redirect('/featured/' + req.user.user_id)
+      res.redirect('/featured/?user_id=' + req.user.user_id)
     })
 
   //////////////////
   // signup route //
   //////////////////
   app.route('/signup')
-   .get((req, res) => {
-     res.render('signup.ejs')
-   })
-
-  ////////////////////
-  // featured route //
-  ////////////////////
-  app.route('/featured/:user_id')
-   .get((req, res) => {
-     connection.query('SELECT game_id, name, price FROM games WHERE review > 4', (err, result) => {
-       res.render('featured.ejs', { user_id: req.params.user_id, games: result })
-     })
-   })
-
-  /////////////////
-  // store route //
-  /////////////////
-  app.route('/store/:user_id')
-    .get((req, res) => {
-      connection.query('SELECT game_id, name, price FROM games', (err, result) => {
-        res.render('store.ejs', { user_id: req.params.user_id, games: result })
+    .post((req, res) => {
+      connection.query('SELECT user_id FROM users WHERE email = ?', [req.body.email], (err, result) => {
+        if (!result[0]) {
+          connection.query('INSERT INTO users (name, surname, username, password, gender, age, email, country) values(?,?,?,?,?,?,?,?)',
+            [req.body.name, req.body.surname, req.body.username, password, req.body.gender, req.body.age, email, req.body.country],
+            (err, result) => {
+              connection.query('SELECT * FROM users WHERE email = ?', [req.body.email], (err, result) => {
+                res.redirect('/featured/?user_id' + result[0].user_id)
+              }
+            )
+          }
+        )}
       })
     })
-
-  ///////////////////
-  // library route //
-  ///////////////////
-  app.route('/library/:user_id')
-    .get((req, res) => {
-      res.render('library.ejs', { user_id: req.params.user_id })
-    })
-
-  ////////////////////
-  // wishlist route //
-  ////////////////////
-  app.route('/wishlist/:user_id')
-   .get((req, res) => {
-     res.render('wishlist.ejs', { user_id: req.params.user_id })
-   })
-
-  ///////////////////
-  // profile route //
-  ///////////////////
-  app.route('/profile/:user_id')
-    .get((req, res) => {
-      connection.query('SELECT * FROM users WHERE user_id = ?', [req.params.user_id], (err, result) => {
-        res.render('profile.ejs', { user: result[0] })
-      })
-    })
-
-  ////////////////
-  // game route //
-  ////////////////
-  app.route('/store/:user_id/:game_id')
-   .get((req, res) => {
-     connection.query("SELECT * FROM games WHERE game_id = ?", [req.params.game_id], (err, result) => {
-       res.render('game.ejs', { user_id: req.params.user_id, game: result[0] })
-     })
-   })
 }
