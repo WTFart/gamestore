@@ -72,7 +72,7 @@ module.exports = function (app, passport) {
   //////////////////
   app.route('/signin')
     .post(passport.authenticate('signin', {
-      failureRedirect: '/signin',
+      failureRedirect: '/',
       failureFlash: true
     }),
     (req, res) => {
