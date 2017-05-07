@@ -32,26 +32,39 @@ module.exports = function (app, passport) {
           ////////////////////
           // featured route //
           ////////////////////
-          connection.query('SELECT game_id, name, price FROM games WHERE review = 5', (err, result) => {
+          connection.query('SELECT game_id, name, price FROM games WHERE review = 5 AND except_country NOT IN (SELECT country FROM users WHERE user_id = ?)',
+          [req.query.user_id],
+          (err, result) => {
             res.render('featured.ejs', { user_id: req.query.user_id, games: result })
           })
         } else if (path == '/store') {
           /////////////////
           // store route //
           /////////////////
-          connection.query('SELECT game_id, name, price FROM games', (err, result) => {
+          connection.query('SELECT game_id, name, price FROM games WHERE except_country NOT IN (SELECT country FROM users WHERE user_id = ?)',
+          [req.query.user_id],
+          (err, result) => {
             res.render('store.ejs', { user_id: req.query.user_id, games: result })
           })
         } else if (path == '/library') {
           ///////////////////
           // library route //
           ///////////////////
-          res.render('library.ejs', { user_id: req.query.user_id })
+          connection.query('SELECT games.* FROM games LEFT JOIN orders ON games.game_id = orders.game_id WHERE orders.user_id = ? AND games.game_id = orders.game_id',
+          [req.query.user_id],
+          (err, result) => {
+            res.render('store.ejs', { user_id: req.query.user_id, games: result })
+            // res.render('library.ejs', { user_id: req.query.user_id, games: result })
+          })
         } else if (path == '/wishlist') {
           ////////////////////
           // wishlist route //
           ////////////////////
-          res.render('wishlist.ejs', { user_id: req.query.user_id })
+          connection.query('SELECT games.* FROM games LEFT JOIN orders ON games.game_id = wishlist.game_id WHERE wishlist.user_id = ? AND games.game_id = wishlist.game_id',
+          [req.query.user_id],
+          (err, result) => {
+            // res.render('wishlist.ejs', { user_id: req.query.user_id, games: result })
+          })
         } else if (path == '/profile') {
           ///////////////////
           // profile route //
