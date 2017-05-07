@@ -53,7 +53,6 @@ module.exports = function (app, passport) {
           connection.query('SELECT games.* FROM games LEFT JOIN orders ON games.game_id = orders.game_id WHERE orders.user_id = ? AND games.game_id = orders.game_id',
           [req.query.user_id],
           (err, result) => {
-            res.render('store.ejs', { user_id: req.query.user_id, games: result })
             // res.render('library.ejs', { user_id: req.query.user_id, games: result })
           })
         } else if (path == '/wishlist') {
