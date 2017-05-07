@@ -71,7 +71,7 @@ footer {
 /* Modal Content/Box */
 .modal-content {
     background: rgba(19, 35, 47, 1);
-    margin: 15% auto; /* 15% from the top and centered */
+    margin: 5% auto; /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
     width: 43%; /* Could be more or less, depending on screen size */
@@ -266,3 +266,74 @@ textarea {
   text-align: right;
 }
 
+/* dropdown option*/
+
+.dropdown {
+  background: #1ab188;
+  position: relative;
+  width: 200px;
+  border-radius: 3px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: 40px;
+}
+
+.dropdown.is-opened {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.dropdown-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 64px;
+  padding: 0 32px;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.dropdown-options-container {
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  background: #169976;
+  min-width: 100%;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  transform: translateY(-40px);
+  transition: transform .3s, opacity .3s;
+  z-index: -1;
+}
+
+.is-opened .dropdown-options-container {
+  pointer-events: all;
+  opacity: 1;
+  transform: translateY(0);
+  z-index: 5;
+}
+
+.dropdown-option {
+  height: 54px;
+}
+
+.dropdown-option:hover {
+  background: #e6e6e6;
+}
+
+.dropdown-inner,
+.dropdown-value,
+.dropdown-icon {
+  pointer-events: none;
+}
+
+.dropdown-icon {
+  transition: transform .3s;
+}
+
+.is-opened .dropdown-icon {
+  transform: rotateZ(540deg);
+}
