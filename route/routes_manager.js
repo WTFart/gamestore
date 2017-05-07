@@ -10,7 +10,7 @@ module.exports = function (app, passport) {
 
   ['/', '/index', '/signin', '/signup',
   '/featured', '/store', '/library', '/wishlist', '/profile',
-  '/featured/:game_id', '/store/:game_id'].forEach((path) => {
+  '/store/:game_id'].forEach((path) => {
     app.route(path)
       .get((req, res) => {
         if (path == '/' || path == '/index') {
@@ -32,8 +32,8 @@ module.exports = function (app, passport) {
           ////////////////////
           // featured route //
           ////////////////////
-          connection.query('SELECT game_id, name, price FROM games WHERE review = 5 AND except_country NOT IN (SELECT country FROM users WHERE user_id = ?) AND game_id NOT IN (SELECT game_id FROM orders WHERE user_id = ?)',
-          [req.cookies.user_id, req.cookies.user_id],
+          connection.query('SELECT game_id, name, price FROM games WHERE review = 5 AND except_country NOT IN (SELECT country FROM stores WHERE store_id = ?) AND game_id NOT IN (SELECT game_id FROM orders WHERE user_id = ?)',
+          [req.cookies.store_id, req.cookies.user_id],
           (err, result) => {
             res.render('featured.ejs', { user_id: req.cookies.user_id, games: result })
           })
@@ -41,8 +41,8 @@ module.exports = function (app, passport) {
           /////////////////
           // store route //
           /////////////////
-          connection.query('SELECT game_id, name, price FROM games WHERE except_country NOT IN (SELECT country FROM users WHERE user_id = ?) AND game_id NOT IN (SELECT game_id FROM orders WHERE user_id = ?)',
-          [req.cookies.user_id, req.cookies.user_id],
+          connection.query('SELECT game_id, name, price FROM games WHERE except_country NOT IN (SELECT country FROM stores WHERE store_id = ?) AND game_id NOT IN (SELECT game_id FROM orders WHERE user_id = ?)',
+          [req.cookies.store_id, req.cookies.user_id],
           (err, result) => {
             res.render('store.ejs', { user_id: req.cookies.user_id, games: result })
           })
@@ -91,8 +91,11 @@ module.exports = function (app, passport) {
       failureFlash: true
     }),
     (req, res) => {
-      res.cookie('user_id', req.user.user_id)
-      res.redirect('/featured/')
+      connection.query('SELECT store_id FROM stores WHERE country = ?', [req.user.country], (err, result) => {
+        res.cookie('store_id', result[0])
+        res.cookie('user_id', req.user.user_id)
+        res.redirect('/featured/')
+      })
     })
 
   //////////////////
@@ -104,7 +107,10 @@ module.exports = function (app, passport) {
       failureFlash: true
     }),
     (req, res) => {
-      res.cookie('user_id', req.user.user_id)
-      res.redirect('/featured/')
+      connection.query('SELECT store_id FROM stores WHERE country = ?', [req.user.country], (err, result) => {
+        res.cookie('store_id', result[0])
+        res.cookie('user_id', req.user.user_id)
+        res.redirect('/featured/')
+      })
     })
 }
