@@ -94,7 +94,7 @@ module.exports = function (app, passport) {
       connection.query('SELECT store_id FROM stores WHERE country = ?', [req.user.country], (err, result) => {
         res.cookie('store_id', result[0])
         res.cookie('user_id', req.user.user_id)
-        res.redirect('/featured/')
+        res.redirect('/featured')
       })
     })
 
@@ -110,7 +110,7 @@ module.exports = function (app, passport) {
       connection.query('SELECT store_id FROM stores WHERE country = ?', [req.user.country], (err, result) => {
         res.cookie('store_id', result[0])
         res.cookie('user_id', req.user.user_id)
-        res.redirect('/featured/')
+        res.redirect('/featured')
       })
     })
 }
