@@ -18,16 +18,6 @@ module.exports = function (app, passport) {
           // home route //
           ////////////////
           res.render('index.ejs')
-        } else if (path == '/signin') {
-          //////////////////
-          // signin route //
-          //////////////////
-          res.render('signin.ejs')
-        } else if (path == '/signup') {
-          //////////////////
-          // signup route //
-          //////////////////
-          res.render('signup.ejs')
         } else if (path == '/featured') {
           ////////////////////
           // featured route //
