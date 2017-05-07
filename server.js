@@ -1,5 +1,6 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
 const app = express()
 const passport = require('passport')
 const flash = require('connect-flash')
@@ -19,6 +20,7 @@ app.use(passport.session())
 app.use(flash())
 app.use(express.static(path.join(__dirname, 'views')))
 app.use(bodyParser.json());
+app.use(cookieParser())
 app.use(cors())
 app.listen(3000);
 console.log('Store@ http://localhost:' + 3000);

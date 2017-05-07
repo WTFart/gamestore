@@ -33,42 +33,42 @@ module.exports = function (app, passport) {
           // featured route //
           ////////////////////
           connection.query('SELECT game_id, name, price FROM games WHERE review = 5 AND except_country NOT IN (SELECT country FROM users WHERE user_id = ?) AND game_id NOT IN (SELECT game_id FROM orders WHERE user_id = ?)',
-          [req.query.user_id, req.query.user_id],
+          [req.cookies.user_id, req.cookies.user_id],
           (err, result) => {
-            res.render('featured.ejs', { user_id: req.query.user_id, games: result })
+            res.render('featured.ejs', { user_id: req.cookies.user_id, games: result })
           })
         } else if (path == '/store') {
           /////////////////
           // store route //
           /////////////////
           connection.query('SELECT game_id, name, price FROM games WHERE except_country NOT IN (SELECT country FROM users WHERE user_id = ?) AND game_id NOT IN (SELECT game_id FROM orders WHERE user_id = ?)',
-          [req.query.user_id, req.query.user_id],
+          [req.cookies.user_id, req.cookies.user_id],
           (err, result) => {
-            res.render('store.ejs', { user_id: req.query.user_id, games: result })
+            res.render('store.ejs', { user_id: req.cookies.user_id, games: result })
           })
         } else if (path == '/library') {
           ///////////////////
           // library route //
           ///////////////////
           connection.query('SELECT games.* FROM games LEFT JOIN orders ON games.game_id = orders.game_id WHERE orders.user_id = ? AND games.game_id = orders.game_id',
-          [req.query.user_id],
+          [req.cookies.user_id],
           (err, result) => {
-            // res.render('library.ejs', { user_id: req.query.user_id, games: result })
+            // res.render('library.ejs', { user_id: req.cookies.user_id, games: result })
           })
         } else if (path == '/wishlist') {
           ////////////////////
           // wishlist route //
           ////////////////////
           connection.query('SELECT games.* FROM games LEFT JOIN orders ON games.game_id = wishlist.game_id WHERE wishlist.user_id = ? AND games.game_id = wishlist.game_id',
-          [req.query.user_id],
+          [req.cookies.user_id],
           (err, result) => {
-            // res.render('wishlist.ejs', { user_id: req.query.user_id, games: result })
+            // res.render('wishlist.ejs', { user_id: req.cookies.user_id, games: result })
           })
         } else if (path == '/profile') {
           ///////////////////
           // profile route //
           ///////////////////
-          connection.query('SELECT * FROM users WHERE user_id = ?', [req.query.user_id], (err, result) => {
+          connection.query('SELECT * FROM users WHERE user_id = ?', [req.cookies.user_id], (err, result) => {
             res.render('profile.ejs', { user: result[0] })
           })
         } else if (path == '/featured/:game_id' || path == '/store/:game_id') {
@@ -76,7 +76,7 @@ module.exports = function (app, passport) {
           // game route //
           ////////////////
           connection.query('SELECT * FROM games WHERE game_id = ?', [req.params.game_id], (err, result) => {
-            res.render('game.ejs', { user_id: req.query.user_id, game: result[0] })
+            res.render('game.ejs', { user_id: req.cookies.user_id, game: result[0] })
           })
         }
       })
@@ -91,7 +91,8 @@ module.exports = function (app, passport) {
       failureFlash: true
     }),
     (req, res) => {
-      res.redirect('/featured/?user_id=' + req.user.user_id)
+      res.cookie('user_id', req.user.user_id)
+      res.redirect('/featured/')
     })
 
   //////////////////
@@ -103,6 +104,7 @@ module.exports = function (app, passport) {
       failureFlash: true
     }),
     (req, res) => {
-      res.redirect('/featured/?user_id' + req,user.user_id)
+      res.cookie('user_id', req.user.user_id)
+      res.redirect('/featured/')
     })
 }
