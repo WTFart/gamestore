@@ -6,13 +6,15 @@ var connection = mysql.createConnection({
   database: 'gamestore_database'
 });
 
-module.exports = function (app, passport) {
+module.exports = (app, passport) => {
   ////////////////
   // home route //
   ////////////////
-  app.get('/', (req, res) => {
+  renderHome = (req, res) => {
     res.render('index.ejs')
-  })
+  }
+  app.get('/', renderHome)
+  app.get('/index', renderHome)
   //////////////////
   // signin route //
   //////////////////
@@ -90,14 +92,11 @@ module.exports = function (app, passport) {
   /////////////////
   // game routes //
   /////////////////
-  app.get('/featured/:game_id', (req, res) => {
+  getGameFromID = (req, res) => {
     connection.query('SELECT * FROM games WHERE game_id = ?', [req.params.game_id], (err, result) => {
       res.render('game.ejs', { user_id: req.cookies.user_id, game: result[0] })
     })
-  })
-  app.get('/store/:game_id', (req, res) => {
-    connection.query('SELECT * FROM games WHERE game_id = ?', [req.params.game_id], (err, result) => {
-      res.render('game.ejs', { user_id: req.cookies.user_id, game: result[0] })
-    })
-  })
+  }
+  app.get('/featured/:game_id', getGameFromID)
+  app.get('/store/:game_id', getGameFromID)
 }
