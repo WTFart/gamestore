@@ -3,12 +3,6 @@
 
 <head>
 
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="">
-  <meta name="author" content="">
-
   <title>
     <%= user.username %> | Profile </title>
 
@@ -18,84 +12,78 @@
   <!-- Custom CSS -->
   <link href="/css/shop-homepage.css" rel="stylesheet">
 
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
 </head>
 
 <body>
-  <div class="profile">
-    <%- include navbar.ejs %>
-      <div class="edit-registration-form">
-        <div class="container">
-          <h1 class="title">ข้อมูลส่วนตัว</h1>
-          <div class="edit-form-color row justify-content-center">
-            <div class="col-lg-6">
 
-              <div class="field">
-                <div class="row">
-                  <div class="col-5 col-md-5">
-                    <label>Name</label>
-                  </div>
-                  <div class="col">
-                    <label><%= user.name %></label>
-                  </div>
-                </div>
-              </div>
-              <div class="field">
-                <div class="row">
-                  <div class="col-5 col-md-5">
-                    <label>Surname</label>
-                  </div>
-                  <div class="col">
-                    <label><%= user.surname %></label>
-                  </div>
-                </div>
-              </div>
-              <div class="field">
-                <div class="row">
-                  <div class="col-5 col-md-5">
-                    <label>Gender</label>
-                  </div>
-                  <div class="col">
-                    <label><%= user.gender %></label>
-                  </div>
-                </div>
-              </div>
-              <div class="field">
-                <div class="row">
-                  <div class="col-5 col-md-5">
-                    <label>Age</label>
-                  </div>
-                  <div class="col">
-                    <label><%= user.age %></label>
-                  </div>
-                </div>
-              </div>
-              <div class="field">
-                <div class="row">
-                  <div class="col-5 col-md-5">
-                    <label>Country</label>
-                  </div>
-                  <div class="col">
-                    <label><%= user.country %></label>
-                  </div>
-                </div>
-              </div>
-            </div>
+  <%- include navbar.ejs %>
+  <br/>
+  <br/>
+  <div class="container">
+    <div class="list-group text-profile col-md-6">
+
+      <a class="list-group-item">
+        <div class="row">
+          <div class="col-md-3">
+            <b>Name:</b>
+          </div>
+          <div class="col-md-3">
+            <%= user.name %>
           </div>
         </div>
-      </div>
-  </div>
-  <!-- jQuery -->
-  <script src="/js/jquery.js"></script>
+      </a>
+      <a class="list-group-item">
+        <div class="row">
+          <div class="col-md-3">
+            <b>Surname:</b>
+          </div>
+          <div class="col-md-3">
+            <%= user.surname %>
+          </div>
+        </div>
+        
+      </a>
+      <a class="list-group-item">
+        <div class="row">
+          <div class="col-md-3">
+            <b>Gender:</b>
+          </div>
+          <div class="col-md-3">
+            <%= user.gender %>
+          </div>
+        </div>
+        
+      </a>
+      <a class="list-group-item">
+        <div class="row">
+          <div class="col-md-3">
+            <b>Age:</b>
+          </div>
+          <div class="col-md-3">
+            <%= user.age %>
+          </div>
+        </div>
+        
+      </a>
+      <a class="list-group-item">
+        <div class="row">
+          <div class="col-md-3">
+            <b>Country:</b>
+          </div>
+          <div class="col-md-3">
+            <%= user.country %>
+          </div>
+        </div>
+       
+      </a>
 
-  <!-- Bootstrap Core JavaScript -->
-  <script src="/js/bootstrap.min.js"></script>
+    </div>
+  </div>
+    <!-- jQuery -->
+    <script src="/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/js/bootstrap.min.js"></script>
 </body>
 
 </html>

@@ -22,7 +22,7 @@ module.exports = function (app, passport) {
           ////////////////////
           // featured route //
           ////////////////////
-          connection.query('SELECT game_id, name, price FROM games WHERE review = 5 AND except_country NOT IN (SELECT country FROM stores WHERE store_id = ?) AND game_id NOT IN (SELECT game_id FROM orders WHERE user_id = ?)',
+          connection.query('SELECT * FROM games WHERE review = 5 AND except_country NOT IN (SELECT country FROM stores WHERE store_id = ?) AND game_id NOT IN (SELECT game_id FROM orders WHERE user_id = ?)',
           [req.cookies.store_id, req.cookies.user_id],
           (err, result) => {
             res.render('featured.ejs', { user_id: req.cookies.user_id, games: result })
@@ -32,13 +32,13 @@ module.exports = function (app, passport) {
           // store route //
           /////////////////
           if (req.query.search) {
-            connection.query('SELECT game_id, name, price FROM games WHERE except_country NOT IN (SELECT country FROM stores WHERE store_id = ?) AND game_id NOT IN (SELECT game_id FROM orders WHERE user_id = ?) AND name LIKE ?',
+            connection.query('SELECT * FROM games WHERE except_country NOT IN (SELECT country FROM stores WHERE store_id = ?) AND game_id NOT IN (SELECT game_id FROM orders WHERE user_id = ?) AND name LIKE ?',
             [req.cookies.store_id, req.cookies.user_id, '%' + req.query.search + '%'],
             (err, result) => {
               res.render('store.ejs', { user_id: req.cookies.user_id, games: result })
             })
           } else {
-            connection.query('SELECT game_id, name, price FROM games WHERE except_country NOT IN (SELECT country FROM stores WHERE store_id = ?) AND game_id NOT IN (SELECT game_id FROM orders WHERE user_id = ?)',
+            connection.query('SELECT * FROM games WHERE except_country NOT IN (SELECT country FROM stores WHERE store_id = ?) AND game_id NOT IN (SELECT game_id FROM orders WHERE user_id = ?)',
             [req.cookies.store_id, req.cookies.user_id],
             (err, result) => {
               res.render('store.ejs', { user_id: req.cookies.user_id, games: result })

@@ -2,23 +2,23 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-    <title>Featured</title>
+  <title>Featured</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Core CSS -->
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom CSS -->
-    <link href="/css/shop-homepage.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link href="/css/shop-homepage.css" rel="stylesheet">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
   <![endif]-->
@@ -26,30 +26,50 @@
 </head>
 
 <body>
-    <%- include navbar.ejs %>
+  <%- include navbar.ejs %>
 
     <div class="container">
-        <div class="col-md-12">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">Go!</button>
-                </span>
+      <div class="col-md-12">
+         <div class="input-group">
+          <form action="/store">
+            <span class="input-group-btn">
+              <input type="text" name="search" class="form-control" placeholder="Search">
+              <button type="submit" class="btn btn-default" type="button">Go!</button>
+            </span>
+          </form>
+        </div>
+        <!-- /input-group -->
+      </div>
+      <!-- /.col-lg-6 -->
+      <br />
+      <br />
+      <br />
+      <div class="list-group">
+        <% for (var i = 0; i < games.length; i++ ) {%>
+          <a href="/store/<%= games[i].game_id %>" class="list-group-item">
+            <div class="col-md-1">
+              <%= i+1 %>
             </div>
-            <!-- /input-group -->
-        </div>
-        <!-- /.col-lg-6 -->
-        <br />
-        <br />
-        <br />
-        <div class="list-group">
-            <% for (var i = 0; i < games.length; i++ ) {%>
-                <a href="/store/<%= games[i].game_id %>" class="list-group-item"><%= games[i].name %></a>
-            <% } %>
-        </div>
-        
+            <div class="col-md-3">
+              <%= games[i].name %>
+            </div>
+            <div class="col-md-3">
+              <%= games[i].price %>
+            </div>
+            <div class="col-md-3">
+              <%= games[i].age_limit %>
+            </div>
+            <div class="col">
+              <%= games[i].release_date %>
+            </div>
+            <br/>
+          </a>
 
-        
+          <% } %>
+      </div>
+
+
+
     </div>
 
 </body>
