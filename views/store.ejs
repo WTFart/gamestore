@@ -45,24 +45,41 @@
       <br />
       <br />
       <div class="list-group">
-        <% for (var i = 0; i < games.length; i++ ) {%>
-          <a href="/store/<%= games[i].game_id %>" class="list-group-item">
+        <a class="list-group-item">
           <div class="col-md-1">
-            <%= i+1 %>
+            <b>Number</b>
           </div>
           <div class="col-md-3">
-            <%= games[i].name %>
+            <b>Name</b>
           </div>
           <div class="col-md-3">
-            <%= games[i].price %>
+            <b>Price</b>
           </div>
           <div class="col-md-3">
-            <%= games[i].age_limit %>
+            <b>Age Limit</b>
           </div>
           <div class="col">
-            <%= games[i].release_date %>
+            <b>Release Date</b>
           </div>
-          <br/>
+        </a>
+        <% for (var i = 0; i < games.length; i++ ) {%>
+          <a href="/store/<%= games[i].game_id %>" class="list-group-item">
+            <div class="col-md-1">
+              <%= i+1 %>
+            </div>
+            <div class="col-md-3">
+              <%= games[i].name %>
+            </div>
+            <div class="col-md-3">
+              <%= games[i].price %>
+            </div>
+            <div class="col-md-3">
+              <%= games[i].age_limit %>
+            </div>
+            <div class="col">
+              <%= games[i].release_date %>
+            </div>
+            <br/>
           </a>
           <% } %>
       </div>

@@ -45,6 +45,23 @@
       <br />
       <br />
       <div class="list-group">
+       <a class="list-group-item">
+          <div class="col-md-1">
+            <b>Number</b>
+          </div>
+          <div class="col-md-3">
+            <b>Name</b>
+          </div>
+          <div class="col-md-3">
+            <b>Price</b>
+          </div>
+          <div class="col-md-3">
+            <b>Age Limit</b>
+          </div>
+          <div class="col">
+            <b>Release Date</b>
+          </div>
+        </a>
         <% for (var i = 0; i < games.length; i++ ) {%>
           <a href="/store/<%= games[i].game_id %>" class="list-group-item">
             <div class="col-md-1">
