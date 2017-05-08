@@ -58,8 +58,8 @@ module.exports = (app, passport) => {
     var sql = 'SELECT * FROM games WHERE except_country NOT IN (SELECT country FROM stores WHERE store_id = ?) AND game_id NOT IN (SELECT game_id FROM orders WHERE user_id = ?)'
     var params = [req.cookies.store_id, req.cookies.user_id]
     if (req.query.search) {
-      sql += ' AND name LIKE %?%'
-      params.push(req.cookies.user_id)
+      sql += ' AND name LIKE ?'
+      params.push('%' + req.query.search + '%')
     }
     connection.query(sql, params, (err, result) => {
       res.render('store.ejs', { user_id: req.cookies.user_id, games: result })
