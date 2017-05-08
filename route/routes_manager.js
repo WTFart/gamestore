@@ -10,11 +10,9 @@ module.exports = (app, passport) => {
   ////////////////
   // home route //
   ////////////////
-  renderHome = (req, res) => {
+  app.get('/', (req, res) => {
     res.render('index.ejs')
-  }
-  app.get('/', renderHome)
-  app.get('/index', renderHome)
+  })
   //////////////////
   // signin route //
   //////////////////
@@ -47,7 +45,13 @@ module.exports = (app, passport) => {
   // featured route //
   ////////////////////
   app.get('/featured', (req, res) => {
-    connection.query('SELECT * FROM games WHERE review = 5 AND except_country NOT IN (SELECT country FROM stores WHERE store_id = ?) AND game_id NOT IN (SELECT game_id FROM orders WHERE user_id = ?)', [req.cookies.store_id, req.cookies.user_id], (err, result) => {
+    var sql = 'SELECT * FROM games WHERE review = 5 AND except_country NOT IN (SELECT country FROM stores WHERE store_id = ?) AND game_id NOT IN (SELECT game_id FROM orders WHERE user_id = ?)'
+    var params = [req.cookies.store_id, req.cookies.user_id]
+    if (req.query.search) {
+      sql += ' AND name LIKE ?'
+      params.push('%' + req.query.search + '%')
+    }
+    connection.query(sql, params, (err, result) => {
       res.render('featured.ejs', { user_id: req.cookies.user_id, games: result })
     })
   })
@@ -89,14 +93,12 @@ module.exports = (app, passport) => {
       res.render('profile.ejs', { user: result[0] })
     })
   })
-  /////////////////
-  // game routes //
-  /////////////////
-  getGameFromID = (req, res) => {
+  ////////////////
+  // game route //
+  ////////////////
+  app.get('/store/:game_id', (req, res) => {
     connection.query('SELECT * FROM games WHERE game_id = ?', [req.params.game_id], (err, result) => {
       res.render('game.ejs', { user_id: req.cookies.user_id, game: result[0] })
     })
-  }
-  app.get('/featured/:game_id', getGameFromID)
-  app.get('/store/:game_id', getGameFromID)
+  })
 }
