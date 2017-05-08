@@ -50,7 +50,7 @@ module.exports = function(passport) {
   },
   (req, email, password, done) => {
     process.nextTick(() => {
-      if (!req.user) {
+      if (!req.user || !(req.body.name && req.body.surname && req.body.username && password && req.body.gender && req.body.age && email && req.body.country)) {
         connection.query('SELECT user_id FROM users WHERE email = ?', [email], (err, result) => {
           if (err) {
             return done(err)
@@ -58,16 +58,19 @@ module.exports = function(passport) {
           if (result[0]) {
             return done(null, false, req.flash('signupMessage', 'Email is already taken.'))
           } else {
-            connection.query('INSERT INTO users (name, surname, username, password, gender, age, email, country) values (?,?,?,?,?,?,?,?)',
-            [req.body.name, req.body.surname, req.body.username, password, req.body.gender, req.body.age, email, req.body.country],
-            (err, result) => {
-              if (err) {
-                return done(err)
-              }
-              connection.query('SELECT * FROM users WHERE email = ?', [email], (err, result) => {
-                return done(null, result[0])
+            if (req.body.password === req.body.confirmation) {
+              console.log([req.body.name, req.body.surname, req.body.username, password, req.body.gender, req.body.age, email, req.body.country])
+              connection.query('INSERT INTO users (name, surname, username, password, gender, age, email, country) values (?,?,?,?,?,?,?,?)',
+              [req.body.name, req.body.surname, req.body.username, password, req.body.gender, req.body.age, email, req.body.country],
+              (err, result) => {
+                if (err) {
+                  return done(err)
+                }
+                connection.query('SELECT * FROM users WHERE email = ?', [email], (err, result) => {
+                  return done(null, result[0])
+                })
               })
-            })
+            }
           }
         })
       } else {
