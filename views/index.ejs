@@ -3,23 +3,23 @@
 
 <head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-    <title>Game Store</title>
+  <title>Game Store</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Core CSS -->
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom CSS -->
-    <link href="/css/shop-homepage.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link href="/css/shop-homepage.css" rel="stylesheet">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
@@ -28,499 +28,519 @@
 
 <body>
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+  <!-- Navigation -->
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/index">Logo</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a id="myBtn">Sign In</a>
-                        <!-- Trigger/Open The Modal -->
+        <a class="navbar-brand" href="/index">Logo</a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li>
+            <a id="myBtn">Sign In</a>
+            <!-- Trigger/Open The Modal -->
 
-                        <!-- The Modal -->
-                        <div id="myModal" class="modal">
+            <!-- The Modal -->
+            <div id="myModal" class="modal">
 
-                            <!-- Modal content -->
-                            <div class="modal-content">
-                                <span class="close">&times;</span>
-                                <div class="form">
-                                    <ul class="tab-group">
-                                        <li class="tab active"><a href="#login">Log In</a></li>
-                                        <li class="tab"><a href="#signup">Sign Up</a></li>
-                                    </ul>
+              <!-- Modal content -->
+              <div class="modal-content">
+                <span class="close">&times;</span>
+                <div class="form">
+                  <ul class="tab-group">
+                    <li class="tab active"><a href="#login">Log In</a></li>
+                    <li class="tab"><a href="#signup">Sign Up</a></li>
+                  </ul>
 
-                                    <div class="tab-content">
-                                        <div id="login">
-                                            <h1>Welcome Back!</h1>
+                  <div class="tab-content">
+                    <div id="login">
+                      <h1>Welcome Back!</h1>
 
-                                            <form action="/signin" method="post">
+                      <form action="/signin" method="post">
 
-                                                <div class="field-wrap">
-                                                    <label>Email Address<span class="req">*</span></label>
-                                                    <input type="email" required autocomplete="off" name="email" />
-                                                </div>
+                        <div class="field-wrap">
+                          <label>Email Address<span class="req">*</span></label>
+                          <input type="email" required autocomplete="off" name="email" />
+                        </div>
 
-                                                <div class="field-wrap">
-                                                    <label>Password<span class="req">*</span></label>
-                                                    <input type="password" required autocomplete="off" name="password" />
-                                                </div>
+                        <div class="field-wrap">
+                          <label>Password<span class="req">*</span></label>
+                          <input type="password" required autocomplete="off" name="password" />
+                        </div>
 
-                                                <p class="forgot"><a href="#">Forgot Password?</a></p>
+                        <p class="forgot"><a href="#">Forgot Password?</a></p>
 
-                                                <button class="button button-block" />Log In</button>
+                        <button class="button button-block" />Log In</button>
 
-                                            </form>
+                      </form>
 
-                                        </div>
+                    </div>
 
-                                        <div id="signup">
-                                            <h1>Sign Up Here</h1>
+                    <div id="signup">
+                      <h1>Sign Up Here</h1>
 
-                                            <form action="/signup" method="post">
-                                                <div class="top-row">
-                                                    <div class="field-wrap">
-                                                        <label>First Name<span class="req">*</span></label>
-                                                        <input type="text" required autocomplete="off" />
-                                                    </div>
+                      <form action="/signup" method="post">
+                        <div class="top-row">
+                          <div class="field-wrap">
+                            <label>First Name<span class="req">*</span></label>
+                            <input type="text" required autocomplete="off" />
+                          </div>
 
-                                                    <div class="field-wrap">
-                                                        <label>Last Name<span class="req">*</span></label>
-                                                        <input type="text" required autocomplete="off" />
-                                                    </div>
-                                                </div>
+                          <div class="field-wrap">
+                            <label>Last Name<span class="req">*</span></label>
+                            <input type="text" required autocomplete="off" />
+                          </div>
+                        </div>
 
-                                                <div class="field-wrap">
-                                                    <label>Email Address<span class="req">*</span></label>
-                                                    <input type="email" required autocomplete="off" />
-                                                </div>
+                        <div class="field-wrap">
+                          <label>Email Address<span class="req">*</span></label>
+                          <input type="email" required autocomplete="off" />
+                        </div>
 
-                                                <div class="field-wrap">
-                                                    <label>Set A Password<span class="req">*</span></label>
-                                                    <input type="password" required autocomplete="off" />
-                                                </div>
+                        <div class="field-wrap">
+                          <label>Set A Password<span class="req">*</span></label>
+                          <input type="password" required autocomplete="off" />
+                        </div>
 
-                                                <div class="field-wrap">
-                                                    <label>Confirm Password<span class="req">*</span></label>
-                                                    <input type="password" required autocomplete="off" />
-                                                </div>
+                        <div class="field-wrap">
+                          <label>Confirm Password<span class="req">*</span></label>
+                          <input type="password" required autocomplete="off" />
+                        </div>
 
-                                                <div class="field-warp">
-                                                    <link href="https://fonts.googleapis.com/css?family=Raleway:300" rel="stylesheet">
-
-                                                    <div class="dropdown js-dropdown">
-                                                        <div class="dropdown-inner dropdown-box">
-                                                            <span class="dropdown-value js-dropdown-value"> Select Country</span>
-                                                            <span class="dropdown-icon">&#9662;</span>
-                                                        </div>
-                                                        <div class="dropdown-options-container js-dropdown-options">
-                                                            <div class="dropdown-option dropdown-box js-dropdown-option">Thailand</div>
-                                                            <div class="dropdown-option dropdown-box js-dropdown-option">Japan</div>
-                                                            <div class="dropdown-option dropdown-box js-dropdown-option">United State</div>
-                                                            <div class="dropdown-option dropdown-box js-dropdown-option">United Kingdom</div>
-                                                            <div class="dropdown-option dropdown-box js-dropdown-option">India</div>
-                                                            <div class="dropdown-option dropdown-box js-dropdown-option">Hongkong</div>
-                                                            <div class="dropdown-option dropdown-box js-dropdown-option">Brazil</div>
-                                                            <div class="dropdown-option dropdown-box js-dropdown-option">China</div>
-                                                            <div class="dropdown-option dropdown-box js-dropdown-option">Singapore</div>
-                                                            <div class="dropdown-option dropdown-box js-dropdown-option">Spain</div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="dropdown js-dropdown">
-                                                        <div class="dropdown-inner dropdown-box">
-                                                            <span class="dropdown-value js-dropdown-value"> Select Age</span>
-                                                            <span class="dropdown-icon">&#9662;</span>
-                                                        </div>
-                                                        <div class="dropdown-options-container js-dropdown-options">
-                                                            <div class="dropdown-option dropdown-box js-dropdown-option">18</div>
-                                                            <div class="dropdown-option dropdown-box js-dropdown-option">19</div>
-                                                            <div class="dropdown-option dropdown-box js-dropdown-option">20</div>
-                                                            <div class="dropdown-option dropdown-box js-dropdown-option">...</div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="dropdown js-dropdown">
-                                                        <div class="dropdown-inner dropdown-box">
-                                                            <span class="dropdown-value js-dropdown-value"> Select Gender</span>
-                                                            <span class="dropdown-icon">&#9662;</span>
-                                                        </div>
-                                                        <div class="dropdown-options-container js-dropdown-options">
-                                                            <div class="dropdown-option dropdown-box js-dropdown-option">Male</div>
-                                                            <div class="dropdown-option dropdown-box js-dropdown-option">Female</div>
-                                                        </div>
-                                                    </div>
-                                                    
-                                                </div>
-
-                                                <button type="submit" class="button button-block" />Get Started</button>
-
-                                            </form>
-
-                                        </div>
-
-
-
-                                    </div>
-                                    <!-- tab-content -->
-
-                                </div>
+                        <div class="field-warp">
+                          <link href="https://fonts.googleapis.com/css?family=Raleway:300" rel="stylesheet">
+                     
+                          <div class="dropdown js-dropdown1">
+                            <div class="dropdown-inner dropdown-box">
+                              <span class="dropdown-value js-dropdown-value1">Select Country</span>
+                              <span class="dropdown-icon">&#9662;</span>
                             </div>
+                            <div class="dropdown-options-container js-dropdown-options1">
+                              <div class="dropdown-option dropdown-box js-dropdown-option1">Thailand</div>
+                              <div class="dropdown-option dropdown-box js-dropdown-option1">Japan</div>
+                              <div class="dropdown-option dropdown-box js-dropdown-option1">United State</div>
+                              <div class="dropdown-option dropdown-box js-dropdown-option1">United Kingdom</div>
+                              <div class="dropdown-option dropdown-box js-dropdown-option1">India</div>
+                              <div class="dropdown-option dropdown-box js-dropdown-option1">Hongkong</div>
+                              <div class="dropdown-option dropdown-box js-dropdown-option1">Brazil</div>
+                              <div class="dropdown-option dropdown-box js-dropdown-option1">China</div>
+                              <div class="dropdown-option dropdown-box js-dropdown-option1">Singapore</div>
+                              <div class="dropdown-option dropdown-box js-dropdown-option1">Spain</div>
+                            </div>
+                          </div>
+                                
+                          <div class="dropdown js-dropdown2">
+                            <div class="dropdown-inner dropdown-box">
+                              <span class="dropdown-value js-dropdown-value2">Select Age</span>
+                              <span class="dropdown-icon">&#9662;</span>
+                            </div>
+                            <div class="dropdown-options-container js-dropdown-options2">
+                              <div class="dropdown-option dropdown-box js-dropdown-option2">18</div>
+                              <div class="dropdown-option dropdown-box js-dropdown-option2">19</div>
+                              <div class="dropdown-option dropdown-box js-dropdown-option2">20</div>
+                            </div>
+                          </div>
+                    
+                          <div class="dropdown js-dropdown3">
+                            <div class="dropdown-inner dropdown-box">
+                              <span class="dropdown-value js-dropdown-value3">Select Gender</span>
+                              <span class="dropdown-icon">&#9662;</span>
+                            </div>
+                            <div class="dropdown-options-container js-dropdown-options3">
+                              <div class="dropdown-option dropdown-box js-dropdown-option3">Male</div>
+                              <div class="dropdown-option dropdown-box js-dropdown-option3">Female</div>
+                            </div>
+                          </div>
 
                         </div>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
 
-    <!-- Page Content -->
-    <div class="container">
+                        <button type="submit" class="button button-block" />Get Started</button>
+
+                      </form>
+
+                    </div>
+                  </div>
+                  <!-- tab-content -->
+                </div>
+              </div>
+
+            </div>
+          </li>
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <div class="row">
+
+      <div class="col-md-3">
+        <p class="lead">Shop Name</p>
+        <div class="list-group">
+          <a href="#" class="list-group-item">Category 1</a>
+          <a href="#" class="list-group-item">Category 2</a>
+          <a href="#" class="list-group-item">Category 3</a>
+        </div>
+      </div>
+
+      <div class="col-md-9">
+
+        <div class="row carousel-holder">
+
+          <div class="col-md-12">
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+              <ol class="carousel-indicators">
+                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+              </ol>
+              <div class="carousel-inner">
+                <div class="item active">
+                  <img class="slide-image" src="http://placehold.it/800x300" alt="">
+                </div>
+                <div class="item">
+                  <img class="slide-image" src="http://placehold.it/800x300" alt="">
+                </div>
+                <div class="item">
+                  <img class="slide-image" src="http://placehold.it/800x300" alt="">
+                </div>
+              </div>
+              <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+              </a>
+              <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+              </a>
+            </div>
+          </div>
+
+        </div>
 
         <div class="row">
 
-            <div class="col-md-3">
-                <p class="lead">Shop Name</p>
-                <div class="list-group">
-                    <a href="#" class="list-group-item">Category 1</a>
-                    <a href="#" class="list-group-item">Category 2</a>
-                    <a href="#" class="list-group-item">Category 3</a>
+          <div class="col-sm-4 col-lg-4 col-md-4">
+            <a style="display:block" href="/game">
+              <div class="thumbnail">
+                <img src="http://placehold.it/320x150" alt="">
+                <div class="caption">
+                  <h4 class="pull-right">$24.99</h4>
+                  <h4><a href="#">First Product</a>
+                  </h4>
+                  <p>See more snippets like this online store item at <a target="_blank" href="http://www.bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p>
                 </div>
+                <div class="ratings">
+                  <p class="pull-right">15 reviews</p>
+                  <p>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                  </p>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-sm-4 col-lg-4 col-md-4">
+            <div class="thumbnail">
+              <img src="http://placehold.it/320x150" alt="">
+              <div class="caption">
+                <h4 class="pull-right">$64.99</h4>
+                <h4><a href="#">Second Product</a>
+                </h4>
+                <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              </div>
+              <div class="ratings">
+                <p class="pull-right">12 reviews</p>
+                <p>
+                  <span class="glyphicon glyphicon-star"></span>
+                  <span class="glyphicon glyphicon-star"></span>
+                  <span class="glyphicon glyphicon-star"></span>
+                  <span class="glyphicon glyphicon-star"></span>
+                  <span class="glyphicon glyphicon-star-empty"></span>
+                </p>
+              </div>
             </div>
+          </div>
 
-            <div class="col-md-9">
-
-                <div class="row carousel-holder">
-
-                    <div class="col-md-12">
-                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                            <ol class="carousel-indicators">
-                                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                            </ol>
-                            <div class="carousel-inner">
-                                <div class="item active">
-                                    <img class="slide-image" src="http://placehold.it/800x300" alt="">
-                                </div>
-                                <div class="item">
-                                    <img class="slide-image" src="http://placehold.it/800x300" alt="">
-                                </div>
-                                <div class="item">
-                                    <img class="slide-image" src="http://placehold.it/800x300" alt="">
-                                </div>
-                            </div>
-                            <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-                                <span class="glyphicon glyphicon-chevron-left"></span>
-                            </a>
-                            <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-                                <span class="glyphicon glyphicon-chevron-right"></span>
-                            </a>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="row">
-
-                    <div class="col-sm-4 col-lg-4 col-md-4">
-                        <a style="display:block" href="/game">
-                            <div class="thumbnail">
-                                <img src="http://placehold.it/320x150" alt="">
-                                <div class="caption">
-                                    <h4 class="pull-right">$24.99</h4>
-                                    <h4><a href="#">First Product</a>
-                                    </h4>
-                                    <p>See more snippets like this online store item at <a target="_blank" href="http://www.bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p>
-                                </div>
-                                <div class="ratings">
-                                    <p class="pull-right">15 reviews</p>
-                                    <p>
-                                        <span class="glyphicon glyphicon-star"></span>
-                                        <span class="glyphicon glyphicon-star"></span>
-                                        <span class="glyphicon glyphicon-star"></span>
-                                        <span class="glyphicon glyphicon-star"></span>
-                                        <span class="glyphicon glyphicon-star"></span>
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="col-sm-4 col-lg-4 col-md-4">
-                        <div class="thumbnail">
-                            <img src="http://placehold.it/320x150" alt="">
-                            <div class="caption">
-                                <h4 class="pull-right">$64.99</h4>
-                                <h4><a href="#">Second Product</a>
-                                </h4>
-                                <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            </div>
-                            <div class="ratings">
-                                <p class="pull-right">12 reviews</p>
-                                <p>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star-empty"></span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-4 col-lg-4 col-md-4">
-                        <div class="thumbnail">
-                            <img src="http://placehold.it/320x150" alt="">
-                            <div class="caption">
-                                <h4 class="pull-right">$74.99</h4>
-                                <h4><a href="#">Third Product</a>
-                                </h4>
-                                <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            </div>
-                            <div class="ratings">
-                                <p class="pull-right">31 reviews</p>
-                                <p>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star-empty"></span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-4 col-lg-4 col-md-4">
-                        <div class="thumbnail">
-                            <img src="http://placehold.it/320x150" alt="">
-                            <div class="caption">
-                                <h4 class="pull-right">$84.99</h4>
-                                <h4><a href="#">Fourth Product</a>
-                                </h4>
-                                <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            </div>
-                            <div class="ratings">
-                                <p class="pull-right">6 reviews</p>
-                                <p>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star-empty"></span>
-                                    <span class="glyphicon glyphicon-star-empty"></span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-4 col-lg-4 col-md-4">
-                        <div class="thumbnail">
-                            <img src="http://placehold.it/320x150" alt="">
-                            <div class="caption">
-                                <h4 class="pull-right">$94.99</h4>
-                                <h4><a href="#">Fifth Product</a>
-                                </h4>
-                                <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            </div>
-                            <div class="ratings">
-                                <p class="pull-right">18 reviews</p>
-                                <p>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star-empty"></span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-4 col-lg-4 col-md-4">
-                        <div class="thumbnail">
-                            <img src="http://placehold.it/320x150" alt="">
-                            <div class="caption">
-                                <h4 class="pull-right">$94.99</h4>
-                                <h4><a href="#">Fifth Product</a>
-                                </h4>
-                                <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            </div>
-                            <div class="ratings">
-                                <p class="pull-right">18 reviews</p>
-                                <p>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star-empty"></span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
+          <div class="col-sm-4 col-lg-4 col-md-4">
+            <div class="thumbnail">
+              <img src="http://placehold.it/320x150" alt="">
+              <div class="caption">
+                <h4 class="pull-right">$74.99</h4>
+                <h4><a href="#">Third Product</a>
+                </h4>
+                <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              </div>
+              <div class="ratings">
+                <p class="pull-right">31 reviews</p>
+                <p>
+                  <span class="glyphicon glyphicon-star"></span>
+                  <span class="glyphicon glyphicon-star"></span>
+                  <span class="glyphicon glyphicon-star"></span>
+                  <span class="glyphicon glyphicon-star"></span>
+                  <span class="glyphicon glyphicon-star-empty"></span>
+                </p>
+              </div>
             </div>
+          </div>
 
+          <div class="col-sm-4 col-lg-4 col-md-4">
+            <div class="thumbnail">
+              <img src="http://placehold.it/320x150" alt="">
+              <div class="caption">
+                <h4 class="pull-right">$84.99</h4>
+                <h4><a href="#">Fourth Product</a>
+                </h4>
+                <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              </div>
+              <div class="ratings">
+                <p class="pull-right">6 reviews</p>
+                <p>
+                  <span class="glyphicon glyphicon-star"></span>
+                  <span class="glyphicon glyphicon-star"></span>
+                  <span class="glyphicon glyphicon-star"></span>
+                  <span class="glyphicon glyphicon-star-empty"></span>
+                  <span class="glyphicon glyphicon-star-empty"></span>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-4 col-lg-4 col-md-4">
+            <div class="thumbnail">
+              <img src="http://placehold.it/320x150" alt="">
+              <div class="caption">
+                <h4 class="pull-right">$94.99</h4>
+                <h4><a href="#">Fifth Product</a>
+                </h4>
+                <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              </div>
+              <div class="ratings">
+                <p class="pull-right">18 reviews</p>
+                <p>
+                  <span class="glyphicon glyphicon-star"></span>
+                  <span class="glyphicon glyphicon-star"></span>
+                  <span class="glyphicon glyphicon-star"></span>
+                  <span class="glyphicon glyphicon-star"></span>
+                  <span class="glyphicon glyphicon-star-empty"></span>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-4 col-lg-4 col-md-4">
+            <div class="thumbnail">
+              <img src="http://placehold.it/320x150" alt="">
+              <div class="caption">
+                <h4 class="pull-right">$94.99</h4>
+                <h4><a href="#">Fifth Product</a>
+                </h4>
+                <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              </div>
+              <div class="ratings">
+                <p class="pull-right">18 reviews</p>
+                <p>
+                  <span class="glyphicon glyphicon-star"></span>
+                  <span class="glyphicon glyphicon-star"></span>
+                  <span class="glyphicon glyphicon-star"></span>
+                  <span class="glyphicon glyphicon-star"></span>
+                  <span class="glyphicon glyphicon-star-empty"></span>
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
-
+      </div>
     </div>
-    <!-- /.container -->
+  </div>
+  <!-- /.container -->
 
-    <div class="container">
+  <div class="container">
 
-        <hr>
+    <hr>
 
-        <!-- Footer -->
-        <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; SKE13 2017</p>
-                </div>
-            </div>
-        </footer>
+    <!-- Footer -->
+    <footer>
+      <div class="row">
+        <div class="col-lg-12">
+          <p>Copyright &copy; SKE13 2017</p>
+        </div>
+      </div>
+    </footer>
 
-    </div>
-    <!-- /.container -->
-    <script>
-        $(".form").find("input, textarea").on("keyup blur focus", function (e) {
-            var $this = $(this),
-                label = $this.prev("label");
+  </div>
+  <!-- /.container -->
+  <script>
+    $(".form").find("input, textarea").on("keyup blur focus", function (e) {
+      var $this = $(this),
+        label = $this.prev("label");
 
-            if (e.type === "keyup") {
-                if ($this.val() === "") {
-                    label.removeClass("active highlight");
-                } else {
-                    label.addClass("active highlight");
-                }
-            } else if (e.type === "blur") {
-                if ($this.val() === "") {
-                    label.removeClass("active highlight");
-                } else {
-                    label.removeClass("highlight");
-                }
-            } else if (e.type === "focus") {
-                if ($this.val() === "") {
-                    label.removeClass("highlight");
-                } else if ($this.val() !== "") {
-                    label.addClass("highlight");
-                }
-            }
-        });
-
-        $(".tab a").on("click", function (e) {
-            e.preventDefault();
-
-            $(this).parent().addClass("active");
-            $(this).parent().siblings().removeClass("active");
-
-            target = $(this).attr("href");
-
-            $(".tab-content > div").not(target).hide();
-
-            $(target).fadeIn(600);
-        });
-    </script>
-
-    <!-- jQuery -->
-    <script src="/js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="/js/bootstrap.min.js"></script>
-    <script>
-        // Get the modal
-        var modal = document.getElementById('myModal');
-
-        // Get the button that opens the modal
-        var btn = document.getElementById("myBtn");
-
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
-
-        // When the user clicks on the button, open the modal 
-        btn.onclick = function () {
-            modal.style.display = "block";
+      if (e.type === "keyup") {
+        if ($this.val() === "") {
+          label.removeClass("active highlight");
+        } else {
+          label.addClass("active highlight");
         }
-
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function () {
-            modal.style.display = "none";
+      } else if (e.type === "blur") {
+        if ($this.val() === "") {
+          label.removeClass("active highlight");
+        } else {
+          label.removeClass("highlight");
         }
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function (event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
+      } else if (e.type === "focus") {
+        if ($this.val() === "") {
+          label.removeClass("highlight");
+        } else if ($this.val() !== "") {
+          label.addClass("highlight");
         }
+      }
+    });
 
-        // Login window 
-        $(".form").find("input, textarea").on("keyup blur focus", function (e) {
-            var $this = $(this),
-                label = $this.prev("label");
+    $(".tab a").on("click", function (e) {
+      e.preventDefault();
 
-            if (e.type === "keyup") {
-                if ($this.val() === "") {
-                    label.removeClass("active highlight");
-                } else {
-                    label.addClass("active highlight");
-                }
-            } else if (e.type === "blur") {
-                if ($this.val() === "") {
-                    label.removeClass("active highlight");
-                } else {
-                    label.removeClass("highlight");
-                }
-            } else if (e.type === "focus") {
-                if ($this.val() === "") {
-                    label.removeClass("highlight");
-                } else if ($this.val() !== "") {
-                    label.addClass("highlight");
-                }
-            }
-        });
+      $(this).parent().addClass("active");
+      $(this).parent().siblings().removeClass("active");
 
-        $(".tab a").on("click", function (e) {
-            e.preventDefault();
+      target = $(this).attr("href");
 
-            $(this).parent().addClass("active");
-            $(this).parent().siblings().removeClass("active");
+      $(".tab-content > div").not(target).hide();
 
-            target = $(this).attr("href");
+      $(target).fadeIn(600);
+    });
+  </script>
 
-            $(".tab-content > div").not(target).hide();
+  <!-- jQuery -->
+  <script src="/js/jquery.js"></script>
 
-            $(target).fadeIn(600);
-        });
+  <!-- Bootstrap Core JavaScript -->
+  <script src="/js/bootstrap.min.js"></script>
+  <script>
+    // Get the modal
+    var modal = document.getElementById('myModal');
 
-        // dropdown country option
-        const dropdown = document.querySelector('.js-dropdown');
-        const dropdownValue = dropdown.querySelector('.js-dropdown-value');
-        const dropdownOptions = dropdown.querySelector('.js-dropdown-options');
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
 
-        dropdown.addEventListener('click', (event) => {
-            if (event.target === dropdown) {
-                dropdown.classList.toggle('is-opened');
-            }
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
 
-            if (event.target.classList.contains('js-dropdown-option')) {
-                dropdownValue.innerText = event.target.innerText;
-                dropdown.classList.remove('is-opened');
-            }
-        });
-    </script>
+    // When the user clicks on the button, open the modal 
+    btn.onclick = function () {
+      modal.style.display = "block";
+    }
 
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+      modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+
+    // Login window 
+    $(".form").find("input, textarea").on("keyup blur focus", function (e) {
+      var $this = $(this),
+        label = $this.prev("label");
+
+      if (e.type === "keyup") {
+        if ($this.val() === "") {
+          label.removeClass("active highlight");
+        } else {
+          label.addClass("active highlight");
+        }
+      } else if (e.type === "blur") {
+        if ($this.val() === "") {
+          label.removeClass("active highlight");
+        } else {
+          label.removeClass("highlight");
+        }
+      } else if (e.type === "focus") {
+        if ($this.val() === "") {
+          label.removeClass("highlight");
+        } else if ($this.val() !== "") {
+          label.addClass("highlight");
+        }
+      }
+    });
+
+    $(".tab a").on("click", function (e) {
+      e.preventDefault();
+
+      $(this).parent().addClass("active");
+      $(this).parent().siblings().removeClass("active");
+
+      target = $(this).attr("href");
+
+      $(".tab-content > div").not(target).hide();
+
+      $(target).fadeIn(600);
+    });
+
+    // dropdown country option
+    const dropdown1 = document.querySelector('.js-dropdown1');
+    const dropdownValue1 = dropdown1.querySelector('.js-dropdown-value1');
+    const dropdownOptions1 = dropdown1.querySelector('.js-dropdown-options1');
+
+    dropdown1.addEventListener('click', (event) => {
+      if (event.target === dropdown1) {
+        dropdown1.classList.toggle('is-opened');
+      }
+
+      if (event.target.classList.contains('js-dropdown-option1')) {
+        dropdownValue1.innerText = event.target.innerText;
+        dropdown1.classList.remove('is-opened');
+      }
+    });
+
+    const dropdown2 = document.querySelector('.js-dropdown2');
+    const dropdownValue2 = dropdown2.querySelector('.js-dropdown-value2');
+    const dropdownOptions2 = dropdown2.querySelector('.js-dropdown-options2');
+
+    dropdown2.addEventListener('click', (event) => {
+      if (event.target === dropdown2) {
+        dropdown2.classList.toggle('is-opened');
+      }
+
+      if (event.target.classList.contains('js-dropdown-option2')) {
+        dropdownValue2.innerText = event.target.innerText;
+        dropdown2.classList.remove('is-opened');
+      }
+    });
+
+    const dropdown3 = document.querySelector('.js-dropdown3');
+    const dropdownValue3 = dropdown3.querySelector('.js-dropdown-value3');
+    const dropdownOptions3 = dropdown3.querySelector('.js-dropdown-options3');
+
+    dropdown3.addEventListener('click', (event) => {
+      if (event.target === dropdown3) {
+        dropdown3.classList.toggle('is-opened');
+      }
+
+      if (event.target.classList.contains('js-dropdown-option3')) {
+        dropdownValue3.innerText = event.target.innerText;
+        dropdown3.classList.remove('is-opened');
+      }
+    });
+  </script>
 </body>
 
 </html>

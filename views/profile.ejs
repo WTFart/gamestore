@@ -3,23 +3,24 @@
 
 <head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-    <title><%= user.username %> | Profile </title>
+  <title>
+    <%= user.username %> | Profile </title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Core CSS -->
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom CSS -->
-    <link href="/css/shop-homepage.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link href="/css/shop-homepage.css" rel="stylesheet">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
@@ -27,17 +28,140 @@
 </head>
 
 <body>
-    <%- include navbar.ejs %>
+<div class="profile">
+  <%- include navbar.ejs %>
 
+    <div class="edit-registration-form">
+      <div class="container">
+        <h1 class="title">แก้ไขข้อมูลส่วนตัว</h1>
+        <div class="edit-form-color row justify-content-center">
+          <%= render partial: 'shared/user_image' %>
+            <div class="col-lg-6">
+              <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+                <%= devise_error_messages! %>
 
+                  <div class="field">
+                    <div class="row">
+                      <div class="col-5 col-md-5">
+                        <label>ชื่อ*</label>
+                      </div>
+                      <div class="col">
+                        <%= f.text_field :name, class: "form-control col-md-12", autofocus: true %>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <div class="row">
+                      <div class="col-5 col-md-5">
+                        <label>ที่อยู่*</label>
+                      </div>
+                      <div class="col">
+                        <%= f.text_field :address, class: "form-control col-md-12", autofocus: true %>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <div class="row">
+                      <div class="col-5 col-md-5">
+                        <label>จังหวัด*</label>
+                      </div>
+                      <div class="col">
+                        <%= f.text_field :province, class: "form-control col-md-12", autofocus: true %>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <div class="row">
+                      <div class="col-5 col-md-5">
+                        <label>เขต*</label>
+                      </div>
+                      <div class="col">
+                        <%= f.text_field :district, class: "form-control col-md-12", autofocus: true %>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <div class="row">
+                      <div class="col-5 col-md-5">
+                        <label>แขวง*</label>
+                      </div>
+                      <div class="col">
+                        <%= f.text_field :subdistrict, class: "form-control col-md-12", autofocus: true %>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <div class="row">
+                      <div class="col-5 col-md-5">
+                        <label>รหัสไปรษณีย์*</label>
+                      </div>
+                      <div class="col">
+                        <%= f.text_field :postal_code, class: "form-control col-md-12", autofocus: true %>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <div class="row">
+                      <div class="col-5 col-md-5">
+                        <label>ID Line*</label>
+                      </div>
+                      <div class="col">
+                        <%= f.text_field :line_id, class: "form-control col-md-12", autofocus: true %>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <div class="row">
+                      <div class="col-5 col-md-5">
+                        <label>หมายเลขโทรศัพท์*</label>
+                      </div>
+                      <div class="col">
+                        <%= f.text_field :phone_number, class: "form-control col-md-12", autofocus: true %>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <div class="row">
+                      <div class="col-5 col-md-5">
+                        <label>Facebook</label>
+                      </div>
+                      <div class="col">
+                        <%= f.text_field :facebook, class: "form-control col-md-12", autofocus: true %>
+                      </div>
+                    </div>
+                  </div>
 
+                  <div class="actions">
+                    <%= f.submit "ยืนยันการแก้ไขข้อมูลส่วนตัว", class: 'btn btn-outline-primary text-btn' %>
+                  </div>
 
+                  <div class="row line-text">
+                    <div class="col-11 col-md-11 line"></div>
+                  </div>
 
+                  <h1 class="title">ความปลอดภัย</h1>
+                  <div class="field">
+                    <%= f.password_field :current_password, class: "form-control", placeholder: "รหัสผ่านปัจจุบัน", autocomplete: "off" %>
+                  </div>
+                  <div class="field">
+                    <%= f.password_field :password, class: "form-control", placeholder: "รหัสผ่านใหม่", autocomplete: "off" %>
+                  </div>
+                  <div class="field">
+                    <%= f.password_field :password_confirmation, class: "form-control", placeholder: "ยืนยันรหัสผ่านใหม่", autocomplete: "off" %>
+                  </div>
 
+                  <div class="actions">
+                    <%= f.submit "ยืนยันการแก้ไขรหัสผ่าน", class: 'btn btn-outline-primary text-btn' %>
+                  </div>
 
+                  <div class="action"></div>
 
-
-
+                  <% end %>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>
     <!-- jQuery -->
     <script src="/js/jquery.js"></script>
 
