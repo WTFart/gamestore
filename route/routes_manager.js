@@ -7,6 +7,26 @@ var connection = mysql.createConnection({
 });
 
 module.exports = (app, passport) => {
+  /////////////////////
+  // utility methods //
+  /////////////////////
+  signIn = (req, res) => {
+    connection.query('SELECT store_id FROM stores WHERE country = ?', [req.user.country], (err, result) => {
+      res.cookie('store_id', result[0])
+      res.cookie('user_id', req.user.user_id)
+      res.redirect('/featured')
+    })
+  }
+  searchGames = (req, res, sql, page) => {
+    var params = [req.cookies.store_id, req.cookies.user_id]
+    if (req.query.search) {
+      sql += ' AND name LIKE ?'
+      params.push('%' + req.query.search + '%')
+    }
+    connection.query(sql, params, (err, result) => {
+      res.render(page, { user_id: req.cookies.user_id, games: result })
+    })
+  }
   ////////////////
   // home route //
   ////////////////
@@ -19,55 +39,25 @@ module.exports = (app, passport) => {
   app.post('/signin', passport.authenticate('signin', {
     failureRedirect: '/',
     failureFlash: true
-  }),
-  (req, res) => {
-    connection.query('SELECT store_id FROM stores WHERE country = ?', [req.user.country], (err, result) => {
-      res.cookie('store_id', result[0])
-      res.cookie('user_id', req.user.user_id)
-      res.redirect('/featured')
-    })
-  })
+  }), signIn)
   //////////////////
   // signup route //
   //////////////////
   app.post('/signup', passport.authenticate('signup', {
     failureRedirect: '/',
     failureFlash: true
-  }),
-  (req, res) => {
-    connection.query('SELECT store_id FROM stores WHERE country = ?', [req.user.country], (err, result) => {
-      res.cookie('store_id', result[0])
-      res.cookie('user_id', req.user.user_id)
-      res.redirect('/featured')
-    })
-  })
+  }), signIn)
   ////////////////////
   // featured route //
   ////////////////////
   app.get('/featured', (req, res) => {
-    var sql = 'SELECT * FROM games WHERE review = 5 AND except_country NOT IN (SELECT country FROM stores WHERE store_id = ?) AND game_id NOT IN (SELECT game_id FROM orders WHERE user_id = ?)'
-    var params = [req.cookies.store_id, req.cookies.user_id]
-    if (req.query.search) {
-      sql += ' AND name LIKE ?'
-      params.push('%' + req.query.search + '%')
-    }
-    connection.query(sql, params, (err, result) => {
-      res.render('featured.ejs', { user_id: req.cookies.user_id, games: result })
-    })
+    searchGames(req, res, 'SELECT * FROM games WHERE review = 5 AND except_country NOT IN (SELECT country FROM stores WHERE store_id = ?) AND game_id NOT IN (SELECT game_id FROM orders WHERE user_id = ?)', 'featured.ejs')
   })
   /////////////////
   // store route //
   /////////////////
   app.get('/store', (req, res) => {
-    var sql = 'SELECT * FROM games WHERE except_country NOT IN (SELECT country FROM stores WHERE store_id = ?) AND game_id NOT IN (SELECT game_id FROM orders WHERE user_id = ?)'
-    var params = [req.cookies.store_id, req.cookies.user_id]
-    if (req.query.search) {
-      sql += ' AND name LIKE ?'
-      params.push('%' + req.query.search + '%')
-    }
-    connection.query(sql, params, (err, result) => {
-      res.render('store.ejs', { user_id: req.cookies.user_id, games: result })
-    })
+    searchGames(req, res, 'SELECT * FROM games WHERE except_country NOT IN (SELECT country FROM stores WHERE store_id = ?) AND game_id NOT IN (SELECT game_id FROM orders WHERE user_id = ?)', 'store.ejs')
   })
   ///////////////////
   // library route //
