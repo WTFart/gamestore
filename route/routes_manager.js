@@ -133,7 +133,7 @@ module.exports = (app, passport) => {
   app.get('/wishlist', (req, res) => {
     searchGames(req, res,
       'SELECT games.* FROM games ' +
-      'LEFT JOIN orders ON games.game_id = wishlist.game_id ' +
+      'LEFT JOIN wishlist ON games.game_id = wishlist.game_id ' +
       'WHERE wishlist.user_id = ? ' +
       'AND games.game_id = wishlist.game_id',
       'wishlist.ejs')
