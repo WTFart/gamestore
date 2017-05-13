@@ -131,12 +131,14 @@ module.exports = (app, passport) => {
   // wishlist route //
   ////////////////////
   app.get('/wishlist', (req, res) => {
-    searchGames(req, res,
-      'SELECT games.* FROM games ' +
-      'LEFT JOIN wishlist ON games.game_id = wishlist.game_id ' +
-      'WHERE wishlist.user_id = ? ' +
-      'AND games.game_id = wishlist.game_id',
-      'wishlist.ejs')
+    connection.query('SELECT username FROM users WHERE user_id = ?', [req.cookies.user_id], (err, result) => {
+      searchGames(req, res,
+        'SELECT games.* FROM games ' +
+        'LEFT JOIN wishlists ON games.game_id = wishlists.game_id ' +
+        'WHERE wishlists.user_id = ? ' +
+        'AND games.game_id = wishlists.game_id',
+        'wishlist.ejs', result[0].username)
+    })
   })
   ///////////////////
   // profile route //
