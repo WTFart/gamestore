@@ -71,7 +71,7 @@
             </div>
           </li>
         <% for (var i = 0; i < games.length; i++ ) {%>
-          <a href="/store/<%= games[i].game_id %>" class="list-group-item">
+          <a href="/games/<%= games[i].game_id %>" class="list-group-item">
             <div class="col-md-1">
               <%= i+1 %>
             </div>
@@ -82,7 +82,7 @@
               <%= games[i].price %>
             </div>
             <div class="col-md-3">
-              <%= games[i].age_limit %>
+              <%= games[i].age_limit %>+
             </div>
             <div class="col">
               <%= games[i].release_date %>
