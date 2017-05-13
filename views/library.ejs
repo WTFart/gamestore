@@ -54,19 +54,19 @@
         <div class="list-group">
           <li class="list-group-item list-head">
             <div class="col-md-1">
-              <button id="number-button" class="button-hidden" style="color:#fff"><b>Number</b><span class="dropdown-icon">&#9662;</span></button>
+              <button class="button-hidden link-button" style="color:#fff" data-href="/library/sort/number"><b>Number</b><span class="dropdown-icon">&#9662;</span></button>
             </div>
             <div class="col-md-3">
-              <button id="name-button" class="button-hidden" style="color:#fff"><b>Name</b><span class="dropdown-icon">&#9662;</span></button>
+              <button class="button-hidden link-button" style="color:#fff" data-href="/library/sort/name"><b>Name</b><span class="dropdown-icon">&#9662;</span></button>
             </div>
             <div class="col-md-3">
-              <button id="price-button" class="button-hidden" style="color:#fff"><b>Price</b><span class="dropdown-icon">&#9662;</span></button>
+              <button class="button-hidden link-button" style="color:#fff" data-href="/library/sort/price"><b>Price</b><span class="dropdown-icon">&#9662;</span></button>
             </div>
             <div class="col-md-3">
-              <button id="age-button" class="button-hidden" style="color:#fff"><b>Age Limit</b><span class="dropdown-icon">&#9662;</span></button>
+              <button class="button-hidden link-button" style="color:#fff" data-href="/library/sort/age_limit"><b>Age Limit</b><span class="dropdown-icon">&#9662;</span></button>
             </div>
             <div class="col">
-              <button id="date-button" class="button-hidden" style="color:#fff"><b>Release Date</b><span class="dropdown-icon">&#9662;</span></button>
+              <button class="button-hidden link-button" style="color:#fff" data-href="/library/sort/release_date"><b>Release Date</b><span class="dropdown-icon">&#9662;</span></button>
             </div>
           </li>
           <% for (var i = 0; i < games.length; i++ ) {%>
@@ -92,6 +92,6 @@
         </div>
       </div>
     </div>
-
+    <script src="js/store.js"></script>
 </body>
 </html>

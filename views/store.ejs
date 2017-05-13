@@ -41,7 +41,7 @@
           <div class="input-group">
             <form action="/store">
               <span class="input-group-btn">
-              <input type="text" name="search" class="form-control" placeholder="Search">
+              <input type="text" name="search" class="form-control" placeholder="Search" value=<%= search %>>
               <button type="submit" class="btn btn-default" type="button">Go!</button>
             </span>
             </form>
@@ -62,10 +62,10 @@
               <button class="button-hidden link-button" style="color:#fff" data-href="/store/sort/price"><b>Price</b><span class="dropdown-icon">&#9662;</span></button>
             </div>
             <div class="col-md-3">
-              <button class="button-hidden link-button" style="color:#fff" data-href="/store/sort/age"><b>Age Limit</b><span class="dropdown-icon">&#9662;</span></button>
+              <button class="button-hidden link-button" style="color:#fff" data-href="/store/sort/age_limit"><b>Age Limit</b><span class="dropdown-icon">&#9662;</span></button>
             </div>
             <div class="col">
-              <button class="button-hidden link-button" style="color:#fff" data-href="/store/sort/date"><b>Release Date</b><span class="dropdown-icon">&#9662;</span></button>
+              <button class="button-hidden link-button" style="color:#fff" data-href="/store/sort/release_date"><b>Release Date</b><span class="dropdown-icon">&#9662;</span></button>
             </div>
           </li>
           <% for (var i = 0; i < games.length; i++ ) {%>
