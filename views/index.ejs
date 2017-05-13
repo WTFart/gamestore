@@ -197,11 +197,10 @@
     <div class="row">
 
       <div class="col-md-3">
-        <p class="lead">Shop Name</p>
+        <p class="lead">KU Game Store</p>
         <div class="list-group">
-          <a href="#" class="list-group-item">Category 1</a>
-          <a href="#" class="list-group-item">Category 2</a>
-          <a href="#" class="list-group-item">Category 3</a>
+          <a href="#" class="list-group-item">Rating</a>
+          <a href="#" class="list-group-item">Price</a>
         </div>
       </div>
 
@@ -218,13 +217,13 @@
               </ol>
               <div class="carousel-inner">
                 <div class="item active">
-                  <img class="slide-image" src="http://placehold.it/800x300" alt="">
+                  <img class="slide-image" src="/img/16.jpg" alt="">
                 </div>
                 <div class="item">
-                  <img class="slide-image" src="http://placehold.it/800x300" alt="">
+                  <img class="slide-image" src="/img/17.jpg" alt="">
                 </div>
                 <div class="item">
-                  <img class="slide-image" src="http://placehold.it/800x300" alt="">
+                  <img class="slide-image" src="/img/18.jpg" alt="">
                 </div>
               </div>
               <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
@@ -239,140 +238,36 @@
         </div>
 
         <div class="row">
-
-          <div class="col-sm-4 col-lg-4 col-md-4">
-            <a style="display:block" href="/game">
-              <div class="thumbnail">
-                <img src="http://placehold.it/320x150" alt="">
-                <div class="caption">
-                  <h4 class="pull-right">$24.99</h4>
-                  <h4><a href="#">First Product</a>
-                  </h4>
-                  <p>See more snippets like this online store item at <a target="_blank" href="http://www.bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p>
+          <% for (var i = 0; i < games.length && i < 6; i++) { %>
+            <% var gamename = ""; %>
+            <% if (games[i].name.length > 18) { %>
+              <% var gamename = games[i].name.substring(0,15) + "...";%>
+            <% } else { %>
+              <% var gamename = games[i].name %>
+            <% } %>
+              <div class="col-sm-4 col-lg-4 col-md-4">
+                <div class="thumbnail">
+                  <img src="/img/<%= games[i].game_id %>.jpg" alt="">
+                  <div class="caption">
+                    <h4 class="pull-right"><%= games[i].price %> <span>&#3647;</span></h4>
+                    <h4><%= gamename %></h4>
+                    <p><%= games[i].description %></p>
+                  </div>
+                  <div class="ratings">
+                    <p class="pull-right">Rating</p>
+                    <p>
+                      <% var review = games[i].review %>
+                      <%for (var j = 0; j < review; j++) {%>
+                        <span class="glyphicon glyphicon-star"></span>
+                      <%}%>
+                      <%for (var j = 0; j < 5-review; j++) {%>
+                        <span class="glyphicon glyphicon-star-empty"></span>
+                      <%}%>
+                    </p>
+                  </div>
                 </div>
-                <div class="ratings">
-                  <p class="pull-right">15 reviews</p>
-                  <p>
-                    <span class="glyphicon glyphicon-star"></span>
-                    <span class="glyphicon glyphicon-star"></span>
-                    <span class="glyphicon glyphicon-star"></span>
-                    <span class="glyphicon glyphicon-star"></span>
-                    <span class="glyphicon glyphicon-star"></span>
-                  </p>
-                </div>
               </div>
-            </a>
-          </div>
-
-          <div class="col-sm-4 col-lg-4 col-md-4">
-            <div class="thumbnail">
-              <img src="http://placehold.it/320x150" alt="">
-              <div class="caption">
-                <h4 class="pull-right">$64.99</h4>
-                <h4><a href="#">Second Product</a>
-                </h4>
-                <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-              </div>
-              <div class="ratings">
-                <p class="pull-right">12 reviews</p>
-                <p>
-                  <span class="glyphicon glyphicon-star"></span>
-                  <span class="glyphicon glyphicon-star"></span>
-                  <span class="glyphicon glyphicon-star"></span>
-                  <span class="glyphicon glyphicon-star"></span>
-                  <span class="glyphicon glyphicon-star-empty"></span>
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-sm-4 col-lg-4 col-md-4">
-            <div class="thumbnail">
-              <img src="http://placehold.it/320x150" alt="">
-              <div class="caption">
-                <h4 class="pull-right">$74.99</h4>
-                <h4><a href="#">Third Product</a>
-                </h4>
-                <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-              </div>
-              <div class="ratings">
-                <p class="pull-right">31 reviews</p>
-                <p>
-                  <span class="glyphicon glyphicon-star"></span>
-                  <span class="glyphicon glyphicon-star"></span>
-                  <span class="glyphicon glyphicon-star"></span>
-                  <span class="glyphicon glyphicon-star"></span>
-                  <span class="glyphicon glyphicon-star-empty"></span>
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-sm-4 col-lg-4 col-md-4">
-            <div class="thumbnail">
-              <img src="http://placehold.it/320x150" alt="">
-              <div class="caption">
-                <h4 class="pull-right">$84.99</h4>
-                <h4><a href="#">Fourth Product</a>
-                </h4>
-                <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-              </div>
-              <div class="ratings">
-                <p class="pull-right">6 reviews</p>
-                <p>
-                  <span class="glyphicon glyphicon-star"></span>
-                  <span class="glyphicon glyphicon-star"></span>
-                  <span class="glyphicon glyphicon-star"></span>
-                  <span class="glyphicon glyphicon-star-empty"></span>
-                  <span class="glyphicon glyphicon-star-empty"></span>
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-sm-4 col-lg-4 col-md-4">
-            <div class="thumbnail">
-              <img src="http://placehold.it/320x150" alt="">
-              <div class="caption">
-                <h4 class="pull-right">$94.99</h4>
-                <h4><a href="#">Fifth Product</a>
-                </h4>
-                <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-              </div>
-              <div class="ratings">
-                <p class="pull-right">18 reviews</p>
-                <p>
-                  <span class="glyphicon glyphicon-star"></span>
-                  <span class="glyphicon glyphicon-star"></span>
-                  <span class="glyphicon glyphicon-star"></span>
-                  <span class="glyphicon glyphicon-star"></span>
-                  <span class="glyphicon glyphicon-star-empty"></span>
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-sm-4 col-lg-4 col-md-4">
-            <div class="thumbnail">
-              <img src="http://placehold.it/320x150" alt="">
-              <div class="caption">
-                <h4 class="pull-right">$94.99</h4>
-                <h4><a href="#">Fifth Product</a>
-                </h4>
-                <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-              </div>
-              <div class="ratings">
-                <p class="pull-right">18 reviews</p>
-                <p>
-                  <span class="glyphicon glyphicon-star"></span>
-                  <span class="glyphicon glyphicon-star"></span>
-                  <span class="glyphicon glyphicon-star"></span>
-                  <span class="glyphicon glyphicon-star"></span>
-                  <span class="glyphicon glyphicon-star-empty"></span>
-                </p>
-              </div>
-            </div>
-          </div>
+            <% } %>
         </div>
       </div>
     </div>
@@ -500,52 +395,6 @@
       $(".tab-content > div").not(target).hide();
 
       $(target).fadeIn(600);
-    });
-
-    // dropdown country option
-    const dropdown1 = document.querySelector('.js-dropdown1');
-    const dropdownValue1 = dropdown1.querySelector('.js-dropdown-value1');
-    const dropdownOptions1 = dropdown1.querySelector('.js-dropdown-options1');
-
-    dropdown1.addEventListener('click', (event) => {
-      if (event.target === dropdown1) {
-        dropdown1.classList.toggle('is-opened');
-      }
-
-      if (event.target.classList.contains('js-dropdown-option1')) {
-        dropdownValue1.innerText = event.target.innerText;
-        dropdown1.classList.remove('is-opened');
-      }
-    });
-
-    const dropdown2 = document.querySelector('.js-dropdown2');
-    const dropdownValue2 = dropdown2.querySelector('.js-dropdown-value2');
-    const dropdownOptions2 = dropdown2.querySelector('.js-dropdown-options2');
-
-    dropdown2.addEventListener('click', (event) => {
-      if (event.target === dropdown2) {
-        dropdown2.classList.toggle('is-opened');
-      }
-
-      if (event.target.classList.contains('js-dropdown-option2')) {
-        dropdownValue2.innerText = event.target.innerText;
-        dropdown2.classList.remove('is-opened');
-      }
-    });
-
-    const dropdown3 = document.querySelector('.js-dropdown3');
-    const dropdownValue3 = dropdown3.querySelector('.js-dropdown-value3');
-    const dropdownOptions3 = dropdown3.querySelector('.js-dropdown-options3');
-
-    dropdown3.addEventListener('click', (event) => {
-      if (event.target === dropdown3) {
-        dropdown3.classList.toggle('is-opened');
-      }
-
-      if (event.target.classList.contains('js-dropdown-option3')) {
-        dropdownValue3.innerText = event.target.innerText;
-        dropdown3.classList.remove('is-opened');
-      }
     });
   </script>
 </body>
