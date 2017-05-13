@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 13, 2017 at 09:43 AM
+-- Generation Time: May 13, 2017 at 05:03 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -51,7 +51,8 @@ INSERT INTO `developers` (`developer_id`, `name`, `website`) VALUES
 (12, 'FromSoftware, Inc.', 'http://fromsoftware.jp'),
 (13, 'Relic Entertainment', 'https://www.relic.com'),
 (14, 'Slightly Mad Studios', 'http://www.slightlymadstudios.com'),
-(15, 'Rocksteady Studios', 'http://rocksteadyltd.com');
+(15, 'Rocksteady Studios', 'http://rocksteadyltd.com'),
+(16, 'Red Barrels', 'https://redbarrelsgames.com');
 
 -- --------------------------------------------------------
 
@@ -97,7 +98,8 @@ INSERT INTO `games` (`game_id`, `name`, `developer`, `publisher`, `genre`, `pric
 (17, 'Warhammer 40,000: Dawn of War III', 13, 12, '{Strategy, RTS, Sci-fi, Action}', 1129, 0, 16, '28-Apr-2017', '', 'Step into a brutal battle between three warring factions In Dawn of War III you will have no choice but to face your foes when a catastrophic weapon is found on the mysterious world of Acheron.'),
 (18, 'Project CARS', 14, 11, '{Racing, Simulation, Driving, Realistic, Sports}', 955, 4, 3, '16-Mar-2015', '', 'Project CARS is the ultimate driver journey!'),
 (19, 'Portal', 3, 3, '{Puzzle, First-Person, Singleplayer, Sci-fi, Action}', 219, 5, 0, '10-Oct-2007', '', 'Portal™ is a new single player game from Valve. Set in the mysterious Aperture Science Laboratories, Portal has been called one of the most innovative new games on the horizon and will offer gamers hours of unique gameplay.'),
-(20, 'Batman™: Arkham Knight', 15, 13, '{Batman, Action, OpenWorld, Superhero, Dark}', 369, 4, 18, '23-Jun-2015', '', 'Batman™: Arkham Knight brings the award-winning Arkham trilogy from Rocksteady Studios to its epic conclusion. Developed exclusively for New-Gen platforms, Batman: Arkham Knight introduces Rocksteady\'s uniquely designed version of the Batmobile.');
+(20, 'Batman™: Arkham Knight', 15, 13, '{Batman, Action, OpenWorld, Superhero, Dark}', 369, 4, 18, '23-Jun-2015', '', 'Batman™: Arkham Knight brings the award-winning Arkham trilogy from Rocksteady Studios to its epic conclusion. Developed exclusively for New-Gen platforms, Batman: Arkham Knight introduces Rocksteady\'s uniquely designed version of the Batmobile.'),
+(21, 'Outlast 2', 16, 14, '{Psychological Horror, FirstPerson, Nudity, Violent}', 599, 4, 18, '25-Apr-2017', '', 'Outlast 2 introduces you to Sullivan Knoth and his followers, who left our wicked world behind to give birth to Temple Gate, a town, deep in the wilderness and hidden from civilization. Knoth and his flock are preparing for the tribulations of the end of times and you’re right in the thick of it.');
 
 -- --------------------------------------------------------
 
@@ -106,50 +108,49 @@ INSERT INTO `games` (`game_id`, `name`, `developer`, `publisher`, `genre`, `pric
 --
 
 CREATE TABLE `orders` (
-  `order_id` int(2) NOT NULL,
+  `order_id` int(2) NOT NULL AUTO_INCREMENT,
   `user_id` int(2) DEFAULT NULL,
   `game_id` int(2) DEFAULT NULL,
   `price` int(4) DEFAULT NULL,
   `payment_id` int(2) DEFAULT NULL,
-  `date` varchar(11) DEFAULT NULL,
-  `time` varchar(11) DEFAULT NULL
+  `date` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`order_id`, `user_id`, `game_id`, `price`, `payment_id`, `date`, `time`) VALUES
-(1, 1, 2, 1499, 28, '1-Jan-2017', '11:59:00 AM'),
-(2, 8, 6, 1250, 2, '3-Jan-2017', '10:14:25 AM'),
-(3, 4, 3, 315, 31, '3-Jan-2017', '6:39:12 PM'),
-(4, 2, 1, 369, 23, '4-Jan-2017', '8:32:23 AM'),
-(5, 10, 19, 219, 27, '7-Jan-2017', '1:21:10 PM'),
-(6, 13, 15, 1500, 19, '11-Jan-2017', '2:12:22 PM'),
-(7, 15, 10, 1850, 18, '13-Jan-2017', '7:29:13 PM'),
-(8, 14, 9, 1990, 8, '20-Jan-2017', '4:53:15 PM'),
-(9, 11, 7, 1990, 10, '20-Jan-2017', '9:45:11 PM'),
-(10, 7, 4, 0, 24, '23-Jan-2017', '7:10:02 AM'),
-(11, 24, 3, 315, 22, '23-Jan-2017', '3:30:08 PM'),
-(12, 30, 5, 2190, 26, '23-Jan-2017', '10:17:17 PM'),
-(13, 1, 19, 219, 28, '30-Jan-2017', '5:18:44 PM'),
-(14, 16, 10, 1850, 7, '2-Feb-2017', '12:26:18 AM'),
-(15, 13, 14, 219, 19, '3-Feb-2017', '12:39:37 PM'),
-(16, 5, 11, 219, 1, '6-Feb-2017', '2:23:04 PM'),
-(17, 12, 13, 315, 9, '7-Feb-2017', '10:30:45 AM'),
-(18, 31, 12, 369, 20, '9-Feb-2017', '2:43:19 PM'),
-(19, 29, 18, 955, 13, '12-Feb-2017', '7:21:48 AM'),
-(20, 18, 20, 369, 16, '15-Feb-2017', '11:34:34 PM'),
-(21, 15, 2, 1499, 18, '16-Feb-2017', '8:14:43 PM'),
-(22, 20, 7, 1990, 17, '19-Feb-2017', '7:40:03 PM'),
-(23, 23, 12, 369, 25, '23-Feb-2017', '3:34:08 PM'),
-(24, 21, 15, 1500, 5, '23-Feb-2017', '7:51:38 PM'),
-(25, 5, 7, 1990, 1, '24-Feb-2017', '7:28:45 AM'),
-(26, 7, 5, 1560, 24, '26-Feb-2017', '12:28:48 PM'),
-(27, 12, 20, 369, 9, '26-Feb-2017', '5:12:28 PM'),
-(28, 25, 19, 219, 12, '26-Feb-2017', '9:27:18 PM'),
-(29, 26, 4, 0, 15, '27-Feb-2017', '8:58:41 AM'),
-(30, 29, 10, 1850, 13, '28-Feb-2017', '10:54:10 AM');
+INSERT INTO `orders` (`order_id`, `user_id`, `game_id`, `price`, `payment_id`, `date`) VALUES
+(1, 1, 2, 1499, 28, '2017-01-01 11:59:00'),
+(2, 8, 6, 1250, 2, '2017-01-03 10:14:25'),
+(3, 4, 3, 315, 31, '2017-01-03 18:39:12'),
+(4, 2, 1, 369, 23, '2017-01-04 08:32:23'),
+(5, 10, 19, 219, 27, '2017-01-07 13:21:10'),
+(6, 13, 15, 1500, 19, '2017-01-11 14:12:22'),
+(7, 15, 10, 1850, 18, '2017-01-13 19:29:13'),
+(8, 14, 9, 1990, 8, '2017-01-20 16:53:15'),
+(9, 11, 7, 1990, 10, '2017-01-20 21:45:11'),
+(10, 7, 4, 0, 24, '2017-01-23 07:10:02'),
+(11, 24, 3, 315, 22, '2017-01-23 15:30:08'),
+(12, 30, 5, 2190, 26, '2017-01-23 22:17:17'),
+(13, 1, 19, 219, 28, '2017-01-30 17:18:44'),
+(14, 16, 10, 1850, 7, '2017-02-02 00:26:18'),
+(15, 13, 14, 219, 19, '2017-02-03 12:39:37'),
+(16, 5, 11, 219, 1, '2017-02-06 14:23:04'),
+(17, 12, 13, 315, 9, '2017-02-07 10:30:45'),
+(18, 31, 12, 369, 20, '2017-02-09 14:43:19'),
+(19, 29, 18, 955, 13, '2017-02-12 07:21:48'),
+(20, 18, 20, 369, 16, '2017-02-15 23:34:34'),
+(21, 15, 2, 1499, 18, '2017-02-16 20:14:43'),
+(22, 20, 7, 1990, 17, '2017-02-19 19:40:03'),
+(23, 23, 12, 369, 25, '2017-02-23 15:34:08'),
+(24, 21, 15, 1500, 5, '2017-02-23 19:51:38'),
+(25, 5, 7, 1990, 1, '2017-02-24 07:28:45'),
+(26, 7, 5, 1560, 24, '2017-02-26 12:28:48'),
+(27, 12, 20, 369, 9, '2017-02-26 17:12:28'),
+(28, 25, 19, 219, 12, '2017-02-26 21:27:18'),
+(29, 26, 4, 0, 15, '2017-02-27 08:58:41'),
+(30, 29, 10, 1850, 13, '2017-02-28 10:54:10');
 
 -- --------------------------------------------------------
 
@@ -162,7 +163,7 @@ CREATE TABLE `payments` (
   `user_id` int(2) DEFAULT NULL,
   `payment_type` varchar(10) DEFAULT NULL,
   `card_number` bigint(16) DEFAULT NULL,
-  `valid` varchar(5) DEFAULT NULL
+  `valid` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 --
@@ -170,37 +171,37 @@ CREATE TABLE `payments` (
 --
 
 INSERT INTO `payments` (`payment_id`, `user_id`, `payment_type`, `card_number`, `valid`) VALUES
-(1, 28, 'Visa', 4539791458727308, 'TRUE'),
-(2, 23, 'MasterCard', 5141314786935894, 'TRUE'),
-(3, 30, 'Visa', 4539407898629166, 'TRUE'),
-(4, 31, 'None', 0, 'FALSE'),
-(5, 1, 'None', 0, 'FALSE'),
-(6, 3, 'None', 0, 'FALSE'),
-(7, 24, 'None', 0, 'FALSE'),
-(8, 2, 'Visa', 4532644511720850, 'TRUE'),
-(9, 29, 'Visa', 4532637388761999, 'TRUE'),
-(10, 27, 'Visa', 4916651075398235, 'TRUE'),
-(11, 10, 'Visa', 4916386681535538, 'TRUE'),
-(12, 9, 'MasterCard', 5122801961147058, 'TRUE'),
-(13, 19, 'Visa', 4427479730433458, 'TRUE'),
-(14, 8, 'Visa', 4485982327775156, 'TRUE'),
-(15, 18, 'Visa', 4532349990498594, 'TRUE'),
-(16, 7, 'MasterCard', 5333275219585259, 'TRUE'),
-(17, 4, 'MasterCard', 5553322886582079, 'TRUE'),
-(18, 16, 'None', 0, 'FALSE'),
-(19, 6, 'None', 0, 'FALSE'),
-(20, 17, 'Visa', 4716000778302254, 'TRUE'),
-(21, 5, 'Visa', 4916179775038901, 'TRUE'),
-(22, 21, 'Visa', 4929191027001269, 'TRUE'),
-(23, 25, 'Visa', 4485492057210184, 'TRUE'),
-(24, 22, 'MasterCard', 5315070013296928, 'TRUE'),
-(25, 12, 'Visa', 4485310692705956, 'TRUE'),
-(26, 15, 'Visa', 4556676055427170, 'TRUE'),
-(27, 11, 'Visa', 4929066953559706, 'TRUE'),
-(28, 14, 'Visa', 4532858329953574, 'TRUE'),
-(29, 13, 'MasterCard', 5302549741478119, 'TRUE'),
-(30, 26, 'Visa', 4539039205063241, 'TRUE'),
-(31, 20, 'Visa', 4532145979275577, 'TRUE');
+(1, 28, 'Visa', 4539791458727308, 1),
+(2, 23, 'MasterCard', 5141314786935894, 1),
+(3, 30, 'Visa', 4539407898629166, 1),
+(4, 31, 'None', 0, 0),
+(5, 1, 'None', 0, 0),
+(6, 3, 'None', 0, 0),
+(7, 24, 'None', 0, 0),
+(8, 2, 'Visa', 4532644511720850, 1),
+(9, 29, 'Visa', 4532637388761999, 1),
+(10, 27, 'Visa', 4916651075398235, 1),
+(11, 10, 'Visa', 4916386681535538, 1),
+(12, 9, 'MasterCard', 5122801961147058, 1),
+(13, 19, 'Visa', 4427479730433458, 1),
+(14, 8, 'Visa', 4485982327775156, 1),
+(15, 18, 'Visa', 4532349990498594, 1),
+(16, 7, 'MasterCard', 5333275219585259, 1),
+(17, 4, 'MasterCard', 5553322886582079, 1),
+(18, 16, 'None', 0, 0),
+(19, 6, 'None', 0, 0),
+(20, 17, 'Visa', 4716000778302254, 1),
+(21, 5, 'Visa', 4916179775038901, 1),
+(22, 21, 'Visa', 4929191027001269, 1),
+(23, 25, 'Visa', 4485492057210184, 1),
+(24, 22, 'MasterCard', 5315070013296928, 1),
+(25, 12, 'Visa', 4485310692705956, 1),
+(26, 15, 'Visa', 4556676055427170, 1),
+(27, 11, 'Visa', 4929066953559706, 1),
+(28, 14, 'Visa', 4532858329953574, 1),
+(29, 13, 'MasterCard', 5302549741478119, 1),
+(30, 26, 'Visa', 4539039205063241, 1),
+(31, 20, 'Visa', 4532145979275577, 1);
 
 -- --------------------------------------------------------
 
@@ -232,7 +233,8 @@ INSERT INTO `publishers` (`publisher_id`, `name`, `country`, `website`) VALUES
 (10, 'Chucklefish Limited', 'U.K.', 'http://chucklefish.org'),
 (11, 'Bandai Namco Entertainment', 'Japan', 'http://bandainamcoent.co.jp'),
 (12, 'SEGA', 'Japan', 'http://www.sega.com'),
-(13, 'Warner Bros. Interactive Entertainment', 'U.S.', 'https://www.warnerbros.com');
+(13, 'Warner Bros. Interactive Entertainment', 'U.S.', 'https://www.warnerbros.com'),
+(14, 'Red Barrels', 'Canada', 'https://redbarrelsgames.com');
 
 -- --------------------------------------------------------
 
@@ -268,7 +270,7 @@ INSERT INTO `stores` (`store_id`, `country`) VALUES
 --
 
 CREATE TABLE `users` (
-  `user_id` int(2) NOT NULL,
+  `user_id` int(2) NOT NULL AUTO_INCREMENT,
   `name` varchar(9) DEFAULT NULL,
   `surname` varchar(11) DEFAULT NULL,
   `username` varchar(11) DEFAULT NULL,
@@ -323,18 +325,11 @@ INSERT INTO `users` (`user_id`, `name`, `surname`, `username`, `password`, `gend
 --
 
 CREATE TABLE `wishlists` (
-  `user_id` int(1) DEFAULT NULL,
-  `game_id` int(1) DEFAULT NULL,
-  `date` varchar(11) DEFAULT NULL
+  `wish_id` int(2) NOT NULL AUTO_INCREMENT,
+  `user_id` int(2) DEFAULT NULL,
+  `game_id` int(2) DEFAULT NULL,
+  `date` datetime(6) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
-
---
--- Dumping data for table `wishlists`
---
-
-INSERT INTO `wishlists` (`user_id`, `game_id`, `date`) VALUES
-(1, 2, '18-Jun-2016'),
-(2, 1, '10-Aug-2016');
 
 --
 -- Indexes for dumped tables
@@ -359,9 +354,8 @@ ALTER TABLE `games`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`order_id`),
-  ADD KEY `user-id` (`user_id`),
-  ADD KEY `game-id` (`game_id`),
-  ADD KEY `payment-id` (`payment_id`);
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `game_id` (`game_id`);
 
 --
 -- Indexes for table `payments`
@@ -393,8 +387,9 @@ ALTER TABLE `users`
 -- Indexes for table `wishlists`
 --
 ALTER TABLE `wishlists`
-  ADD KEY `gameID` (`game_id`),
-  ADD KEY `userID` (`user_id`);
+  ADD PRIMARY KEY (`wish_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `game_id` (`game_id`);
 
 --
 -- Constraints for dumped tables
@@ -411,9 +406,8 @@ ALTER TABLE `games`
 -- Constraints for table `orders`
 --
 ALTER TABLE `orders`
-  ADD CONSTRAINT `game-id` FOREIGN KEY (`game_id`) REFERENCES `games` (`game_id`),
-  ADD CONSTRAINT `payment-id` FOREIGN KEY (`payment_id`) REFERENCES `payments` (`payment_id`),
-  ADD CONSTRAINT `user-id` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
+  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`game_id`) REFERENCES `games` (`game_id`);
 
 --
 -- Constraints for table `payments`
@@ -431,8 +425,8 @@ ALTER TABLE `users`
 -- Constraints for table `wishlists`
 --
 ALTER TABLE `wishlists`
-  ADD CONSTRAINT `gameID` FOREIGN KEY (`game_id`) REFERENCES `games` (`game_id`),
-  ADD CONSTRAINT `userID` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+  ADD CONSTRAINT `wishlists_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
+  ADD CONSTRAINT `wishlists_ibfk_2` FOREIGN KEY (`game_id`) REFERENCES `games` (`game_id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
