@@ -215,16 +215,20 @@ module.exports = (app, passport) => {
     setCookies(req, res)
     getGame(req, res, 'wish.ejs')
   })
-  ///////////////////
-  // payment route //
-  ///////////////////
+  ////////////////////
+  // payment routes //
+  ////////////////////
   app.get('/payment/:game_id', (req, res) => {
     setCookies(req, res)
     connection.query('SELECT * FROM games WHERE game_id = ?', [req.params.game_id], (err, result1) => {
-      connection.query('SELECT * FROM payments WHERE user_id = ? AND valid = ?', [req.cookies.user_id, 'TRUE'], (err, result2) => {
+      connection.query('SELECT * FROM payments WHERE user_id = ? AND valid = TRUE', [req.cookies.user_id], (err, result2) => {
         res.render('payment.ejs', { game: result1[0], payments: result2, user_id: req.cookies.user_id, username: req.cookies.username })
       })
     })
+  })
+  app.get('/payment/buy/:game_id', (req, res) => {
+    setCookies(req, res)
+    connection.query('INSERT')
   })
   ////////////////////
   // utility routes //

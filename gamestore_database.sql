@@ -113,7 +113,8 @@ CREATE TABLE `orders` (
   `game_id` int(2) DEFAULT NULL,
   `price` int(4) DEFAULT NULL,
   `payment_id` int(2) DEFAULT NULL,
-  `date` datetime DEFAULT NULL
+  `date` datetime DEFAULT NULL,
+  PRIMARY KEY (`order_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 --
@@ -159,11 +160,12 @@ INSERT INTO `orders` (`order_id`, `user_id`, `game_id`, `price`, `payment_id`, `
 --
 
 CREATE TABLE `payments` (
-  `payment_id` int(2) NOT NULL,
+  `payment_id` int(2) NOT NULL AUTO_INCREMENT,
   `user_id` int(2) DEFAULT NULL,
   `payment_type` varchar(10) DEFAULT NULL,
   `card_number` bigint(16) DEFAULT NULL,
-  `valid` tinyint(1) DEFAULT NULL
+  `valid` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`payment_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 --
@@ -278,7 +280,8 @@ CREATE TABLE `users` (
   `gender` varchar(6) DEFAULT NULL,
   `age` int(2) DEFAULT NULL,
   `email` varchar(24) DEFAULT NULL,
-  `country` varchar(9) DEFAULT NULL
+  `country` varchar(9) DEFAULT NULL,
+  PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 --
@@ -328,7 +331,8 @@ CREATE TABLE `wishlists` (
   `wish_id` int(2) NOT NULL AUTO_INCREMENT,
   `user_id` int(2) DEFAULT NULL,
   `game_id` int(2) DEFAULT NULL,
-  `date` datetime(6) DEFAULT NULL
+  `date` datetime(6) DEFAULT NULL,
+  PRIMARY KEY (`wish_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 --
@@ -353,7 +357,6 @@ ALTER TABLE `games`
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
-  ADD PRIMARY KEY (`order_id`),
   ADD KEY `user_id` (`user_id`),
   ADD KEY `game_id` (`game_id`);
 
@@ -361,7 +364,6 @@ ALTER TABLE `orders`
 -- Indexes for table `payments`
 --
 ALTER TABLE `payments`
-  ADD PRIMARY KEY (`payment_id`),
   ADD KEY `user_id` (`user_id`);
 
 --
@@ -380,14 +382,12 @@ ALTER TABLE `stores`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`user_id`),
   ADD KEY `country` (`country`);
 
 --
 -- Indexes for table `wishlists`
 --
 ALTER TABLE `wishlists`
-  ADD PRIMARY KEY (`wish_id`),
   ADD KEY `user_id` (`user_id`),
   ADD KEY `game_id` (`game_id`);
 
