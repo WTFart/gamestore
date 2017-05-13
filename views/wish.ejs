@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>
+    <%= game.name %>
+  </title>
+
+  <!-- Bootstrap Core CSS -->
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link href="/css/shop-homepage.css" rel="stylesheet">
+
+  <!-- jQuery -->
+  <script src="/js/jquery.js"></script>
+
+  <!-- Bootstrap Core JavaScript -->
+  <script src="/js/bootstrap.min.js"></script>
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+  <%- include navbar.ejs %>
+    <br/>
+    <br/>
+    <div class="container">
+      <div class "row">
+        <div class="col-md-6">
+          <img src="/img/<%=game.game_id%>.jpg" height="215px" width="460px">
+          <br/>
+          <br/>
+          <button type="button" class="btn btn-default btn-lg" style="width:229px" data-href="/payment/<%=game.game_id%>">Buy</button>
+          <button type="button" class="btn btn-default btn-lg" style="width:229px" data-href="/wishlist/remove/<%=game.game_id%>">Remove from Wishlist</button>
+        </div>
+        <div class="col" style="font-size:16px;">
+          <div class="list-group text-profile col-md-6">
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-md-3">
+                  <b>Name:</b>
+                </div>
+                <div class="col-md-9">
+                  <%= game.name %>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-md-3">
+                  <b>Developer:</b>
+                </div>
+                <div class="col-md-9">
+                  <button class="button-hidden link-button" data-href="<%=developer.website%>"><%= developer.name %></button> 
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-md-3">
+                  <b>Publisher:</b>
+                </div>
+                <div class="col-md-9">
+                  <button class="button-hidden link-button" data-href="<%=publisher.website%>"><%= publisher.name %></button> 
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-md-3">
+                  <b>Release Date:</b>
+                </div>
+                <div class="col-md-9">
+                  <%= game.release_date %>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-md-3">
+                  <b>Age Limit:</b>
+                </div>
+                <div class="col-md-9">
+                  <%= game.age_limit %>+
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-md-3">
+                  <b>Price:</b>
+                </div>
+                <div class="col-md-9">
+                  <%= game.price %>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-md-3">
+                  <b>Genre:</b>
+                </div>
+                <div class="col-md-9">
+                  <%= game.genre %>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-md-3">
+                  <b>Rating:</b>
+                </div>
+                <div class="col-md-9">
+                  <% var review = game.review %>
+                    <%for (var i = 0; i < review; i++) {%>
+                      <span class="glyphicon glyphicon-star"></span>
+                      <%}%>
+                        <%for (var i = 0; i < 5-review; i++) {%>
+                          <span class="glyphicon glyphicon-star-empty"></span>
+                          <%}%>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-md-3">
+                  <b>Description:</b>
+                </div>
+                <div class="col-md-9">
+                  <%= game.description %>
+                </div>
+              </div>
+            </li>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/js/game.js"></script>
+</body>
+
+</html>
