@@ -60,7 +60,7 @@ module.exports = function(passport) {
           } else {
             if (req.body.password === req.body.confirmation) {
               console.log([req.body.name, req.body.surname, req.body.username, password, req.body.gender, req.body.age, email, req.body.country])
-              connection.query('INSERT INTO users (name, surname, username, password, gender, age, email, country) values (?,?,?,?,?,?,?,?)',
+              connection.query('INSERT INTO users (name, surname, username, password, gender, age, email, country) VALUES (?,?,?,?,?,?,?,?)',
               [req.body.name, req.body.surname, req.body.username, password, req.body.gender, req.body.age, email, req.body.country],
               (err, result) => {
                 if (err) {
