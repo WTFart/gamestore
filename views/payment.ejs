@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>
+    <%= game.name %>
+  </title>
+
+  <!-- Bootstrap Core CSS -->
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link href="/css/shop-homepage.css" rel="stylesheet">
+
+  <!-- jQuery -->
+  <script src="/js/jquery.js"></script>
+
+  <!-- Bootstrap Core JavaScript -->
+  <script src="/js/bootstrap.min.js"></script>
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+  <%- include navbar.ejs %>
+    <br/>
+    <br/>
+    <div class="container">
+      <div class "row">
+        <div style="font-size:16px;">
+          <div class="list-group text-profile col-md-6">
+
+            <li class="list-group-item">
+              <div class="row">
+                <div class="input-group">
+                  <div class="col-md-2">
+                    <span class="input-group-addon active">
+                      <input type="radio">
+                    </span>
+                  </div>
+                <div class="col-md-5">
+                  <label type="text" class="form-control"><%= payments[0].card_number %></label>
+                </div>
+                <div class="col-md-5">
+                  <label type="text" class="form-control"><%= payments[0].payment_type %></label>
+                </div>
+                </div><!-- /input-group -->
+              </div>
+            </li>
+            <% for (var i = 1; i < payments.length; i++) { %>
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="input-group">
+                    <div class="col-md-2">
+                      <span class="input-group-addon active">
+                        <input type="radio">
+                      </span>
+                    </div>
+                  <div class="col-md-5">
+                    <label type="text" class="form-control"><%= payments[i].card_number %></label>
+                  </div>
+                  <div class="col-md-5">
+                    <label type="text" class="form-control"><%= payments[i].payment_type %></label>
+                  </div>
+                  </div><!-- /input-group -->
+                </div>
+              </li>
+            <% } %>
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
+
+</html>
