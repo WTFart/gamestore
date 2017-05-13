@@ -167,7 +167,7 @@ module.exports = (app, passport) => {
       'wishlist.ejs')
   })
   app.get('/wishlist/add/:game_id', (req, res) => {
-    connection.query('INSERT INTO wishlists (user_id, game_id, date) VALUES (?,?,?)', [req.cookies.user_id, req.params.game_id, ''], (err, result) => {
+    connection.query('INSERT INTO wishlists (user_id, game_id, date) VALUES (?,?,NOW())', [req.cookies.user_id, req.params.game_id], (err, result) => {
       res.redirect('/wishlist')
     })
   })
@@ -218,17 +218,25 @@ module.exports = (app, passport) => {
   ////////////////////
   // payment routes //
   ////////////////////
-  app.get('/payment/:game_id', (req, res) => {
+  app.get('/payment/buy/:game_id', (req, res) => {
     setCookies(req, res)
     connection.query('SELECT * FROM games WHERE game_id = ?', [req.params.game_id], (err, result1) => {
-      connection.query('SELECT * FROM payments WHERE user_id = ? AND valid = TRUE', [req.cookies.user_id], (err, result2) => {
+      connection.query('SELECT * FROM payments WHERE user_id = ? AND valid = TRUE LIMIT 1', [req.cookies.user_id], (err, result2) => {
+        res.cookie('game_id', req.params.game_id)
+        res.cookie('payment_id', result2[0].payment_id)
         res.render('payment.ejs', { game: result1[0], payments: result2, user_id: req.cookies.user_id, username: req.cookies.username })
       })
     })
   })
-  app.get('/payment/buy/:game_id', (req, res) => {
-    setCookies(req, res)
-    connection.query('INSERT')
+  app.get('/payment/checkout', (req, res) => {
+    connection.query('SELECT price FROM games WHERE game_id = ?', [req.cookies.game_id], (err, price) => {
+      connection.query('INSERT INTO orders (user_id, game_id, price, payment_id, date) VALUES (?,?,?,?,NOW())', [req.cookies.user_id, req.cookies.game_id, price[0].price, req.cookies.payment_id], (err, result) => {
+        setCookies(req, res)
+        res.clearCookie('game_id')
+        res.clearCookie('payment_id')
+        res.redirect('/library')
+      })
+    })
   })
   ////////////////////
   // utility routes //
