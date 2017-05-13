@@ -16,6 +16,7 @@ module.exports = (app, passport) => {
     res.cookie('username', req.cookies.username)
   }
   clearCookies = (res) => {
+    res.clearCookie('index_sort')
     res.clearCookie('store_id')
     res.clearCookie('user_id')
     res.clearCookie('username')
@@ -106,6 +107,13 @@ module.exports = (app, passport) => {
     failureRedirect: '/',
     failureFlash: true
   }), signIn)
+  ///////////////////
+  // signout route //
+  ///////////////////
+  app.get('/signout', (req, res) => {
+    clearCookies()
+    res.redirect('/')
+  })
   ////////////////////
   // featured route //
   ////////////////////
