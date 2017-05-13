@@ -60,7 +60,13 @@ module.exports = (app, passport) => {
     connection.query('SELECT * FROM games WHERE game_id = ?', [req.params.game_id], (err, result1) => {
       connection.query('SELECT * FROM publishers WHERE publisher_id = ?', [result1[0].publisher], (err, result2) => {
         connection.query('SELECT * FROM developers WHERE developer_id = ?', [result1[0].developer], (err, result3) => {
-          res.render(page, { user_id: req.cookies.user_id, game: result1[0], publisher: result2[0], developer: result3[0] })
+          res.render(page, {
+            user_id: req.cookies.user_id,
+            username: req.cookies.username,
+            game: result1[0],
+            publisher: result2[0],
+            developer: result3[0]
+          })
         })
       })
     })
@@ -128,9 +134,9 @@ module.exports = (app, passport) => {
       'AND games.game_id = orders.game_id',
       'library.ejs')
   })
-  ////////////////////
-  // wishlist route //
-  ////////////////////
+  /////////////////////
+  // wishlist routes //
+  /////////////////////
   app.get('/wishlist', (req, res) => {
     searchGames(req, res,
       'SELECT games.* FROM games ' +
@@ -138,6 +144,16 @@ module.exports = (app, passport) => {
       'WHERE wishlists.user_id = ? ' +
       'AND games.game_id = wishlists.game_id',
       'wishlist.ejs')
+  })
+  app.get('/wishlist/add/:game_id', (req, res) => {
+    connection.query('INSERT INTO wishlists (user_id, game_id, date) VALUES (?,?,?)', [req.cookies.user_id, req.params.game_id, ''], (err, result) => {
+      res.redirect('/wishlist')
+    })
+  })
+  app.get('/wishlist/remove/:game_id', (req, res) => {
+    connection.query('DELETE FROM wishlists WHERE user_id = ? AND game_id = ?', [req.cookies.user_id, req.params.game_id], (err, result) => {
+      res.redirect('/wishlist')
+    })
   })
   ///////////////////
   // profile route //
@@ -151,6 +167,21 @@ module.exports = (app, passport) => {
   /////////////////
   // game routes //
   /////////////////
+  app.get('/store/:game_id', (req, res) => {
+    connection.query(
+      'SELECT games.* FROM games ' +
+      'LEFT JOIN wishlists ON games.game_id = wishlists.game_id ' +
+      'WHERE wishlists.user_id = ? ' +
+      'AND wishlists.game_id = ?',
+      [req.cookies.user_id, req.params.game_id], (err, result) => {
+      setCookies(req, res)
+      if (result[0]) {
+        res.redirect('/wish/' + req.params.game_id)
+      } else {
+        res.redirect('/games/' + req.params.game_id)
+      }
+    })
+  })
   app.get('/games/:game_id', (req, res) => {
     setCookies(req, res)
     getGame(req, res, 'game.ejs')
@@ -158,6 +189,10 @@ module.exports = (app, passport) => {
   app.get('/owns/:game_id', (req, res) => {
     setCookies(req, res)
     getGame(req, res, 'own.ejs')
+  })
+  app.get('/wish/:game_id', (req, res) => {
+    setCookies(req, res)
+    getGame(req, res, 'wish.ejs')
   })
   ////////////////////
   // utility routes //
