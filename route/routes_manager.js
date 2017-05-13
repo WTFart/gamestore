@@ -29,7 +29,7 @@ module.exports = (app, passport) => {
   }
   searchGames = (req, res, sql, page, username=null) => {
     setCookies(req, res)
-    var params = [req.cookies.store_id, req.cookies.user_id]
+    var params = [req.cookies.store_id, req.cookies.user_id, req.cookies.user_id]
     if (req.query.search || req.cookies.search && req.cookies.search != '') {
       if (req.query.search != '') {
         if (req.query.search && req.query.search != req.cookies.search || !req.cookies.search) {
@@ -45,7 +45,12 @@ module.exports = (app, passport) => {
       sql += ' ORDER BY ' + req.cookies.sort_by
     }
     connection.query(sql, params, (err, result) => {
-      res.render(page, { user_id: req.cookies.user_id, games: result, search: (req.query.search) ? req.query.search : ((req.query.search == '') ?  '' : req.cookies.search), username: username })
+      res.render(page, {
+        user_id: req.cookies.user_id,
+        games: result,
+        search: (req.query.search) ? req.query.search : ((req.query.search == '') ?  '' : req.cookies.search),
+        username: username
+      })
     })
   }
   sortBy = (req, res, route) => {
@@ -77,27 +82,52 @@ module.exports = (app, passport) => {
   // featured route //
   ////////////////////
   app.get('/featured', (req, res) => {
-    searchGames(req, res, 'SELECT * FROM games WHERE review = 5 AND except_country NOT IN (SELECT country FROM stores WHERE store_id = ?) AND game_id NOT IN (SELECT game_id FROM orders WHERE user_id = ?)', 'featured.ejs')
+    searchGames(req, res,
+      'SELECT * FROM games ' + 
+      'WHERE review = 5 ' +
+      'AND except_country NOT IN ' +
+        '(SELECT country FROM stores WHERE store_id = ?) ' +
+      'AND game_id NOT IN ' +
+        '(SELECT game_id FROM orders WHERE user_id = ?) ' +
+      'AND age_limit <= ALL(SELECT age FROM users WHERE user_id = ?)',
+      'featured.ejs')
   })
   /////////////////
   // store route //
   /////////////////
   app.get('/store', (req, res) => {
-    searchGames(req, res, 'SELECT * FROM games WHERE except_country NOT IN (SELECT country FROM stores WHERE store_id = ?) AND game_id NOT IN (SELECT game_id FROM orders WHERE user_id = ?)', 'store.ejs')
+    searchGames(req, res,
+      'SELECT * FROM games ' +
+      'WHERE except_country NOT IN ' +
+        '(SELECT country FROM stores WHERE store_id = ?) ' +
+      'AND game_id NOT IN ' +
+        '(SELECT game_id FROM orders WHERE user_id = ?) ' +
+      'AND age_limit <= ALL(SELECT age FROM users WHERE user_id = ?)',
+      'store.ejs')
   })
   ///////////////////
   // library route //
   ///////////////////
   app.get('/library', (req, res) => {
     connection.query('SELECT username FROM users WHERE user_id = ?', [req.cookies.user_id], (err, result) => {
-      searchGames(req, res, 'SELECT games.* FROM games LEFT JOIN orders ON games.game_id = orders.game_id WHERE orders.user_id = ? AND games.game_id = orders.game_id', 'library.ejs', result[0].username)
+      searchGames(req, res,
+        'SELECT games.* FROM games ' +
+        'LEFT JOIN orders ON games.game_id = orders.game_id ' +
+        'WHERE orders.user_id = ? ' +
+        'AND games.game_id = orders.game_id',
+        'library.ejs', result[0].username)
     })
   })
   ////////////////////
   // wishlist route //
   ////////////////////
   app.get('/wishlist', (req, res) => {
-    searchGames(req, res, 'SELECT games.* FROM games LEFT JOIN orders ON games.game_id = wishlist.game_id WHERE wishlist.user_id = ? AND games.game_id = wishlist.game_id', 'wishlist.ejs')
+    searchGames(req, res,
+      'SELECT games.* FROM games ' +
+      'LEFT JOIN orders ON games.game_id = wishlist.game_id ' +
+      'WHERE wishlist.user_id = ? ' +
+      'AND games.game_id = wishlist.game_id',
+      'wishlist.ejs')
   })
   ///////////////////
   // profile route //
