@@ -17,7 +17,7 @@ module.exports = (app, passport) => {
       res.redirect('/featured')
     })
   }
-  searchGames = (req, res, sql, page) => {
+  searchGames = (req, res, sql, page, username=null) => {
     var params = [req.cookies.store_id, req.cookies.user_id]
     if (req.query.search || req.cookies.search && req.cookies.search != '') {
       if (req.query.search != '') {
@@ -34,7 +34,7 @@ module.exports = (app, passport) => {
       sql += ' ORDER BY ' + req.cookies.sort_by
     }
     connection.query(sql, params, (err, result) => {
-      res.render(page, { user_id: req.cookies.user_id, games: result, search: (req.query.search) ? req.query.search : ((req.query.search == '') ?  '' : req.cookies.search) })
+      res.render(page, { user_id: req.cookies.user_id, games: result, search: (req.query.search) ? req.query.search : ((req.query.search == '') ?  '' : req.cookies.search), username: username })
     })
   }
   sortBy = (req, res, route) => {
@@ -84,7 +84,9 @@ module.exports = (app, passport) => {
   // library route //
   ///////////////////
   app.get('/library', (req, res) => {
-    searchGames(req, res, 'SELECT games.* FROM games LEFT JOIN orders ON games.game_id = orders.game_id WHERE orders.user_id = ? AND games.game_id = orders.game_id', 'library.ejs')
+    connection.query('SELECT username FROM users WHERE user_id = ?', [req.cookies.user_id], (err, result) => {
+      searchGames(req, res, 'SELECT games.* FROM games LEFT JOIN orders ON games.game_id = orders.game_id WHERE orders.user_id = ? AND games.game_id = orders.game_id', 'library.ejs', result[0].username)
+    })
   })
   ////////////////////
   // wishlist route //
