@@ -216,7 +216,7 @@ module.exports = (app, passport) => {
   // buy game route //
   ////////////////////
   app.get('/payment/:game_id', (req, res) => {
-    connection.query('SELECT * FROM games WHERE game_id = ?'. [req.params.game_id], (err, result1) => {
+    connection.query('SELECT * FROM games WHERE game_id = ?', [req.params.game_id], (err, result1) => {
       connection.query('SELECT * FROM payments WHERE user_id = ? AND valid = ?', [req.cookies.user_id, 'TRUE'], (err, result2) => {
         res.render('payment.ejs', { game: result1[0], payments: result2, user_id: req.cookies.user_id, username: req.cookies.username })
       })
