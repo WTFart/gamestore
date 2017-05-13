@@ -79,8 +79,10 @@ module.exports = (app, passport) => {
   // home route //
   ////////////////
   app.get('/', (req, res) => {
-    clearCookies(res)
-    res.render('index.ejs')
+    connection.query('SELECT * FROM games WHERE review = 5', (err, result) => {
+      clearCookies(res)
+      res.render('index.ejs', { games: result })
+    })
   })
   //////////////////
   // signin route //
