@@ -53,6 +53,15 @@ module.exports = (app, passport) => {
       })
     })
   }
+  getGame = (req, res, page) => {
+    connection.query('SELECT * FROM games WHERE game_id = ?', [req.params.game_id], (err, result1) => {
+      connection.query('SELECT * FROM publishers WHERE publisher_id = ?', [result1[0].publisher], (err, result2) => {
+        connection.query('SELECT * FROM developers WHERE developer_id = ?', [result1[0].developer], (err, result3) => {
+          res.render(page, { user_id: req.cookies.user_id, game: result1[0], publisher: result2[0], developer: result3[0] })
+        })
+      })
+    })
+  }
   sortBy = (req, res, route) => {
     res.cookie('sort_by', req.params.by)
     res.redirect(route)
@@ -138,14 +147,16 @@ module.exports = (app, passport) => {
       res.render('profile.ejs', { user: result[0] })
     })
   })
-  ////////////////
-  // game route //
-  ////////////////
-  app.get('/store/:game_id', (req, res) => {
+  /////////////////
+  // game routes //
+  /////////////////
+  app.get('/games/:game_id', (req, res) => {
     setCookies(req, res)
-    connection.query('SELECT * FROM games WHERE game_id = ?', [req.params.game_id], (err, result) => {
-      res.render('game.ejs', { user_id: req.cookies.user_id, game: result[0] })
-    })
+    getGame(req, res, 'game.ejs')
+  })
+  app.get('/owns/:game_id', (req, res) => {
+    setCookies(req, res)
+    getGame(req, res, 'own.ejs')
   })
   ////////////////////
   // utility routes //

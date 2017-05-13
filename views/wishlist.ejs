@@ -1,12 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Wishlist</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Library</title>
+
+  <!-- Bootstrap Core CSS -->
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link href="/css/shop-homepage.css" rel="stylesheet">
+
+  <!-- jQuery -->
+  <script src="/js/jquery.js"></script>
+
+  <!-- Bootstrap Core JavaScript -->
+  <script src="/js/bootstrap.min.js"></script>
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
 </head>
 <body>
-  
+  <%- include navbar.ejs %>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-9 font-col"><b><%= username %>'s library</b></div>
+        <div class="col">
+          <div class="input-group">
+            <form action="/library">
+              <span class="input-group-btn">
+              <input type="text" name="search" class="form-control" placeholder="Search" value=<%= search %>>
+              <button type="submit" class="btn btn-default" type="button">Go!</button>
+            </span>
+            </form>
+          </div>
+          <!-- /input-group -->
+        </div>
+        <!-- /.col-lg-6 -->
+        <br />
+        <div class="list-group">
+          <li class="list-group-item list-head">
+            <div class="col-md-1">
+              <button class="button-hidden link-button" style="color:#fff" data-href="/library/sort/number"><b>Number</b><span class="dropdown-icon">&#9662;</span></button>
+            </div>
+            <div class="col-md-3">
+              <button class="button-hidden link-button" style="color:#fff" data-href="/library/sort/name"><b>Name</b><span class="dropdown-icon">&#9662;</span></button>
+            </div>
+            <div class="col-md-3">
+              <button class="button-hidden link-button" style="color:#fff" data-href="/library/sort/price"><b>Price</b><span class="dropdown-icon">&#9662;</span></button>
+            </div>
+            <div class="col-md-3">
+              <button class="button-hidden link-button" style="color:#fff" data-href="/library/sort/age_limit"><b>Age Limit</b><span class="dropdown-icon">&#9662;</span></button>
+            </div>
+            <div class="col">
+              <button class="button-hidden link-button" style="color:#fff" data-href="/library/sort/release_date"><b>Release Date</b><span class="dropdown-icon">&#9662;</span></button>
+            </div>
+          </li>
+          <% for (var i = 0; i < games.length; i++ ) {%>
+            <a href="/owns/<%= games[i].game_id %>" class="list-group-item">
+              <div class="col-md-1">
+                <%= i+1 %>
+              </div>
+              <div class="col-md-3">
+                <%= games[i].name %>
+              </div>
+              <div class="col-md-3">
+                <%= games[i].price %>
+              </div>
+              <div class="col-md-3">
+                <%= games[i].age_limit %>+
+              </div>
+              <div class="col">
+                <%= games[i].release_date %>
+              </div>
+              <br/>
+            </a>
+            <% } %>
+        </div>
+      </div>
+    </div>
+    <script src="js/store.js"></script>
 </body>
 </html>
