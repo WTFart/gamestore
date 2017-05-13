@@ -344,8 +344,16 @@ textarea {
 }
 
 .button-hidden {
-  background-color: white;
+  background-color: transparent;
   border: none;
   margin: 0px;
   padding: 0px;
+}
+
+.list-head {
+  background-color: rgba(19, 35, 47, 0.9);
+}
+
+.font-col {
+  font-size: 24px;
 }

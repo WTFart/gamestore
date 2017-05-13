@@ -31,59 +31,62 @@
   <%- include navbar.ejs %>
 
     <div class="container">
-      <div class="col-md-12">
-        <div class="input-group">
-           <form action="/store">
-            <span class="input-group-btn">
+      <div class="row">
+        <div class="col-md-9"></div>
+        <div class="col">
+          <div class="input-group">
+            <form action="/store">
+              <span class="input-group-btn">
               <input type="text" name="search" class="form-control" placeholder="Search">
               <button type="submit" class="btn btn-default" type="button">Go!</button>
             </span>
-          </form>
+            </form>
+          </div>
+          <!-- /input-group -->
         </div>
-        <!-- /input-group -->
-      </div>
-      <!-- /.col-lg-6 -->
-      <br />
-      <br />
-      <br />
-      <div class="list-group">
-        <a class="list-group-item">
-          <div class="col-md-1">
-            <button id="number-button" class="button-hidden"><b>Number</b><span class="dropdown-icon">&#9662;</span></button>
-          </div>
-          <div class="col-md-3">
-            <button id="name-button" class="button-hidden"><b>Name</b><span class="dropdown-icon">&#9662;</span></button>
-          </div>
-          <div class="col-md-3">
-            <button id="price-button" class="button-hidden"><b>Price</b><span class="dropdown-icon">&#9662;</span></button>
-          </div>
-          <div class="col-md-3">
-            <button id="age-button" class="button-hidden"><b>Age Limit</b><span class="dropdown-icon">&#9662;</span></button>
-          </div>
-          <div class="col">
-            <button id="date-button" class="button-hidden"><b>Release Date</b><span class="dropdown-icon">&#9662;</span></button>
-          </div>
-        </a>
-        <% for (var i = 0; i < games.length; i++ ) {%>
-          <a href="/store/<%= games[i].game_id %>" class="list-group-item">
+        <!-- /.col-lg-6 -->
+        <br />
+        <br />
+        <br />
+        <div class="list-group">
+          <li class="list-group-item list-head">
             <div class="col-md-1">
-              <%= i+1 %>
+              <button id="number-button" class="button-hidden" style="color:#fff"><b>Number</b><span class="dropdown-icon">&#9662;</span></button>
             </div>
             <div class="col-md-3">
-              <%= games[i].name %>
+              <button id="name-button" class="button-hidden" style="color:#fff"><b>Name</b><span class="dropdown-icon">&#9662;</span></button>
             </div>
             <div class="col-md-3">
-              <%= games[i].price %>
+              <button id="price-button" class="button-hidden" style="color:#fff"><b>Price</b><span class="dropdown-icon">&#9662;</span></button>
             </div>
             <div class="col-md-3">
-              <%= games[i].age_limit %>
+              <button id="age-button" class="button-hidden" style="color:#fff"><b>Age Limit</b><span class="dropdown-icon">&#9662;</span></button>
             </div>
             <div class="col">
-              <%= games[i].release_date %>
+              <button id="date-button" class="button-hidden" style="color:#fff"><b>Release Date</b><span class="dropdown-icon">&#9662;</span></button>
             </div>
-            <br/>
-          </a>
-          <% } %>
+          </li>
+          <% for (var i = 0; i < games.length; i++ ) {%>
+            <a href="/store/<%= games[i].game_id %>" class="list-group-item">
+              <div class="col-md-1">
+                <%= i+1 %>
+              </div>
+              <div class="col-md-3">
+                <%= games[i].name %>
+              </div>
+              <div class="col-md-3">
+                <%= games[i].price %>
+              </div>
+              <div class="col-md-3">
+                <%= games[i].age_limit %>
+              </div>
+              <div class="col">
+                <%= games[i].release_date %>
+              </div>
+              <br/>
+            </a>
+            <% } %>
+        </div>
       </div>
     </div>
     <script src="js/store.js"></script>
