@@ -220,11 +220,13 @@ module.exports = (app, passport) => {
   ////////////////////
   app.get('/payment/buy/:game_id', (req, res) => {
     setCookies(req, res)
-    connection.query('SELECT * FROM games WHERE game_id = ?', [req.params.game_id], (err, result1) => {
-      connection.query('SELECT * FROM payments WHERE user_id = ? AND valid = TRUE LIMIT 1', [req.cookies.user_id], (err, result2) => {
-        res.cookie('game_id', req.params.game_id)
-        res.cookie('payment_id', result2[0].payment_id)
-        res.render('payment.ejs', { game: result1[0], payments: result2, user_id: req.cookies.user_id, username: req.cookies.username })
+    connection.query('SELECT name, surname FROM users WHERE user_id = ?', [req.cookies.user_id], (err, user) => {
+      connection.query('SELECT * FROM games WHERE game_id = ?', [req.params.game_id], (err, result1) => {
+        connection.query('SELECT * FROM payments WHERE user_id = ? AND valid = TRUE LIMIT 1', [req.cookies.user_id], (err, result2) => {
+          res.cookie('game_id', req.params.game_id)
+          res.cookie('payment_id', result2[0].payment_id)
+          res.render('payment.ejs', { game: result1[0], payments: result2, user_id: req.cookies.user_id, username: req.cookies.username, name: user[0].name, surname: user[0].surname })
+        })
       })
     })
   })
