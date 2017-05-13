@@ -41,49 +41,68 @@
     <br/>
     <div class="container">
       <div class "row">
-        <div style="font-size:16px;">
+        <div class="col-md-6">
+          <img src="/img/<%=game.game_id%>.jpg" height="215px" width="460px">
+        </div>
+        <div class="col" style="font-size:16px;">
           <div class="list-group text-profile col-md-6">
-
             <li class="list-group-item">
               <div class="row">
-                <div class="input-group">
-                  <div class="col-md-2">
-                    <span class="input-group-addon active">
-                      <input type="radio">
-                    </span>
-                  </div>
-                <div class="col-md-5">
-                  <label type="text" class="form-control"><%= payments[0].card_number %></label>
+                <div class="col-md-4">
+                  <b>Name:</b>
                 </div>
-                <div class="col-md-5">
-                  <label type="text" class="form-control"><%= payments[0].payment_type %></label>
+                <div class="col-md-8">
+                  <%= game.name %>
                 </div>
-                </div><!-- /input-group -->
               </div>
             </li>
-            <% for (var i = 1; i < payments.length; i++) { %>
-              <li class="list-group-item">
-                <div class="row">
-                  <div class="input-group">
-                    <div class="col-md-2">
-                      <span class="input-group-addon active">
-                        <input type="radio">
-                      </span>
-                    </div>
-                  <div class="col-md-5">
-                    <label type="text" class="form-control"><%= payments[i].card_number %></label>
-                  </div>
-                  <div class="col-md-5">
-                    <label type="text" class="form-control"><%= payments[i].payment_type %></label>
-                  </div>
-                  </div><!-- /input-group -->
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-md-4">
+                  <b>Price:</b>
                 </div>
-              </li>
-            <% } %>
+                <div class="col-md-8">
+                  <%= game.price %>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-md-4">
+                  <b>Buy For:</b>
+                </div>
+                <div class="col-md-8">
+                  <%= username %>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-md-4">
+                  <b>Payment Type:</b>
+                </div>
+                <div class="col-md-8">
+                  <%= payments[0].payment_type %>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-md-4">
+                  <b>Card Number:</b>
+                </div>
+                <div class="col-md-8">
+                  <%= payments[0].card_number %>
+                </div>
+              </div>
+            </li>
+            <br/>
+              <button type="button" class="btn btn-default btn-lg" style="width:557px" data-href="/payment/buy/<%= game.id&payments[0].payment_id %>">Confirm to Buy</button>
           </div>
         </div>
       </div>
     </div>
+    <script src="/js/game.js"></script>
 </body>
 
 </html>
