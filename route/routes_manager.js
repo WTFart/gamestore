@@ -31,9 +31,8 @@ module.exports = (app, passport) => {
       res.redirect('/featured')
     })
   }
-  searchGames = (req, res, sql, page) => {
+  searchGames = (req, res, sql, params, page) => {
     setCookies(req, res)
-    var params = [req.cookies.store_id, req.cookies.user_id, req.cookies.user_id]
     if (req.query.search || req.cookies.search && req.cookies.search != '') {
       if (req.query.search != '') {
         if (req.query.search && req.query.search != req.cookies.search || !req.cookies.search) {
@@ -126,6 +125,7 @@ module.exports = (app, passport) => {
       'AND game_id NOT IN ' +
         '(SELECT game_id FROM orders WHERE user_id = ?) ' +
       'AND age_limit <= ALL(SELECT age FROM users WHERE user_id = ?)',
+      [req.cookies.store_id, req.cookies.user_id, req.cookies.user_id],
       'featured.ejs')
   })
   /////////////////
@@ -139,6 +139,7 @@ module.exports = (app, passport) => {
       'AND game_id NOT IN ' +
         '(SELECT game_id FROM orders WHERE user_id = ?) ' +
       'AND age_limit <= ALL(SELECT age FROM users WHERE user_id = ?)',
+      [req.cookies.store_id, req.cookies.user_id, req.cookies.user_id],
       'store.ejs')
   })
   ///////////////////
@@ -150,6 +151,7 @@ module.exports = (app, passport) => {
       'LEFT JOIN orders ON games.game_id = orders.game_id ' +
       'WHERE orders.user_id = ? ' +
       'AND games.game_id = orders.game_id',
+      [req.cookies.user_id],
       'library.ejs')
   })
   /////////////////////
@@ -161,6 +163,7 @@ module.exports = (app, passport) => {
       'LEFT JOIN wishlists ON games.game_id = wishlists.game_id ' +
       'WHERE wishlists.user_id = ? ' +
       'AND games.game_id = wishlists.game_id',
+      [req.cookies.user_id],
       'wishlist.ejs')
   })
   app.get('/wishlist/add/:game_id', (req, res) => {
