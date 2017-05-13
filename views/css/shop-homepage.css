@@ -342,3 +342,10 @@ textarea {
   font-size: 20px;
   
 }
+
+.button-hidden {
+  background-color: white;
+  border: none;
+  margin: 0px;
+  padding: 0px;
+}
