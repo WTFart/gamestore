@@ -16,7 +16,6 @@ module.exports = (app, passport) => {
     res.cookie('username', req.cookies.username)
   }
   clearCookies = (res) => {
-    res.clearCookie('index_sort')
     res.clearCookie('store_id')
     res.clearCookie('user_id')
     res.clearCookie('username')
@@ -82,12 +81,13 @@ module.exports = (app, passport) => {
   ////////////////
   app.get('/', (req, res) => {
     var sql = 'SELECT * FROM games ORDER BY '
-    if (req.cookies.index_sort) {
-      sql += req.cookies.index_sort + ' DESC'
-      res.clearCookie('index_sort')
+    if (req.cookies.sort_by) {
+      sql += req.cookies.sort_by + ' DESC '
+      res.clearCookie('sort_by')
     } else {
-      sql += 'RAND() LIMIT 6'
+      sql += 'RAND() '
     }
+    sql += 'LIMIT 6'
     connection.query(sql, (err, result) => {
       clearCookies(res)
       res.render('index.ejs', { games: result })
@@ -216,8 +216,7 @@ module.exports = (app, passport) => {
   // utility routes //
   ////////////////////
   app.get('/sort/:by', (req, res) => {
-    res.cookie('index_sort', req.params.by)
-    res.redirect('/')
+    sortBy(req, res, '/')
   })
   app.get('/featured/sort/:by', (req, res) => {
     sortBy(req, res, '/featured')
