@@ -10,6 +10,16 @@ module.exports = (app, passport) => {
   /////////////////////
   // utility methods //
   /////////////////////
+  setCookies = (req, res) => {
+    res.cookie('store_id', req.cookies.store_id)
+    res.cookie('user_id', req.cookies.user_id)
+  }
+  clearCookies = (res) => {
+    res.clearCookie('store_id')
+    res.clearCookie('user_id')
+    res.clearCookie('search')
+    res.clearCookie('sort_by')
+  }
   signIn = (req, res) => {
     connection.query('SELECT store_id FROM stores WHERE country = ?', [req.user.country], (err, result) => {
       res.cookie('store_id', result[0].store_id)
@@ -18,6 +28,7 @@ module.exports = (app, passport) => {
     })
   }
   searchGames = (req, res, sql, page, username=null) => {
+    setCookies(req, res)
     var params = [req.cookies.store_id, req.cookies.user_id]
     if (req.query.search || req.cookies.search && req.cookies.search != '') {
       if (req.query.search != '') {
@@ -40,12 +51,6 @@ module.exports = (app, passport) => {
   sortBy = (req, res, route) => {
     res.cookie('sort_by', req.params.by)
     res.redirect(route)
-  }
-  clearCookies = (res) => {
-    res.clearCookie('store_id')
-    res.clearCookie('user_id')
-    res.clearCookie('search')
-    res.clearCookie('sort_by')
   }
   ////////////////
   // home route //
@@ -98,6 +103,7 @@ module.exports = (app, passport) => {
   // profile route //
   ///////////////////
   app.get('/profile', (req, res) => {
+    setCookies(req, res)
     connection.query('SELECT * FROM users WHERE user_id = ?', [req.cookies.user_id], (err, result) => {
       res.render('profile.ejs', { user: result[0] })
     })
@@ -106,6 +112,7 @@ module.exports = (app, passport) => {
   // game route //
   ////////////////
   app.get('/store/:game_id', (req, res) => {
+    setCookies(req, res)
     connection.query('SELECT * FROM games WHERE game_id = ?', [req.params.game_id], (err, result) => {
       res.render('game.ejs', { user_id: req.cookies.user_id, game: result[0] })
     })
