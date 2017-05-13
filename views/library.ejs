@@ -18,7 +18,11 @@
   <!-- Custom CSS -->
   <link href="/css/shop-homepage.css" rel="stylesheet">
 
-  <link href="/css/sheet.scss" rel="stylesheet">
+  <!-- jQuery -->
+  <script src="/js/jquery.js"></script>
+
+  <!-- Bootstrap Core JavaScript -->
+  <script src="/js/bootstrap.min.js"></script>
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -66,7 +70,7 @@
             </div>
           </li>
           <% for (var i = 0; i < games.length; i++ ) {%>
-            <a href="/library/<%= games[i].game_id %>" class="list-group-item">
+            <a href="/store/<%= games[i].game_id %>" class="list-group-item">
               <div class="col-md-1">
                 <%= i+1 %>
               </div>
@@ -88,5 +92,6 @@
         </div>
       </div>
     </div>
+
 </body>
 </html>
