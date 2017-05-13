@@ -111,7 +111,7 @@ a:hover {
 }
 
 .button-hidden {
-  background-color: white;
+  background-color: transparent;
   border: none;
   margin: 0px;
   padding: 0px;
