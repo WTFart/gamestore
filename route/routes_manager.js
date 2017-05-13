@@ -111,7 +111,7 @@ module.exports = (app, passport) => {
   // signout route //
   ///////////////////
   app.get('/signout', (req, res) => {
-    clearCookies()
+    clearCookies(res)
     res.redirect('/')
   })
   ////////////////////
