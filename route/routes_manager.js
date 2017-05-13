@@ -24,6 +24,7 @@ module.exports = (app, passport) => {
   }
   signIn = (req, res) => {
     connection.query('SELECT store_id FROM stores WHERE country = ?', [req.user.country], (err, result) => {
+      clearCookies(res)
       res.cookie('store_id', result[0].store_id)
       res.cookie('user_id', req.user.user_id)
       res.cookie('username', req.user.username)
@@ -79,7 +80,14 @@ module.exports = (app, passport) => {
   // home route //
   ////////////////
   app.get('/', (req, res) => {
-    connection.query('SELECT * FROM games WHERE review = 5', (err, result) => {
+    var sql = 'SELECT * FROM games ORDER BY '
+    if (req.cookies.index_sort) {
+      sql += req.cookies.index_sort + ' DESC'
+      res.clearCookie('index_sort')
+    } else {
+      sql += 'RAND() LIMIT 6'
+    }
+    connection.query(sql, (err, result) => {
       clearCookies(res)
       res.render('index.ejs', { games: result })
     })
@@ -199,6 +207,10 @@ module.exports = (app, passport) => {
   ////////////////////
   // utility routes //
   ////////////////////
+  app.get('/sort/:by', (req, res) => {
+    res.cookie('index_sort', req.params.by)
+    res.redirect('/')
+  })
   app.get('/featured/sort/:by', (req, res) => {
     sortBy(req, res, '/featured')
   })
