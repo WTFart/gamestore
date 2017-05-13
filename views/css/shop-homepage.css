@@ -110,6 +110,13 @@ a:hover {
   color: #179b77;
 }
 
+.button-hidden {
+  background-color: white;
+  border: none;
+  margin: 0px;
+  padding: 0px;
+}
+
 .form {
   background: rgba(19, 35, 47, 0.9);
   padding: 40px;
@@ -267,3 +274,5 @@ textarea {
 }
 
 /* dropdown option*/
+
+
