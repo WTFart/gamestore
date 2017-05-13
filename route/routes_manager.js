@@ -13,10 +13,12 @@ module.exports = (app, passport) => {
   setCookies = (req, res) => {
     res.cookie('store_id', req.cookies.store_id)
     res.cookie('user_id', req.cookies.user_id)
+    res.cookie('username', req.cookies.username)
   }
   clearCookies = (res) => {
     res.clearCookie('store_id')
     res.clearCookie('user_id')
+    res.clearCookie('username')
     res.clearCookie('search')
     res.clearCookie('sort_by')
   }
@@ -24,10 +26,11 @@ module.exports = (app, passport) => {
     connection.query('SELECT store_id FROM stores WHERE country = ?', [req.user.country], (err, result) => {
       res.cookie('store_id', result[0].store_id)
       res.cookie('user_id', req.user.user_id)
+      res.cookie('username', req.user.username)
       res.redirect('/featured')
     })
   }
-  searchGames = (req, res, sql, page, username=null) => {
+  searchGames = (req, res, sql, page) => {
     setCookies(req, res)
     var params = [req.cookies.store_id, req.cookies.user_id, req.cookies.user_id]
     if (req.query.search || req.cookies.search && req.cookies.search != '') {
@@ -49,7 +52,7 @@ module.exports = (app, passport) => {
         user_id: req.cookies.user_id,
         games: result,
         search: (req.query.search) ? req.query.search : ((req.query.search == '') ?  '' : req.cookies.search),
-        username: username
+        username: req.cookies.username
       })
     })
   }
@@ -118,27 +121,23 @@ module.exports = (app, passport) => {
   // library route //
   ///////////////////
   app.get('/library', (req, res) => {
-    connection.query('SELECT username FROM users WHERE user_id = ?', [req.cookies.user_id], (err, result) => {
-      searchGames(req, res,
-        'SELECT games.* FROM games ' +
-        'LEFT JOIN orders ON games.game_id = orders.game_id ' +
-        'WHERE orders.user_id = ? ' +
-        'AND games.game_id = orders.game_id',
-        'library.ejs', result[0].username)
-    })
+    searchGames(req, res,
+      'SELECT games.* FROM games ' +
+      'LEFT JOIN orders ON games.game_id = orders.game_id ' +
+      'WHERE orders.user_id = ? ' +
+      'AND games.game_id = orders.game_id',
+      'library.ejs')
   })
   ////////////////////
   // wishlist route //
   ////////////////////
   app.get('/wishlist', (req, res) => {
-    connection.query('SELECT username FROM users WHERE user_id = ?', [req.cookies.user_id], (err, result) => {
-      searchGames(req, res,
-        'SELECT games.* FROM games ' +
-        'LEFT JOIN wishlists ON games.game_id = wishlists.game_id ' +
-        'WHERE wishlists.user_id = ? ' +
-        'AND games.game_id = wishlists.game_id',
-        'wishlist.ejs', result[0].username)
-    })
+    searchGames(req, res,
+      'SELECT games.* FROM games ' +
+      'LEFT JOIN wishlists ON games.game_id = wishlists.game_id ' +
+      'WHERE wishlists.user_id = ? ' +
+      'AND games.game_id = wishlists.game_id',
+      'wishlist.ejs')
   })
   ///////////////////
   // profile route //
@@ -146,7 +145,7 @@ module.exports = (app, passport) => {
   app.get('/profile', (req, res) => {
     setCookies(req, res)
     connection.query('SELECT * FROM users WHERE user_id = ?', [req.cookies.user_id], (err, result) => {
-      res.render('profile.ejs', { user: result[0] })
+      res.render('profile.ejs', { user: result[0], user_id: result[0].user_id, username: result[0].username })
     })
   })
   /////////////////
