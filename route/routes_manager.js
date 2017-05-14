@@ -262,7 +262,7 @@ module.exports = (app, passport) => {
   })
   app.post('/payment/new', (req, res) => {
     setCookies(req, res)
-    if (req.body.payment_type && req.body.card_number) {
+    if (req.body.payment_type && req.body.card_number_1 && req.body.card_number_2 && req.body.card_number_3 && req.body.card_number_4) {
       connection.query('INSERT INTO payments (user_id, payment_type, card_number, valid) VALUES (?,?,?,TRUE)', [req.cookies.user_id, req.body.payment_type, req.body.card_number_1 + req.body.card_number_2 + req.body.card_number_3 + req.body.card_number_4], (err, result) => {
         if (req.cookies.game_id && req.cookies.game_id != "undefined") {
           res.redirect('/payment/buy/' + req.cookies.game_id)
