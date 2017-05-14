@@ -220,6 +220,8 @@ module.exports = (app, passport) => {
   ////////////////////
   app.get('/payment', (req, res) => {
     setCookies(req, res)
+    res.cookie('game_id', req.cookies.game_id)
+    res.cookie('buying', req.cookies.buying)
     res.render('new_payment.ejs', { user_id: req.cookies.user_id, username: req.cookies.username })
   })
   app.get('/payment/buy/:game_id', (req, res) => {
@@ -228,8 +230,13 @@ module.exports = (app, passport) => {
       connection.query('SELECT * FROM games WHERE game_id = ?', [req.params.game_id], (err, result1) => {
         connection.query('SELECT * FROM payments WHERE user_id = ? AND valid = TRUE LIMIT 1', [req.cookies.user_id], (err, result2) => {
           res.cookie('game_id', req.params.game_id)
-          res.cookie('payment_id', result2[0].payment_id)
-          res.render('payment.ejs', { game: result1[0], payments: result2, user_id: req.cookies.user_id, username: req.cookies.username, name: user[0].name, surname: user[0].surname })
+          if (result2[0]) {
+            res.cookie('payment_id', result2[0].payment_id)
+            res.render('payment.ejs', { game: result1[0], payments: result2, user_id: req.cookies.user_id, username: req.cookies.username, name: user[0].name, surname: user[0].surname })
+          } else {
+            res.cookie('buying', true)
+            res.redirect('/payment')
+          }
         })
       })
     })
@@ -248,7 +255,12 @@ module.exports = (app, passport) => {
     setCookies(req, res)
     if (req.body.payment_type && req.body.card_number) {
       connection.query('INSERT INTO payments (user_id, payment_type, card_number, valid) VALUES (?,?,?,TRUE)', [req.cookies.user_id, req.body.payment_type, req.body.card_number], (err, result) => {
-        res.redirect('/profile', { user_id: req.cookies.user_id, username: req.cookies.username })
+        if (req.cookies.buying) {
+          res.clearCookie('buying')
+          res.redirect('/payment/buy/' + req.cookies.game_id)
+        } else {
+          res.redirect('/profile', { user_id: req.cookies.user_id, username: req.cookies.username })
+        }
       })
     } else {
       res.redirect('/payment', { user_id: req.cookies.user_id, username: req.cookies.username })
