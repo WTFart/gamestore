@@ -218,6 +218,10 @@ module.exports = (app, passport) => {
   ////////////////////
   // payment routes //
   ////////////////////
+  app.get('/payment', (req, res) => {
+    setCookies(req, res)
+    res.render('new_payment.ejs', { user_id: req.cookies.user_id, username: req.cookies.username })
+  })
   app.get('/payment/buy/:game_id', (req, res) => {
     setCookies(req, res)
     connection.query('SELECT name, surname FROM users WHERE user_id = ?', [req.cookies.user_id], (err, user) => {
@@ -239,6 +243,16 @@ module.exports = (app, passport) => {
         res.redirect('/library')
       })
     })
+  })
+  app.post('/payment', (req, res) => {
+    setCookies(req, res)
+    if (req.body.payment_type && req.body.card_number) {
+      connection.query('INSERT INTO payments (user_id, payment_type, card_number, valid) VALUES (?,?,?,TRUE)', [req.cookies.user_id, req.body.payment_type, req.body.card_number], (err, result) => {
+        res.redirect('/profile', { user_id: req.cookies.user_id, username: req.cookies.username })
+      })
+    } else {
+      res.redirect('/payment', { user_id: req.cookies.user_id, username: req.cookies.username })
+    }
   })
   ////////////////////
   // utility routes //
