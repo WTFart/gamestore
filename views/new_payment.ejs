@@ -10,7 +10,7 @@
   <meta name="author" content="">
 
   <title>
-    <%= user_id %>
+    <%= username %>
   </title>
 
   <!-- Bootstrap Core CSS -->
@@ -41,19 +41,41 @@
     <br/>
     <div class="container">
       <div class "row">
-        
-        <div class="col-md-9" style="font-size:16px;">
-          
 
+        <div class="col-md-9" style="font-size:16px;">
+          <div class="list-group text-profile col-md-6">
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-md-8">
+                  <b>Payment Method:</b>
+                </div>
+                <form action="/payment/new" method="post">
+                  <div class="col-md-4">
+                    <select name="payment_type" id="sel1">
+                    <option value="Visa">Visa</option>
+                    <option value="MasterCard">Mastercard</option>
+                  </select>
+                  </div>
+                  <br>
+                  <input type="text" font color="black" required autocomplete="off" name="card_number" />
+                  <br/>
+                  <button type="submit" class="btn btn-default btn-lg" style="width:557px" >Confirm card</button>
+                </form>
+
+
+              </div>
+            </li>
+          </div>
+          
         </div>
+        
         <div class="col" style="font-size:16px;">
 
-          
-        
+
+
         </div>
       </div>
     </div>
-    <script src="/js/game.js"></script>
 </body>
 
 </html>
