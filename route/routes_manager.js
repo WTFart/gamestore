@@ -244,7 +244,7 @@ module.exports = (app, passport) => {
       })
     })
   })
-  app.post('/payment', (req, res) => {
+  app.post('/payment/new', (req, res) => {
     setCookies(req, res)
     if (req.body.payment_type && req.body.card_number) {
       connection.query('INSERT INTO payments (user_id, payment_type, card_number, valid) VALUES (?,?,?,TRUE)', [req.cookies.user_id, req.body.payment_type, req.body.card_number], (err, result) => {
