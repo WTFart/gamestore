@@ -12,8 +12,8 @@ This Game Store is a part of Database System project course. It is dynamic web a
   - In our web you can search and buy some game.
   - The web can show your purchased library.
   - The game that you see on the web filtered by your age and country.
-  - 
-  - 
+  - User can add their credit card.
+  - User can pin their favorite game to wish list.
 
 ## Installation guide
 
