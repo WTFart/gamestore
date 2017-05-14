@@ -17,7 +17,7 @@
   <link href="/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom CSS -->
-  <link href="/css/shop-homepage.css" rel="stylesheet">
+  <link href="/css/card.css" rel="stylesheet">
 
   <!-- jQuery -->
   <script src="/js/jquery.js"></script>
@@ -42,38 +42,41 @@
     <div class="container">
       <div class "row">
 
-        <div class="col-md-9" style="font-size:16px;">
-          <div class="list-group text-profile col-md-6">
-            <li class="list-group-item">
-              <div class="row">
-                <div class="col-md-8">
-                  <b>Payment Method:</b>
-                </div>
-                <form action="/payment/new" method="post">
-                  <div class="col-md-4">
-                    <select name="payment_type" id="sel1">
+
+        <div class="credit-card-wrapper">
+          <div class="credit-card front">
+            <form action="/payment/new" method="post">
+              <div class="title">
+                <div class="card-title">CREDIT CARD</div>
+                <div style="width: 45%; float:right">
+                  Type:
+                  <select name="payment_type" id="gender">
                     <option value="Visa">Visa</option>
-                    <option value="MasterCard">Mastercard</option>
+                    <option value="Mastercard">Mastercard</option>
                   </select>
-                  </div>
-                  <br>
-                  <input type="text" font color="black" required autocomplete="off" name="card_number" />
-                  <br/>
-                  <button type="submit" class="btn btn-default btn-lg" style="width:557px" >Confirm card</button>
-                </form>
-
-
+                </div>
               </div>
-            </li>
+
+              <div class="card-number">
+                <div class="card-number-label">CARD NUMBER</div>
+                <div class="card-numbers">
+                  <input type="text" class="tbx-number-0" maxlength='4' />
+                  <input type="text" class="tbx-number-1" maxlength='4' />
+                  <input type="text" class="tbx-number-2" maxlength='4' />
+                  <input type="text" class="tbx-number-3" maxlength='4' />
+                </div>
+              </div>
+
+              <br>
+              <br>
+              <div class="submit">
+                <button type="submit" class="btn btn-default btn-lg" style="height:50px; width:388px;">Confirm card</button>
+              </div>
+            </form>
+
           </div>
-          
         </div>
-        
-        <div class="col" style="font-size:16px;">
 
-
-
-        </div>
       </div>
     </div>
 </body>
