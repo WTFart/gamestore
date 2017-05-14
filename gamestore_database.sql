@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 13, 2017 at 05:03 PM
+-- Generation Time: May 14, 2017 at 07:49 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -108,13 +108,12 @@ INSERT INTO `games` (`game_id`, `name`, `developer`, `publisher`, `genre`, `pric
 --
 
 CREATE TABLE `orders` (
-  `order_id` int(2) NOT NULL AUTO_INCREMENT,
+  `order_id` int(2) NOT NULL,
   `user_id` int(2) DEFAULT NULL,
   `game_id` int(2) DEFAULT NULL,
   `price` int(4) DEFAULT NULL,
   `payment_id` int(2) DEFAULT NULL,
-  `date` datetime DEFAULT NULL,
-  PRIMARY KEY (`order_id`)
+  `date` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 --
@@ -151,7 +150,9 @@ INSERT INTO `orders` (`order_id`, `user_id`, `game_id`, `price`, `payment_id`, `
 (27, 12, 20, 369, 9, '2017-02-26 17:12:28'),
 (28, 25, 19, 219, 12, '2017-02-26 21:27:18'),
 (29, 26, 4, 0, 15, '2017-02-27 08:58:41'),
-(30, 29, 10, 1850, 13, '2017-02-28 10:54:10');
+(30, 29, 10, 1850, 13, '2017-02-28 10:54:10'),
+(31, 2, 2, 1499, 8, '2017-05-14 13:09:27'),
+(32, 2, 3, 315, 8, '2017-05-14 14:03:10');
 
 -- --------------------------------------------------------
 
@@ -160,12 +161,11 @@ INSERT INTO `orders` (`order_id`, `user_id`, `game_id`, `price`, `payment_id`, `
 --
 
 CREATE TABLE `payments` (
-  `payment_id` int(2) NOT NULL AUTO_INCREMENT,
+  `payment_id` int(2) NOT NULL,
   `user_id` int(2) DEFAULT NULL,
   `payment_type` varchar(10) DEFAULT NULL,
   `card_number` bigint(16) DEFAULT NULL,
-  `valid` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`payment_id`)
+  `valid` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 --
@@ -272,7 +272,7 @@ INSERT INTO `stores` (`store_id`, `country`) VALUES
 --
 
 CREATE TABLE `users` (
-  `user_id` int(2) NOT NULL AUTO_INCREMENT,
+  `user_id` int(2) NOT NULL,
   `name` varchar(9) DEFAULT NULL,
   `surname` varchar(11) DEFAULT NULL,
   `username` varchar(11) DEFAULT NULL,
@@ -280,8 +280,7 @@ CREATE TABLE `users` (
   `gender` varchar(6) DEFAULT NULL,
   `age` int(2) DEFAULT NULL,
   `email` varchar(24) DEFAULT NULL,
-  `country` varchar(9) DEFAULT NULL,
-  PRIMARY KEY (`user_id`)
+  `country` varchar(9) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 --
@@ -328,11 +327,10 @@ INSERT INTO `users` (`user_id`, `name`, `surname`, `username`, `password`, `gend
 --
 
 CREATE TABLE `wishlists` (
-  `wish_id` int(2) NOT NULL AUTO_INCREMENT,
+  `wish_id` int(2) NOT NULL,
   `user_id` int(2) DEFAULT NULL,
   `game_id` int(2) DEFAULT NULL,
-  `date` datetime(6) DEFAULT NULL,
-  PRIMARY KEY (`wish_id`)
+  `date` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 --
@@ -357,6 +355,7 @@ ALTER TABLE `games`
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
+  ADD PRIMARY KEY (`order_id`),
   ADD KEY `user_id` (`user_id`),
   ADD KEY `game_id` (`game_id`);
 
@@ -364,6 +363,7 @@ ALTER TABLE `orders`
 -- Indexes for table `payments`
 --
 ALTER TABLE `payments`
+  ADD PRIMARY KEY (`payment_id`),
   ADD KEY `user_id` (`user_id`);
 
 --
@@ -382,15 +382,41 @@ ALTER TABLE `stores`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
+  ADD PRIMARY KEY (`user_id`),
   ADD KEY `country` (`country`);
 
 --
 -- Indexes for table `wishlists`
 --
 ALTER TABLE `wishlists`
+  ADD PRIMARY KEY (`wish_id`),
   ADD KEY `user_id` (`user_id`),
   ADD KEY `game_id` (`game_id`);
 
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `order_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+--
+-- AUTO_INCREMENT for table `payments`
+--
+ALTER TABLE `payments`
+  MODIFY `payment_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `user_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+--
+-- AUTO_INCREMENT for table `wishlists`
+--
+ALTER TABLE `wishlists`
+  MODIFY `wish_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- Constraints for dumped tables
 --
