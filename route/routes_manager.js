@@ -22,6 +22,10 @@ module.exports = (app, passport) => {
     res.clearCookie('search')
     res.clearCookie('sort_by')
   }
+  clearBuyGameCookies = (res) => {
+    res.clearCookie('game_id')
+    res.clearCookie('payment_id')
+  }
   signIn = (req, res) => {
     connection.query('SELECT store_id FROM stores WHERE country = ?', [req.user.country], (err, result) => {
       clearCookies(res)
@@ -33,6 +37,7 @@ module.exports = (app, passport) => {
   }
   searchGames = (req, res, sql, params, page) => {
     setCookies(req, res)
+    clearBuyGameCookies(res)
     if (req.query.search || req.cookies.search && req.cookies.search != '') {
       if (req.query.search != '') {
         if (req.query.search && req.query.search != req.cookies.search || !req.cookies.search) {
@@ -89,6 +94,7 @@ module.exports = (app, passport) => {
     sql += 'LIMIT 6'
     connection.query(sql, (err, result) => {
       clearCookies(res)
+      clearBuyGameCookies(res)
       res.render('index.ejs', { games: result })
     })
   })
@@ -111,6 +117,7 @@ module.exports = (app, passport) => {
   ///////////////////
   app.get('/signout', (req, res) => {
     clearCookies(res)
+    clearBuyGameCookies(res)
     res.redirect('/')
   })
   ////////////////////
@@ -181,6 +188,7 @@ module.exports = (app, passport) => {
   ///////////////////
   app.get('/profile', (req, res) => {
     setCookies(req, res)
+    clearBuyGameCookies(res)
     connection.query('SELECT * FROM users WHERE user_id = ?', [req.cookies.user_id], (err, result) => {
       res.render('profile.ejs', { user: result[0], user_id: result[0].user_id, username: result[0].username })
     })
@@ -196,6 +204,7 @@ module.exports = (app, passport) => {
       'AND wishlists.game_id = ?',
       [req.cookies.user_id, req.params.game_id], (err, result) => {
       setCookies(req, res)
+      clearBuyGameCookies(res)
       if (result[0]) {
         res.redirect('/wish/' + req.params.game_id)
       } else {
@@ -205,14 +214,17 @@ module.exports = (app, passport) => {
   })
   app.get('/games/:game_id', (req, res) => {
     setCookies(req, res)
+    clearBuyGameCookies(res)
     getGame(req, res, 'game.ejs')
   })
   app.get('/owns/:game_id', (req, res) => {
     setCookies(req, res)
+    clearBuyGameCookies(res)
     getGame(req, res, 'own.ejs')
   })
   app.get('/wish/:game_id', (req, res) => {
     setCookies(req, res)
+    clearBuyGameCookies(res)
     getGame(req, res, 'wish.ejs')
   })
   ////////////////////
@@ -221,7 +233,6 @@ module.exports = (app, passport) => {
   app.get('/payment', (req, res) => {
     setCookies(req, res)
     res.cookie('game_id', req.cookies.game_id)
-    res.cookie('buying', req.cookies.buying)
     res.render('new_payment.ejs', { user_id: req.cookies.user_id, username: req.cookies.username })
   })
   app.get('/payment/buy/:game_id', (req, res) => {
@@ -234,7 +245,6 @@ module.exports = (app, passport) => {
             res.cookie('payment_id', result2[0].payment_id)
             res.render('payment.ejs', { game: result1[0], payments: result2, user_id: req.cookies.user_id, username: req.cookies.username, name: user[0].name, surname: user[0].surname })
           } else {
-            res.cookie('buying', true)
             res.redirect('/payment')
           }
         })
@@ -245,8 +255,7 @@ module.exports = (app, passport) => {
     connection.query('SELECT price FROM games WHERE game_id = ?', [req.cookies.game_id], (err, price) => {
       connection.query('INSERT INTO orders (user_id, game_id, price, payment_id, date) VALUES (?,?,?,?,NOW())', [req.cookies.user_id, req.cookies.game_id, price[0].price, req.cookies.payment_id], (err, result) => {
         setCookies(req, res)
-        res.clearCookie('game_id')
-        res.clearCookie('payment_id')
+        clearBuyGameCookies(res)
         res.redirect('/library')
       })
     })
@@ -255,15 +264,14 @@ module.exports = (app, passport) => {
     setCookies(req, res)
     if (req.body.payment_type && req.body.card_number) {
       connection.query('INSERT INTO payments (user_id, payment_type, card_number, valid) VALUES (?,?,?,TRUE)', [req.cookies.user_id, req.body.payment_type, req.body.card_number], (err, result) => {
-        if (req.cookies.buying) {
-          res.clearCookie('buying')
+        if (req.cookies.game_id && req.cookies.game_id != "undefined") {
           res.redirect('/payment/buy/' + req.cookies.game_id)
         } else {
-          res.redirect('/profile', { user_id: req.cookies.user_id, username: req.cookies.username })
+          res.redirect('/profile')
         }
       })
     } else {
-      res.redirect('/payment', { user_id: req.cookies.user_id, username: req.cookies.username })
+      res.redirect('/payment')
     }
   })
   ////////////////////
