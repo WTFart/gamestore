@@ -82,8 +82,6 @@
                           <input type="password" required autocomplete="off" name="password" />
                         </div>
 
-                        <p class="forgot"><a href="#">Forgot Password?</a></p>
-
                         <button class="button button-block" />Log In</button>
 
                       </form>
@@ -217,20 +215,20 @@
               </ol>
               <div class="carousel-inner">
                 <% var num = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]; %>
-                <% var index = Math.floor(Math.random() * 20); %>
+                <% var index = Math.floor(Math.random() * num.length); %>
                 <div class="item active">
+                  <img class="slide-image" src="/img/<%= num[index] %>.jpg" alt="">
                   <% num.splice(index, 1); %>
-                  <img class="slide-image" src="/img/<%= index %>.jpg" alt="">
                 </div>
                 <div class="item">
-                  <% index = Math.floor(Math.random() * 20); %>
+                  <% index = Math.floor(Math.random() * num.length); %>
+                  <img class="slide-image" src="/img/<%= num[index] %>.jpg" alt="">
                   <% num.splice(index, 1); %>
-                  <img class="slide-image" src="/img/<%= index %>.jpg" alt="">
                 </div>
                 <div class="item">
-                  <% index = Math.floor(Math.random() * 20); %>
+                  <% index = Math.floor(Math.random() * num.length); %>
+                  <img class="slide-image" src="/img/<%= num[index] %>.jpg" alt="">
                   <% num.splice(index, 1); %>
-                  <img class="slide-image" src="/img/<%= index %>.jpg" alt="">
                 </div>
               </div>
               <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
