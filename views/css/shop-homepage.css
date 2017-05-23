@@ -282,3 +282,8 @@ textarea {
 }
 
 /* dropdown option*/
+
+.font {
+  font-family: fantasy;
+  font-size: 36px
+}
