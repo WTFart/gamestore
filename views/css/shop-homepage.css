@@ -281,9 +281,18 @@ textarea {
   text-align: right;
 }
 
-/* dropdown option*/
-
 .font {
   font-family: fantasy;
   font-size: 30px
+}
+
+.trans {
+  background-color: transparent;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.form-color {
+  background: rgba(19, 35, 47, 1);
 }

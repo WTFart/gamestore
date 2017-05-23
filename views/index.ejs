@@ -84,7 +84,7 @@
                             </div>
 
                             <button class="button button-block" />Log In</button>
-
+                            
                           </form>
 
                         </div>
@@ -125,65 +125,65 @@
                               <input type="password" required autocomplete="off" name="confirmation" />
                             </div>
 
+
                             <div class="field-warp">
-                              <div>
-                                <select name="country" id="country">
-                              <option value="">-- Select Country --</option>
- 				                      <option value="Thailand">Thailand</option>
-                              <option value="Japan">Japan</option>
-                              <option value="U.S.">United States</option>
-                              <option value="U.K.">United Kingdom</option>
-                              <option value="India">India</option>
-                              <option value="Hongkong">Hongkong</option>
-                              <option value="Brazil">Brazil</option>
-                              <option value="China">China</option>
-                              <option value="Singapore">Singapore</option>
-                              <option value="Spain">Spain</option>
-                          </select>
-
-                                <select name="gender" id="gender">
-                              <option value="">-- Select Gender --</option>
-                              <option value="Male">Male</option>
-                              <option value="Female">Female</option>
-                            </select>
-
-                                <select name="age" id="age">
-                              <option value="">-- Select Age --</option>
-                              <option value="13">13</option>
-                              <option value="14">14</option>
-                              <option value="15">15</option>
-                              <option value="16">16</option>
-                              <option value="17">17</option>
-                              <option value="18">18</option>
-                              <option value="19">19</option>
-                              <option value="20">20</option>
-                              <option value="21">21</option>
-                              <option value="22">22</option>
-                              <option value="23">23</option>
-                              <option value="24">24</option>
-                              <option value="25">25</option>
-                              <option value="26">26</option>
-                              <option value="27">27</option>
-                              <option value="28">28</option>
-                              <option value="29">29</option>
-                              <option value="30">30</option>
-                            </select>
-                              </div>
+                              <select class="form-control trans" name="country" id="country">
+                                <option class="form-color" value=" ">-- Select Country --</option>
+ 				                        <option class="form-color" value="Thailand">Thailand</option>
+                                <option class="form-color" value="Japan">Japan</option>
+                                <option class="form-color" value="U.S.">United States</option>
+                                <option class="form-color" value="U.K.">United Kingdom</option>
+                                <option class="form-color" value="India">India</option>
+                                <option class="form-color" value="Hongkong">Hongkong</option>
+                                <option class="form-color" value="Brazil">Brazil</option>
+                                <option class="form-color" value="China">China</option>
+                                <option class="form-color" value="Singapore">Singapore</option>
+                                <option class="form-color" value="Spain">Spain</option>
+                              </select>
+                              <br />
+                              <br />
+                              <select class="form-control trans" name="gender" id="gender">
+                                <option class="form-color" value="">-- Select Gender --</option>
+                                <option class="form-color" value="Male">Male</option>
+                                <option class="form-color" value="Female">Female</option>
+                              </select>
+                              <br />
+                              <br />
+                              <select class="form-control trans" name="age" id="age">
+                                <option class="form-color"  value="">-- Select Age --</option>
+                                <option class="form-color" value="13">13</option>
+                                <option class="form-color" value="14">14</option>
+                                <option class="form-color" value="15">15</option>
+                                <option class="form-color" value="16">16</option>
+                                <option class="form-color" value="17">17</option>
+                                <option class="form-color" value="18">18</option>
+                                <option class="form-color" value="19">19</option>
+                                <option class="form-color" value="20">20</option>
+                                <option class="form-color" value="21">21</option>
+                                <option class="form-color" value="22">22</option>
+                                <option class="form-color" value="23">23</option>
+                                <option class="form-color" value="24">24</option>
+                                <option class="form-color" value="25">25</option>
+                                <option class="form-color" value="26">26</option>
+                                <option class="form-color" value="27">27</option>
+                                <option class="form-color" value="28">28</option>
+                                <option class="form-color" value="29">29</option>
+                                <option class="form-color" value="30">30</option>
+                              </select>
                             </div>
                             <br />
-                            <button type="submit" class="button button-block" />Get Started</button>
-
+                            <br />
                           </form>
-
+                          <button type="submit" class="button button-block" />Get Started</button>
                         </div>
                       </div>
-                      <!-- tab-content -->
                     </div>
+                    <!-- tab-content -->
                   </div>
                 </div>
+              </li>
+            </ul>
           </div>
-          </li>
-          </ul>
         </div>
       </div>
       <!-- /.navbar-collapse -->
@@ -407,6 +407,52 @@
       $(".tab-content > div").not(target).hide();
 
       $(target).fadeIn(600);
+    });
+
+    // dropdown country option
+    const dropdown1 = document.querySelector('.js-dropdown1');
+    const dropdownValue1 = dropdown1.querySelector('.js-dropdown-value1');
+    const dropdownOptions1 = dropdown1.querySelector('.js-dropdown-options1');
+
+    dropdown1.addEventListener('click', (event) => {
+      if (event.target === dropdown1) {
+        dropdown1.classList.toggle('is-opened');
+      }
+
+      if (event.target.classList.contains('js-dropdown-option1')) {
+        dropdownValue1.innerText = event.target.innerText;
+        dropdown1.classList.remove('is-opened');
+      }
+    });
+
+    const dropdown2 = document.querySelector('.js-dropdown2');
+    const dropdownValue2 = dropdown2.querySelector('.js-dropdown-value2');
+    const dropdownOptions2 = dropdown2.querySelector('.js-dropdown-options2');
+
+    dropdown2.addEventListener('click', (event) => {
+      if (event.target === dropdown2) {
+        dropdown2.classList.toggle('is-opened');
+      }
+
+      if (event.target.classList.contains('js-dropdown-option2')) {
+        dropdownValue2.innerText = event.target.innerText;
+        dropdown2.classList.remove('is-opened');
+      }
+    });
+
+    const dropdown3 = document.querySelector('.js-dropdown3');
+    const dropdownValue3 = dropdown3.querySelector('.js-dropdown-value3');
+    const dropdownOptions3 = dropdown3.querySelector('.js-dropdown-options3');
+
+    dropdown3.addEventListener('click', (event) => {
+      if (event.target === dropdown3) {
+        dropdown3.classList.toggle('is-opened');
+      }
+
+      if (event.target.classList.contains('js-dropdown-option3')) {
+        dropdownValue3.innerText = event.target.innerText;
+        dropdown3.classList.remove('is-opened');
+      }
     });
   </script>
 </body>
