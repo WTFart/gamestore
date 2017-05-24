@@ -27,7 +27,7 @@ module.exports = function(passport) {
   },
   (req, email, password, done) => {
     process.nextTick(() => {
-      connection.query('SELECT * FROM users WHERE email = ?', [email], (err, result) => {
+      connection.query('SELECT user_id FROM users WHERE email = ?', [email], (err, result) => {
         if (err) {
           return done(err)
         }
