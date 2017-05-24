@@ -22,7 +22,7 @@
 
   <!-- Bootstrap Core JavaScript -->
   <script src="/js/bootstrap.min.js"></script>
-  
+
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -38,151 +38,153 @@
   <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
       <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-        <a class="navbar-brand" href="/"><p class="font">GameStore</p></a>
-      </div>
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-          <li>
-            <a id="myBtn">Sign In</a>
-            <!-- Trigger/Open The Modal -->
+      <div class="row">
+        <div class="col-md-11">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="/">
+              <p class="font">GameStore</p>
+            </a>
+          </div>
+        </div>
+        <div class="col">
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
 
-            <!-- The Modal -->
-            <div id="myModal" class="modal">
+              <li>
+                <a id="myBtn">Sign In</a>
+                <!-- Trigger/Open The Modal -->
 
-              <!-- Modal content -->
-              <div class="modal-content">
-                <span class="close">&times;</span>
-                <div class="form">
-                  <ul class="tab-group">
-                    <li class="tab active"><a href="#login">Log In</a></li>
-                    <li class="tab"><a href="#signup">Sign Up</a></li>
-                  </ul>
+                <!-- The Modal -->
+                <div id="myModal" class="modal">
 
-                  <div class="tab-content">
-                    <div id="login">
-                      <h1>Welcome Back!</h1>
+                  <!-- Modal content -->
+                  <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <div class="form">
+                      <ul class="tab-group">
+                        <li class="tab active"><a href="#login">Log In</a></li>
+                        <li class="tab"><a href="#signup">Sign Up</a></li>
+                      </ul>
 
-                      <form action="/signin" method="post">
+                      <div class="tab-content">
+                        <div id="login">
+                          <h1>Welcome Back!</h1>
 
-                        <div class="field-wrap">
-                          <label>Email Address<span class="req">*</span></label>
-                          <input type="email" required autocomplete="off" name="email" />
+                          <form action="/signin" method="post">
+
+                            <div class="field-wrap">
+                              <label>Email Address<span class="req">*</span></label>
+                              <input type="email" required autocomplete="off" name="email" />
+                            </div>
+
+                            <div class="field-wrap">
+                              <label>Password<span class="req">*</span></label>
+                              <input type="password" required autocomplete="off" name="password" />
+                            </div>
+
+                            <button class="button button-block" />Log In</button>
+                            
+                          </form>
+
                         </div>
 
-                        <div class="field-wrap">
-                          <label>Password<span class="req">*</span></label>
-                          <input type="password" required autocomplete="off" name="password" />
+                        <div id="signup">
+                          <h1>Sign Up Here</h1>
+
+                          <form action="/signup" method="post">
+                            <div class="top-row">
+                              <div class="field-wrap">
+                                <label>First Name<span class="req">*</span></label>
+                                <input type="text" required autocomplete="off" name="name" />
+                              </div>
+
+                              <div class="field-wrap">
+                                <label>Last Name<span class="req">*</span></label>
+                                <input type="text" required autocomplete="off" name="surname" />
+                              </div>
+                            </div>
+
+                            <div class="field-wrap">
+                              <label>Email Address<span class="req">*</span></label>
+                              <input type="email" required autocomplete="off" name="email" />
+                            </div>
+
+                            <div class="field-wrap">
+                              <label>Username<span class="req">*</span></label>
+                              <input type="text" required autocomplete="off" name="username" />
+                            </div>
+
+                            <div class="field-wrap">
+                              <label>Set A Password<span class="req">*</span></label>
+                              <input type="password" required autocomplete="off" name="password" />
+                            </div>
+
+                            <div class="field-wrap">
+                              <label>Confirm Password<span class="req">*</span></label>
+                              <input type="password" required autocomplete="off" name="confirmation" />
+                            </div>
+
+
+                            <div class="field-warp">
+                              <select class="form-control trans" name="country" id="country">
+                                <option class="form-color" value=" ">-- Select Country --</option>
+ 				                        <option class="form-color" value="Thailand">Thailand</option>
+                                <option class="form-color" value="Japan">Japan</option>
+                                <option class="form-color" value="U.S.">United States</option>
+                                <option class="form-color" value="U.K.">United Kingdom</option>
+                                <option class="form-color" value="India">India</option>
+                                <option class="form-color" value="Hongkong">Hongkong</option>
+                                <option class="form-color" value="Brazil">Brazil</option>
+                                <option class="form-color" value="China">China</option>
+                                <option class="form-color" value="Singapore">Singapore</option>
+                                <option class="form-color" value="Spain">Spain</option>
+                              </select>
+                              <br />
+                              <br />
+                              <select class="form-control trans" name="gender" id="gender">
+                                <option class="form-color" value="">-- Select Gender --</option>
+                                <option class="form-color" value="Male">Male</option>
+                                <option class="form-color" value="Female">Female</option>
+                              </select>
+                              <br />
+                              <br />
+                              <select class="form-control trans" name="age" id="age">
+                                <option class="form-color"  value="">-- Select Age --</option>
+                                <option class="form-color" value="13">13</option>
+                                <option class="form-color" value="14">14</option>
+                                <option class="form-color" value="15">15</option>
+                                <option class="form-color" value="16">16</option>
+                                <option class="form-color" value="17">17</option>
+                                <option class="form-color" value="18">18</option>
+                                <option class="form-color" value="19">19</option>
+                                <option class="form-color" value="20">20</option>
+                                <option class="form-color" value="21">21</option>
+                                <option class="form-color" value="22">22</option>
+                                <option class="form-color" value="23">23</option>
+                                <option class="form-color" value="24">24</option>
+                                <option class="form-color" value="25">25</option>
+                                <option class="form-color" value="26">26</option>
+                                <option class="form-color" value="27">27</option>
+                                <option class="form-color" value="28">28</option>
+                                <option class="form-color" value="29">29</option>
+                                <option class="form-color" value="30">30</option>
+                              </select>
+                            </div>
+                            <br />
+                            <br />
+                          </form>
+                          <button type="submit" class="button button-block" />Get Started</button>
                         </div>
-
-                        <button class="button button-block" />Log In</button>
-
-                      </form>
-
+                      </div>
                     </div>
-
-                    <div id="signup">
-                      <h1>Sign Up Here</h1>
-
-                      <form action="/signup" method="post">
-                        <div class="top-row">
-                          <div class="field-wrap">
-                            <label>First Name<span class="req">*</span></label>
-                            <input type="text" required autocomplete="off" name="name" />
-                          </div>
-
-                          <div class="field-wrap">
-                            <label>Last Name<span class="req">*</span></label>
-                            <input type="text" required autocomplete="off" name="surname" />
-                          </div>
-                        </div>
-
-                        <div class="field-wrap">
-                          <label>Email Address<span class="req">*</span></label>
-                          <input type="email" required autocomplete="off" name="email" />
-                        </div>
-
-                        <div class="field-wrap">
-                          <label>Username<span class="req">*</span></label>
-                          <input type="text" required autocomplete="off" name="username" />
-                        </div>
-
-                        <div class="field-wrap">
-                          <label>Set A Password<span class="req">*</span></label>
-                          <input type="password" required autocomplete="off" name="password" />
-                        </div>
-
-                        <div class="field-wrap">
-                          <label>Confirm Password<span class="req">*</span></label>
-                          <input type="password" required autocomplete="off" name="confirmation" />
-                        </div>
-
-                        <div class="field-warp">
-                          <div>
-                            <select name="country" id="country">
-                              <option value="">-- Select Country --</option>
- 				                      <option value="Thailand">Thailand</option>
-                              <option value="Japan">Japan</option>
-                              <option value="U.S.">United States</option>
-                              <option value="U.K.">United Kingdom</option>
-                              <option value="India">India</option>
-                              <option value="Hongkong">Hongkong</option>
-                              <option value="Brazil">Brazil</option>
-                              <option value="China">China</option>
-                              <option value="Singapore">Singapore</option>
-                              <option value="Spain">Spain</option>
-                          </select>
-
-                            <select name="gender" id="gender">
-                              <option value="">-- Select Gender --</option>
-                              <option value="Male">Male</option>
-                              <option value="Female">Female</option>
-                            </select>
-
-                            <select name="age" id="age">
-                              <option value="">-- Select Age --</option>
-                              <option value="13">13</option>
-                              <option value="14">14</option>
-                              <option value="15">15</option>
-                              <option value="16">16</option>
-                              <option value="17">17</option>
-                              <option value="18">18</option>
-                              <option value="19">19</option>
-                              <option value="20">20</option>
-                              <option value="21">21</option>
-                              <option value="22">22</option>
-                              <option value="23">23</option>
-                              <option value="24">24</option>
-                              <option value="25">25</option>
-                              <option value="26">26</option>
-                              <option value="27">27</option>
-                              <option value="28">28</option>
-                              <option value="29">29</option>
-                              <option value="30">30</option>
-                            </select>
-                          </div>
-                        </div>
-
-                        <button type="submit" class="button button-block" />Get Started</button>
-
-                      </form>
-
-                    </div>
+                    <!-- tab-content -->
                   </div>
-                  <!-- tab-content -->
                 </div>
-              </div>
-
-            </div>
-          </li>
-        </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
       <!-- /.navbar-collapse -->
     </div>
@@ -215,21 +217,21 @@
               </ol>
               <div class="carousel-inner">
                 <% var num = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]; %>
-                <% var index = Math.floor(Math.random() * num.length); %>
-                <div class="item active">
-                  <img class="slide-image" src="/img/<%= num[index] %>.jpg" alt="">
-                  <% num.splice(index, 1); %>
-                </div>
-                <div class="item">
-                  <% index = Math.floor(Math.random() * num.length); %>
-                  <img class="slide-image" src="/img/<%= num[index] %>.jpg" alt="">
-                  <% num.splice(index, 1); %>
-                </div>
-                <div class="item">
-                  <% index = Math.floor(Math.random() * num.length); %>
-                  <img class="slide-image" src="/img/<%= num[index] %>.jpg" alt="">
-                  <% num.splice(index, 1); %>
-                </div>
+                  <% var index = Math.floor(Math.random() * num.length); %>
+                    <div class="item active">
+                      <img class="slide-image" src="/img/<%= num[index] %>.jpg" alt="">
+                      <% num.splice(index, 1); %>
+                    </div>
+                    <div class="item">
+                      <% index = Math.floor(Math.random() * num.length); %>
+                        <img class="slide-image" src="/img/<%= num[index] %>.jpg" alt="">
+                        <% num.splice(index, 1); %>
+                    </div>
+                    <div class="item">
+                      <% index = Math.floor(Math.random() * num.length); %>
+                        <img class="slide-image" src="/img/<%= num[index] %>.jpg" alt="">
+                        <% num.splice(index, 1); %>
+                    </div>
               </div>
               <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
                 <span class="glyphicon glyphicon-chevron-left"></span>
@@ -245,34 +247,39 @@
         <div class="row">
           <% for (var i = 0; i < games.length; i++) { %>
             <% var gamename = ""; %>
-            <% if (games[i].name.length > 18) { %>
-              <% var gamename = games[i].name.substring(0,15) + "...";%>
-            <% } else { %>
-              <% var gamename = games[i].name %>
-            <% } %>
-              <div class="col-sm-4 col-lg-4 col-md-4">
-                <div class="thumbnail">
-                  <img src="/img/<%= games[i].game_id %>.jpg" alt="">
-                  <div class="caption">
-                    <h4 class="pull-right"><%= games[i].price %> <span>&#3647;</span></h4>
-                    <h4><%= gamename %></h4>
-                    <p><%= games[i].description %></p>
-                  </div>
-                  <div class="ratings">
-                    <p class="pull-right">Rating</p>
-                    <p>
-                      <% var review = games[i].review %>
-                      <%for (var j = 0; j < review; j++) {%>
-                        <span class="glyphicon glyphicon-star"></span>
-                      <%}%>
-                      <%for (var j = 0; j < 5-review; j++) {%>
-                        <span class="glyphicon glyphicon-star-empty"></span>
-                      <%}%>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            <% } %>
+              <% if (games[i].name.length > 18) { %>
+                <% var gamename = games[i].name.substring(0,15) + "...";%>
+                  <% } else { %>
+                    <% var gamename = games[i].name %>
+                      <% } %>
+                        <div class="col-sm-4 col-lg-4 col-md-4">
+                          <div class="thumbnail">
+                            <img src="/img/<%= games[i].game_id %>.jpg" alt="">
+                            <div class="caption">
+                              <h4 class="pull-right">
+                                <%= games[i].price %> <span>&#3647;</span></h4>
+                              <h4>
+                                <%= gamename %>
+                              </h4>
+                              <p>
+                                <%= games[i].description %>
+                              </p>
+                            </div>
+                            <div class="ratings">
+                              <p class="pull-right">Rating</p>
+                              <p>
+                                <% var review = games[i].review %>
+                                  <%for (var j = 0; j < review; j++) {%>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <%}%>
+                                      <%for (var j = 0; j < 5-review; j++) {%>
+                                        <span class="glyphicon glyphicon-star-empty"></span>
+                                        <%}%>
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                        <% } %>
         </div>
       </div>
     </div>
@@ -402,6 +409,51 @@
       $(target).fadeIn(600);
     });
 
+    // dropdown country option
+    const dropdown1 = document.querySelector('.js-dropdown1');
+    const dropdownValue1 = dropdown1.querySelector('.js-dropdown-value1');
+    const dropdownOptions1 = dropdown1.querySelector('.js-dropdown-options1');
+
+    dropdown1.addEventListener('click', (event) => {
+      if (event.target === dropdown1) {
+        dropdown1.classList.toggle('is-opened');
+      }
+
+      if (event.target.classList.contains('js-dropdown-option1')) {
+        dropdownValue1.innerText = event.target.innerText;
+        dropdown1.classList.remove('is-opened');
+      }
+    });
+
+    const dropdown2 = document.querySelector('.js-dropdown2');
+    const dropdownValue2 = dropdown2.querySelector('.js-dropdown-value2');
+    const dropdownOptions2 = dropdown2.querySelector('.js-dropdown-options2');
+
+    dropdown2.addEventListener('click', (event) => {
+      if (event.target === dropdown2) {
+        dropdown2.classList.toggle('is-opened');
+      }
+
+      if (event.target.classList.contains('js-dropdown-option2')) {
+        dropdownValue2.innerText = event.target.innerText;
+        dropdown2.classList.remove('is-opened');
+      }
+    });
+
+    const dropdown3 = document.querySelector('.js-dropdown3');
+    const dropdownValue3 = dropdown3.querySelector('.js-dropdown-value3');
+    const dropdownOptions3 = dropdown3.querySelector('.js-dropdown-options3');
+
+    dropdown3.addEventListener('click', (event) => {
+      if (event.target === dropdown3) {
+        dropdown3.classList.toggle('is-opened');
+      }
+
+      if (event.target.classList.contains('js-dropdown-option3')) {
+        dropdownValue3.innerText = event.target.innerText;
+        dropdown3.classList.remove('is-opened');
+      }
+    });
   </script>
 </body>
 
