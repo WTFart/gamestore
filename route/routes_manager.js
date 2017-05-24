@@ -63,8 +63,8 @@ module.exports = (app, passport) => {
   }
   getGame = (req, res, page) => {
     connection.query('SELECT * FROM games WHERE game_id = ?', [req.params.game_id], (err, result1) => {
-      connection.query('SELECT * FROM publishers WHERE publisher_id = ?', [result1[0].publisher], (err, result2) => {
-        connection.query('SELECT * FROM developers WHERE developer_id = ?', [result1[0].developer], (err, result3) => {
+      connection.query('SELECT name, website FROM publishers WHERE publisher_id = ?', [result1[0].publisher], (err, result2) => {
+        connection.query('SELECT name, website FROM developers WHERE developer_id = ?', [result1[0].developer], (err, result3) => {
           res.render(page, {
             user_id: req.cookies.user_id,
             username: req.cookies.username,
@@ -84,7 +84,7 @@ module.exports = (app, passport) => {
   // home route //
   ////////////////
   app.get('/', (req, res) => {
-    var sql = 'SELECT * FROM games ORDER BY '
+    var sql = 'SELECT game_id, name, price, review, description FROM games ORDER BY '
     if (req.cookies.sort_by) {
       sql += req.cookies.sort_by + ' DESC '
       res.clearCookie('sort_by')
@@ -125,7 +125,7 @@ module.exports = (app, passport) => {
   ////////////////////
   app.get('/featured', (req, res) => {
     searchGames(req, res,
-      'SELECT * FROM games ' + 
+      'SELECT game_id, name, price, age_limit, release_date FROM games ' + 
       'WHERE review = 5 ' +
       'AND except_country NOT IN ' +
         '(SELECT country FROM stores WHERE store_id = ?) ' +
@@ -140,7 +140,7 @@ module.exports = (app, passport) => {
   /////////////////
   app.get('/store', (req, res) => {
     searchGames(req, res,
-      'SELECT * FROM games ' +
+      'SELECT game_id, name, price, age_limit, release_date FROM games ' +
       'WHERE except_country NOT IN ' +
         '(SELECT country FROM stores WHERE store_id = ?) ' +
       'AND game_id NOT IN ' +
@@ -154,7 +154,7 @@ module.exports = (app, passport) => {
   ///////////////////
   app.get('/library', (req, res) => {
     searchGames(req, res,
-      'SELECT games.* FROM games ' +
+      'SELECT games.game_id, games.name, games.price, games.age_limit, games.release_date FROM games ' +
       'LEFT JOIN orders ON games.game_id = orders.game_id ' +
       'WHERE orders.user_id = ? ' +
       'AND games.game_id = orders.game_id',
@@ -166,7 +166,7 @@ module.exports = (app, passport) => {
   /////////////////////
   app.get('/wishlist', (req, res) => {
     searchGames(req, res,
-      'SELECT games.* FROM games ' +
+      'SELECT games.game_id, games.name, games.price, games.age_limit, games.release_date FROM games ' +
       'LEFT JOIN wishlists ON games.game_id = wishlists.game_id ' +
       'WHERE wishlists.user_id = ? ' +
       'AND games.game_id = wishlists.game_id',
@@ -198,7 +198,7 @@ module.exports = (app, passport) => {
   /////////////////
   app.get('/store/:game_id', (req, res) => {
     connection.query(
-      'SELECT games.* FROM games ' +
+      'SELECT games.game_id FROM games ' +
       'LEFT JOIN wishlists ON games.game_id = wishlists.game_id ' +
       'WHERE wishlists.user_id = ? ' +
       'AND wishlists.game_id = ?',
@@ -238,7 +238,7 @@ module.exports = (app, passport) => {
   app.get('/payment/buy/:game_id', (req, res) => {
     setCookies(req, res)
     connection.query('SELECT name, surname FROM users WHERE user_id = ?', [req.cookies.user_id], (err, user) => {
-      connection.query('SELECT * FROM games WHERE game_id = ?', [req.params.game_id], (err, result1) => {
+      connection.query('SELECT game_id, name, price FROM games WHERE game_id = ?', [req.params.game_id], (err, result1) => {
         connection.query('SELECT * FROM payments WHERE user_id = ? AND valid = TRUE LIMIT 1', [req.cookies.user_id], (err, result2) => {
           res.cookie('game_id', req.params.game_id)
           if (result2[0]) {
